@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AE6131E518E8C7A3008BE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E418E8C7A3008BE5FF /* Foundation.framework */; };
+		AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */; };
+		AE6131E918E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
+		AE6131EF18E8C7A3008BE5FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE6131ED18E8C7A3008BE5FF /* InfoPlist.strings */; };
+		AE6131F118E8C7A3008BE5FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6131F018E8C7A3008BE5FF /* main.m */; };
+		AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */; };
+		AE6131F818E8C7A3008BE5FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE6131F618E8C7A3008BE5FF /* Main.storyboard */; };
+		AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6131FA18E8C7A3008BE5FF /* CDViewController.m */; };
+		AE6131FD18E8C7A3008BE5FF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE6131FC18E8C7A3008BE5FF /* Images.xcassets */; };
+		AE61320418E8C7A3008BE5FF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE61320318E8C7A3008BE5FF /* XCTest.framework */; };
+		AE61320518E8C7A3008BE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E418E8C7A3008BE5FF /* Foundation.framework */; };
+		AE61320618E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
+		AE61320E18E8C7A3008BE5FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE61320C18E8C7A3008BE5FF /* InfoPlist.strings */; };
+		AE61321018E8C7A3008BE5FF /* timeWiserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AE61320718E8C7A3008BE5FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE6131D918E8C7A3008BE5FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE6131E018E8C7A3008BE5FF;
+			remoteInfo = timeWiser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AE6131E118E8C7A3008BE5FF /* timeWiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeWiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE6131E418E8C7A3008BE5FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AE6131E818E8C7A3008BE5FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AE6131EC18E8C7A3008BE5FF /* timeWiser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "timeWiser-Info.plist"; sourceTree = "<group>"; };
+		AE6131EE18E8C7A3008BE5FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE6131F018E8C7A3008BE5FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AE6131F218E8C7A3008BE5FF /* timeWiser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "timeWiser-Prefix.pch"; sourceTree = "<group>"; };
+		AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDAppDelegate.h; sourceTree = "<group>"; };
+		AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDAppDelegate.m; sourceTree = "<group>"; };
+		AE6131F718E8C7A3008BE5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AE6131F918E8C7A3008BE5FF /* CDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDViewController.h; sourceTree = "<group>"; };
+		AE6131FA18E8C7A3008BE5FF /* CDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDViewController.m; sourceTree = "<group>"; };
+		AE6131FC18E8C7A3008BE5FF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AE61320218E8C7A3008BE5FF /* timeWiserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeWiserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE61320318E8C7A3008BE5FF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AE61320B18E8C7A3008BE5FF /* timeWiserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "timeWiserTests-Info.plist"; sourceTree = "<group>"; };
+		AE61320D18E8C7A3008BE5FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = timeWiserTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AE6131DE18E8C7A3008BE5FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */,
+				AE6131E918E8C7A3008BE5FF /* UIKit.framework in Frameworks */,
+				AE6131E518E8C7A3008BE5FF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE6131FF18E8C7A3008BE5FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE61320418E8C7A3008BE5FF /* XCTest.framework in Frameworks */,
+				AE61320618E8C7A3008BE5FF /* UIKit.framework in Frameworks */,
+				AE61320518E8C7A3008BE5FF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AE6131D818E8C7A3008BE5FF = {
+			isa = PBXGroup;
+			children = (
+				AE6131EA18E8C7A3008BE5FF /* timeWiser */,
+				AE61320918E8C7A3008BE5FF /* timeWiserTests */,
+				AE6131E318E8C7A3008BE5FF /* Frameworks */,
+				AE6131E218E8C7A3008BE5FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AE6131E218E8C7A3008BE5FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE6131E118E8C7A3008BE5FF /* timeWiser.app */,
+				AE61320218E8C7A3008BE5FF /* timeWiserTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE6131E318E8C7A3008BE5FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE6131E418E8C7A3008BE5FF /* Foundation.framework */,
+				AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */,
+				AE6131E818E8C7A3008BE5FF /* UIKit.framework */,
+				AE61320318E8C7A3008BE5FF /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
+			isa = PBXGroup;
+			children = (
+				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
+				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
+				AE6131F618E8C7A3008BE5FF /* Main.storyboard */,
+				AE6131F918E8C7A3008BE5FF /* CDViewController.h */,
+				AE6131FA18E8C7A3008BE5FF /* CDViewController.m */,
+				AE6131FC18E8C7A3008BE5FF /* Images.xcassets */,
+				AE6131EB18E8C7A3008BE5FF /* Supporting Files */,
+			);
+			path = timeWiser;
+			sourceTree = "<group>";
+		};
+		AE6131EB18E8C7A3008BE5FF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE6131EC18E8C7A3008BE5FF /* timeWiser-Info.plist */,
+				AE6131ED18E8C7A3008BE5FF /* InfoPlist.strings */,
+				AE6131F018E8C7A3008BE5FF /* main.m */,
+				AE6131F218E8C7A3008BE5FF /* timeWiser-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AE61320918E8C7A3008BE5FF /* timeWiserTests */ = {
+			isa = PBXGroup;
+			children = (
+				AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */,
+				AE61320A18E8C7A3008BE5FF /* Supporting Files */,
+			);
+			path = timeWiserTests;
+			sourceTree = "<group>";
+		};
+		AE61320A18E8C7A3008BE5FF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE61320B18E8C7A3008BE5FF /* timeWiserTests-Info.plist */,
+				AE61320C18E8C7A3008BE5FF /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE6131E018E8C7A3008BE5FF /* timeWiser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE61321318E8C7A3008BE5FF /* Build configuration list for PBXNativeTarget "timeWiser" */;
+			buildPhases = (
+				AE6131DD18E8C7A3008BE5FF /* Sources */,
+				AE6131DE18E8C7A3008BE5FF /* Frameworks */,
+				AE6131DF18E8C7A3008BE5FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = timeWiser;
+			productName = timeWiser;
+			productReference = AE6131E118E8C7A3008BE5FF /* timeWiser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AE61320118E8C7A3008BE5FF /* timeWiserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE61321618E8C7A3008BE5FF /* Build configuration list for PBXNativeTarget "timeWiserTests" */;
+			buildPhases = (
+				AE6131FE18E8C7A3008BE5FF /* Sources */,
+				AE6131FF18E8C7A3008BE5FF /* Frameworks */,
+				AE61320018E8C7A3008BE5FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AE61320818E8C7A3008BE5FF /* PBXTargetDependency */,
+			);
+			name = timeWiserTests;
+			productName = timeWiserTests;
+			productReference = AE61320218E8C7A3008BE5FF /* timeWiserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE6131D918E8C7A3008BE5FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CD;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = CDFLS;
+				TargetAttributes = {
+					AE61320118E8C7A3008BE5FF = {
+						TestTargetID = AE6131E018E8C7A3008BE5FF;
+					};
+				};
+			};
+			buildConfigurationList = AE6131DC18E8C7A3008BE5FF /* Build configuration list for PBXProject "timeWiser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AE6131D818E8C7A3008BE5FF;
+			productRefGroup = AE6131E218E8C7A3008BE5FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE6131E018E8C7A3008BE5FF /* timeWiser */,
+				AE61320118E8C7A3008BE5FF /* timeWiserTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AE6131DF18E8C7A3008BE5FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE6131FD18E8C7A3008BE5FF /* Images.xcassets in Resources */,
+				AE6131EF18E8C7A3008BE5FF /* InfoPlist.strings in Resources */,
+				AE6131F818E8C7A3008BE5FF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE61320018E8C7A3008BE5FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE61320E18E8C7A3008BE5FF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AE6131DD18E8C7A3008BE5FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
+				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
+				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE6131FE18E8C7A3008BE5FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE61321018E8C7A3008BE5FF /* timeWiserTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AE61320818E8C7A3008BE5FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE6131E018E8C7A3008BE5FF /* timeWiser */;
+			targetProxy = AE61320718E8C7A3008BE5FF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AE6131ED18E8C7A3008BE5FF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE6131EE18E8C7A3008BE5FF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AE6131F618E8C7A3008BE5FF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE6131F718E8C7A3008BE5FF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AE61320C18E8C7A3008BE5FF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE61320D18E8C7A3008BE5FF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AE61321118E8C7A3008BE5FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AE61321218E8C7A3008BE5FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AE61321418E8C7A3008BE5FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "timeWiser/timeWiser-Prefix.pch";
+				INFOPLIST_FILE = "timeWiser/timeWiser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AE61321518E8C7A3008BE5FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "timeWiser/timeWiser-Prefix.pch";
+				INFOPLIST_FILE = "timeWiser/timeWiser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AE61321718E8C7A3008BE5FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/timeWiser.app/timeWiser";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "timeWiser/timeWiser-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "timeWiserTests/timeWiserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AE61321818E8C7A3008BE5FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/timeWiser.app/timeWiser";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "timeWiser/timeWiser-Prefix.pch";
+				INFOPLIST_FILE = "timeWiserTests/timeWiserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AE6131DC18E8C7A3008BE5FF /* Build configuration list for PBXProject "timeWiser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE61321118E8C7A3008BE5FF /* Debug */,
+				AE61321218E8C7A3008BE5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE61321318E8C7A3008BE5FF /* Build configuration list for PBXNativeTarget "timeWiser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE61321418E8C7A3008BE5FF /* Debug */,
+				AE61321518E8C7A3008BE5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AE61321618E8C7A3008BE5FF /* Build configuration list for PBXNativeTarget "timeWiserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE61321718E8C7A3008BE5FF /* Debug */,
+				AE61321818E8C7A3008BE5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE6131D918E8C7A3008BE5FF /* Project object */;
+}
