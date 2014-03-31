@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewPagerController.h"
 
-@interface CDViewController : UIViewController
+@interface CDViewController : ViewPagerController
 
 @end

@@ -19,12 +19,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bz-y2-nzi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="178"/>
+            <point key="canvasLocation" x="22" y="125"/>
         </scene>
-        <!--View Controller-->
+        <!--Timer View Controller-->
         <scene sceneID="wEf-UX-drt">
             <objects>
-                <viewController id="Ffs-v3-EDJ" customClass="CDViewController" sceneMemberID="viewController">
+                <viewController id="Ffs-v3-EDJ" userLabel="Timer View Controller" customClass="CDViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lRx-QJ-RDh"/>
                         <viewControllerLayoutGuide type="bottom" id="XXa-0f-bFM"/>
@@ -38,7 +38,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WkQ-I1-09Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="528" y="163"/>
+            <point key="canvasLocation" x="470" y="151"/>
+        </scene>
+        <!--Content View Controller-->
+        <scene sceneID="eYm-Jn-PMC">
+            <objects>
+                <viewController storyboardIdentifier="contentViewController" id="WKB-nT-uja" userLabel="Content View Controller" customClass="ContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l9Y-AK-YKe"/>
+                        <viewControllerLayoutGuide type="bottom" id="p4G-B8-Ilt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7l6-1z-A32">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIa-Wk-MPV">
+                                <rect key="frame" x="139" y="119" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="TIa-Wk-MPV" id="mff-fK-8xe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tfy-hh-I25" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="888" y="151"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -21,7 +21,8 @@
 		AE61320618E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
 		AE61320E18E8C7A3008BE5FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE61320C18E8C7A3008BE5FF /* InfoPlist.strings */; };
 		AE61321018E8C7A3008BE5FF /* timeWiserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */; };
-		AE61321F18E8FAA6008BE5FF /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61321E18E8FAA6008BE5FF /* HMSegmentedControl.m */; };
+		AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322118E9EFAC008BE5FF /* ViewPagerController.m */; };
+		AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322418E9F147008BE5FF /* ContentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +55,10 @@
 		AE61320B18E8C7A3008BE5FF /* timeWiserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "timeWiserTests-Info.plist"; sourceTree = "<group>"; };
 		AE61320D18E8C7A3008BE5FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = timeWiserTests.m; sourceTree = "<group>"; };
-		AE61321D18E8FAA6008BE5FF /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
-		AE61321E18E8FAA6008BE5FF /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		AE61322018E9EFAC008BE5FF /* ViewPagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPagerController.h; sourceTree = "<group>"; };
+		AE61322118E9EFAC008BE5FF /* ViewPagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewPagerController.m; sourceTree = "<group>"; };
+		AE61322318E9F147008BE5FF /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		AE61322418E9F147008BE5FF /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +122,7 @@
 				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
 				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
 				AE6131F618E8C7A3008BE5FF /* Main.storyboard */,
-				AE6131F918E8C7A3008BE5FF /* CDViewController.h */,
-				AE6131FA18E8C7A3008BE5FF /* CDViewController.m */,
+				AE61322618E9F152008BE5FF /* VCs */,
 				AE6131FC18E8C7A3008BE5FF /* Images.xcassets */,
 				AE6131EB18E8C7A3008BE5FF /* Supporting Files */,
 			);
@@ -159,10 +161,21 @@
 		AE61321918E8CA10008BE5FF /* segmentedControl */ = {
 			isa = PBXGroup;
 			children = (
-				AE61321D18E8FAA6008BE5FF /* HMSegmentedControl.h */,
-				AE61321E18E8FAA6008BE5FF /* HMSegmentedControl.m */,
+				AE61322018E9EFAC008BE5FF /* ViewPagerController.h */,
+				AE61322118E9EFAC008BE5FF /* ViewPagerController.m */,
 			);
 			name = segmentedControl;
+			sourceTree = "<group>";
+		};
+		AE61322618E9F152008BE5FF /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				AE61322318E9F147008BE5FF /* ContentViewController.h */,
+				AE61322418E9F147008BE5FF /* ContentViewController.m */,
+				AE6131F918E8C7A3008BE5FF /* CDViewController.h */,
+				AE6131FA18E8C7A3008BE5FF /* CDViewController.m */,
+			);
+			name = VCs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,8 +277,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
-				AE61321F18E8FAA6008BE5FF /* HMSegmentedControl.m in Sources */,
+				AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
+				AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */,
 				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
