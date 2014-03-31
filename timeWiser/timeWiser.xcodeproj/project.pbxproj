@@ -21,6 +21,7 @@
 		AE61320618E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
 		AE61320E18E8C7A3008BE5FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE61320C18E8C7A3008BE5FF /* InfoPlist.strings */; };
 		AE61321018E8C7A3008BE5FF /* timeWiserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */; };
+		AE61321F18E8FAA6008BE5FF /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61321E18E8FAA6008BE5FF /* HMSegmentedControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		AE61320B18E8C7A3008BE5FF /* timeWiserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "timeWiserTests-Info.plist"; sourceTree = "<group>"; };
 		AE61320D18E8C7A3008BE5FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = timeWiserTests.m; sourceTree = "<group>"; };
+		AE61321D18E8FAA6008BE5FF /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		AE61321E18E8FAA6008BE5FF /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,7 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AE61321918E8CA10008BE5FF /* segmentedControl */,
 				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
 				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
 				AE6131F618E8C7A3008BE5FF /* Main.storyboard */,
@@ -150,6 +154,15 @@
 				AE61320C18E8C7A3008BE5FF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AE61321918E8CA10008BE5FF /* segmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				AE61321D18E8FAA6008BE5FF /* HMSegmentedControl.h */,
+				AE61321E18E8FAA6008BE5FF /* HMSegmentedControl.m */,
+			);
+			name = segmentedControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
+				AE61321F18E8FAA6008BE5FF /* HMSegmentedControl.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
 				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
 			);
