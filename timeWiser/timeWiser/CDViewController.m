@@ -8,6 +8,8 @@
 
 #import "CDViewController.h"
 #import "ContentViewController.h"
+#import "TasksViewController.h"
+#import "TodayViewController.h"
 
 @interface CDViewController () <ViewPagerDataSource, ViewPagerDelegate>
 @property (nonatomic) NSUInteger numberOfTabs;
@@ -29,6 +31,7 @@
     self.dataSource = self;
     self.delegate = self;
     [self loadContent];
+    [self selectTabAtIndex:1];
 }
 
 #pragma mark - Setters
@@ -65,7 +68,18 @@
     UILabel *label = [UILabel new];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:12.0];
-    label.text = [NSString stringWithFormat:@"Tab #%lu", (unsigned long)index];
+    if (index == 0)
+    {
+        label.text = [NSString stringWithFormat:@"TODAY"];
+    }
+    else if (index == 1)
+    {
+        label.text = [NSString stringWithFormat:@"TIMER"];
+    }
+    else if (index == 2)
+    {
+        label.text = [NSString stringWithFormat:@"TASKS"];
+    }
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor blackColor];
     [label sizeToFit];
@@ -75,11 +89,24 @@
 
 - (UIViewController *)viewPager:(ViewPagerController *)viewPager contentViewControllerForTabAtIndex:(NSUInteger)index {
     
+    if (index == 1)
+    {
     ContentViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
     
     cvc.labelString = [NSString stringWithFormat:@"Content View #%lu", (unsigned long)index];
-    
     return cvc;
+    }
+    else if (index == 0)
+    {
+        TodayViewController *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"TodayViewController"];
+        return tvc;
+    }
+    else if (index == 2)
+    {
+        TasksViewController *avc = [self.storyboard instantiateViewControllerWithIdentifier:@"TasksViewController"];
+        return avc;
+    }
+    return nil;
 }
 
 #pragma mark - ViewPagerDelegate

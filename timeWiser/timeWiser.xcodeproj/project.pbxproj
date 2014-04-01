@@ -23,6 +23,8 @@
 		AE61321018E8C7A3008BE5FF /* timeWiserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */; };
 		AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322118E9EFAC008BE5FF /* ViewPagerController.m */; };
 		AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322418E9F147008BE5FF /* ContentViewController.m */; };
+		AE61322C18EA8B62008BE5FF /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322B18EA8B62008BE5FF /* TasksViewController.m */; };
+		AE61322F18EA8B78008BE5FF /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322E18EA8B78008BE5FF /* TodayViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		AE61322118E9EFAC008BE5FF /* ViewPagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewPagerController.m; sourceTree = "<group>"; };
 		AE61322318E9F147008BE5FF /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		AE61322418E9F147008BE5FF /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		AE61322A18EA8B62008BE5FF /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TasksViewController.h; path = ../TasksViewController.h; sourceTree = "<group>"; };
+		AE61322B18EA8B62008BE5FF /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TasksViewController.m; path = ../TasksViewController.m; sourceTree = "<group>"; };
+		AE61322D18EA8B78008BE5FF /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayViewController.h; path = ../TodayViewController.h; sourceTree = "<group>"; };
+		AE61322E18EA8B78008BE5FF /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayViewController.m; path = ../TodayViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,10 @@
 		AE61322618E9F152008BE5FF /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				AE61322A18EA8B62008BE5FF /* TasksViewController.h */,
+				AE61322B18EA8B62008BE5FF /* TasksViewController.m */,
+				AE61322D18EA8B78008BE5FF /* TodayViewController.h */,
+				AE61322E18EA8B78008BE5FF /* TodayViewController.m */,
 				AE61322318E9F147008BE5FF /* ContentViewController.h */,
 				AE61322418E9F147008BE5FF /* ContentViewController.m */,
 				AE6131F918E8C7A3008BE5FF /* CDViewController.h */,
@@ -276,11 +286,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE61322F18EA8B78008BE5FF /* TodayViewController.m in Sources */,
 				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
 				AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
 				AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */,
 				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
+				AE61322C18EA8B62008BE5FF /* TasksViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
