@@ -25,6 +25,11 @@
 		AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322418E9F147008BE5FF /* ContentViewController.m */; };
 		AE61322C18EA8B62008BE5FF /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322B18EA8B62008BE5FF /* TasksViewController.m */; };
 		AE61322F18EA8B78008BE5FF /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322E18EA8B78008BE5FF /* TodayViewController.m */; };
+		AE61323918EBBB0E008BE5FF /* SFCounterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61323218EBBB0E008BE5FF /* SFCounterLabel.m */; };
+		AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61323418EBBB0E008BE5FF /* SFRoundProgressCounterView.m */; };
+		AE61323B18EBBB0E008BE5FF /* SFRoundProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61323618EBBB0E008BE5FF /* SFRoundProgressLayer.m */; };
+		AE61323C18EBBB0E008BE5FF /* SFRoundProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61323818EBBB0E008BE5FF /* SFRoundProgressView.m */; };
+		AE61323F18EBBB1B008BE5FF /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61323E18EBBB1B008BE5FF /* TTTAttributedLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +70,16 @@
 		AE61322B18EA8B62008BE5FF /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TasksViewController.m; path = ../TasksViewController.m; sourceTree = "<group>"; };
 		AE61322D18EA8B78008BE5FF /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayViewController.h; path = ../TodayViewController.h; sourceTree = "<group>"; };
 		AE61322E18EA8B78008BE5FF /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayViewController.m; path = ../TodayViewController.m; sourceTree = "<group>"; };
+		AE61323118EBBB0E008BE5FF /* SFCounterLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCounterLabel.h; sourceTree = "<group>"; };
+		AE61323218EBBB0E008BE5FF /* SFCounterLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCounterLabel.m; sourceTree = "<group>"; };
+		AE61323318EBBB0E008BE5FF /* SFRoundProgressCounterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFRoundProgressCounterView.h; sourceTree = "<group>"; };
+		AE61323418EBBB0E008BE5FF /* SFRoundProgressCounterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFRoundProgressCounterView.m; sourceTree = "<group>"; };
+		AE61323518EBBB0E008BE5FF /* SFRoundProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFRoundProgressLayer.h; sourceTree = "<group>"; };
+		AE61323618EBBB0E008BE5FF /* SFRoundProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFRoundProgressLayer.m; sourceTree = "<group>"; };
+		AE61323718EBBB0E008BE5FF /* SFRoundProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFRoundProgressView.h; sourceTree = "<group>"; };
+		AE61323818EBBB0E008BE5FF /* SFRoundProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFRoundProgressView.m; sourceTree = "<group>"; };
+		AE61323D18EBBB1B008BE5FF /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		AE61323E18EBBB1B008BE5FF /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +139,7 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AE61323018EBBAE5008BE5FF /* Counter */,
 				AE61321918E8CA10008BE5FF /* segmentedControl */,
 				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
 				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
@@ -186,6 +202,23 @@
 				AE6131FA18E8C7A3008BE5FF /* CDViewController.m */,
 			);
 			name = VCs;
+			sourceTree = "<group>";
+		};
+		AE61323018EBBAE5008BE5FF /* Counter */ = {
+			isa = PBXGroup;
+			children = (
+				AE61323D18EBBB1B008BE5FF /* TTTAttributedLabel.h */,
+				AE61323E18EBBB1B008BE5FF /* TTTAttributedLabel.m */,
+				AE61323118EBBB0E008BE5FF /* SFCounterLabel.h */,
+				AE61323218EBBB0E008BE5FF /* SFCounterLabel.m */,
+				AE61323318EBBB0E008BE5FF /* SFRoundProgressCounterView.h */,
+				AE61323418EBBB0E008BE5FF /* SFRoundProgressCounterView.m */,
+				AE61323518EBBB0E008BE5FF /* SFRoundProgressLayer.h */,
+				AE61323618EBBB0E008BE5FF /* SFRoundProgressLayer.m */,
+				AE61323718EBBB0E008BE5FF /* SFRoundProgressView.h */,
+				AE61323818EBBB0E008BE5FF /* SFRoundProgressView.m */,
+			);
+			name = Counter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,9 +323,14 @@
 				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
 				AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
+				AE61323B18EBBB0E008BE5FF /* SFRoundProgressLayer.m in Sources */,
+				AE61323918EBBB0E008BE5FF /* SFCounterLabel.m in Sources */,
 				AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */,
 				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
+				AE61323C18EBBB0E008BE5FF /* SFRoundProgressView.m in Sources */,
 				AE61322C18EA8B62008BE5FF /* TasksViewController.m in Sources */,
+				AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */,
+				AE61323F18EBBB1B008BE5FF /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
