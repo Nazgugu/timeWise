@@ -41,6 +41,7 @@
 		AE61327218ED1FCB008BE5FF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE61327118ED1FCB008BE5FF /* QuartzCore.framework */; };
 		AE61327818ED2206008BE5FF /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327518ED2206008BE5FF /* JVFloatLabeledTextField.m */; };
 		AE61327918ED2206008BE5FF /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */; };
+		AE61327B18EDC932008BE5FF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE61327A18EDC932008BE5FF /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		AE61327518ED2206008BE5FF /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextField.m; sourceTree = "<group>"; };
 		AE61327618ED2206008BE5FF /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextView.h; sourceTree = "<group>"; };
 		AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextView.m; sourceTree = "<group>"; };
+		AE61327A18EDC932008BE5FF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE61327B18EDC932008BE5FF /* CoreText.framework in Frameworks */,
 				AE61327218ED1FCB008BE5FF /* QuartzCore.framework in Frameworks */,
 				AE61326018ED0AFE008BE5FF /* Accelerate.framework in Frameworks */,
 				AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */,
@@ -161,6 +164,7 @@
 		AE6131E318E8C7A3008BE5FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE61327A18EDC932008BE5FF /* CoreText.framework */,
 				AE61327118ED1FCB008BE5FF /* QuartzCore.framework */,
 				AE61325F18ED0AFE008BE5FF /* Accelerate.framework */,
 				AE6131E418E8C7A3008BE5FF /* Foundation.framework */,

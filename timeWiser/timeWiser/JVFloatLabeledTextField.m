@@ -156,7 +156,8 @@
 - (void)setPlaceholder:(NSString *)placeholder
 {
     [super setPlaceholder:placeholder];
-
+    UIColor *color = [UIColor colorWithWhite:0.702f alpha:1.0f];
+     self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
     _floatingLabel.text = placeholder;
     [_floatingLabel sizeToFit];
 }

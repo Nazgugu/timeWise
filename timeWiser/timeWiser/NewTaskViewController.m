@@ -13,9 +13,9 @@
 const static CGFloat kJVFieldHeight = 54.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
 
-const static CGFloat kJVFieldFontSize = 18.0f;
+const static CGFloat kJVFieldFontSize = 16.0f;
 
-const static CGFloat kJVFieldFloatingLabelFontSize = 12.0f;
+const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 @interface NewTaskViewController ()
 
@@ -47,6 +47,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 12.0f;
     titleField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     titleField.floatingLabelTextColor = floatingLabelColor;
     titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    titleField.backgroundColor = [UIColor clearColor];
     //UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
     //titleField.leftView = leftView;
     //titleField.leftViewMode = UITextFieldViewModeAlways;
@@ -59,15 +60,15 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 12.0f;
     [self.view addSubview:div1];
     
     JVFloatLabeledTextField *priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                           CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height,  self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
-    priceField.placeholder = NSLocalizedString(@"Description", @"");
+                                           CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, 80.0f, kJVFieldHeight)];
+    priceField.placeholder = NSLocalizedString(@"Price", @"");
     priceField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     priceField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    priceField.clearButtonMode = UITextFieldViewModeWhileEditing;
     priceField.floatingLabelTextColor = floatingLabelColor;
+    priceField.backgroundColor = [UIColor clearColor];
     [self.view addSubview:priceField];
     
-    /*UIView *div2 = [UIView new];
+    UIView *div2 = [UIView new];
     div2.frame = CGRectMake(kJVFieldHMargin + priceField.frame.size.width,
                             titleField.frame.origin.y + titleField.frame.size.height,
                             1.0f, kJVFieldHeight);
@@ -77,32 +78,38 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 12.0f;
     JVFloatLabeledTextField *locationField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                               CGRectMake(kJVFieldHMargin + kJVFieldHMargin + priceField.frame.size.width + 1.0f,
                                                          div1.frame.origin.y + div1.frame.size.height,
-                                                         self.view.frame.size.width - 2*kJVFieldHMargin - priceField.frame.size.width - 1.0f,
+                                                         self.view.frame.size.width - 3*kJVFieldHMargin - priceField.frame.size.width - 1.0f,
                                                          kJVFieldHeight)];
     locationField.placeholder = NSLocalizedString(@"Specific Location (optional)", @"");
     locationField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     locationField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     locationField.floatingLabelTextColor = floatingLabelColor;
-    [self.view addSubview:locationField];*/
+    locationField.backgroundColor = [UIColor clearColor];
+    locationField.opaque = NO;
+    [self.view addSubview:locationField];
     
     UIView *div3 = [UIView new];
     div3.frame = CGRectMake(kJVFieldHMargin, priceField.frame.origin.y + priceField.frame.size.height,
                             self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
     div3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
     [self.view addSubview:div3];
-    titleField.delegate = self;
-    priceField.delegate = self;
     
-    /*JVFloatLabeledTextView *descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
-    descriptionField.frame = CGRectMake(kJVFieldHMargin,
+    JVFloatLabeledTextView *descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
+    descriptionField.frame = CGRectMake(kJVFieldHMargin - descriptionField.textContainer.lineFragmentPadding,
                                         div3.frame.origin.y + div3.frame.size.height,
                                         self.view.frame.size.width - 2*kJVFieldHMargin + descriptionField.textContainer.lineFragmentPadding,
-                                        kJVFieldHeight);
+                                        kJVFieldHeight*3);
     descriptionField.placeholder = NSLocalizedString(@"Description", @"");
     descriptionField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     descriptionField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     descriptionField.floatingLabelTextColor = floatingLabelColor;
-    [self.view addSubview:descriptionField];*/
+    descriptionField.backgroundColor = [UIColor clearColor];
+    descriptionField.opaque = NO;
+    [self.view addSubview:descriptionField];
+    //set delegate
+    titleField.delegate = self;
+    priceField.delegate = self;
+    locationField.delegate = self;
     
     [titleField becomeFirstResponder];
 
