@@ -63,7 +63,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 12.0f;
     priceField.placeholder = NSLocalizedString(@"Description", @"");
     priceField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     priceField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    priceField.clearButtonMode = UITextFieldViewModeWhileEditing;
     priceField.floatingLabelTextColor = floatingLabelColor;
     [self.view addSubview:priceField];
     
@@ -90,6 +90,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 12.0f;
                             self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
     div3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
     [self.view addSubview:div3];
+    titleField.delegate = self;
+    priceField.delegate = self;
     
     /*JVFloatLabeledTextView *descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
     descriptionField.frame = CGRectMake(kJVFieldHMargin,
@@ -105,6 +107,21 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 12.0f;
     [titleField becomeFirstResponder];
 
 }
+
+//Dismiss keyboard when touch out side.
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField isKindOfClass:[JVFloatLabeledTextField class]])
+    {
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
