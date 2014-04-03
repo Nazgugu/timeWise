@@ -10,5 +10,4 @@
 #import "ViewPagerController.h"
 
 @interface CDViewController : ViewPagerController
-
 @end

@@ -17,13 +17,10 @@
 
 @implementation CDViewController
 
-
-- (void)loadView
+-(void)loadView
 {
     [super loadView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil/*@selector(add)*/];
 }
-
 
 - (void)viewDidLoad
 {
