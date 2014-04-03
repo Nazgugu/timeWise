@@ -39,6 +39,8 @@
 		AE61326E18ED1F34008BE5FF /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61326B18ED1F34008BE5FF /* UIImage+BlurredFrame.m */; };
 		AE61326F18ED1F34008BE5FF /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61326D18ED1F34008BE5FF /* UIImage+ImageEffects.m */; };
 		AE61327218ED1FCB008BE5FF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE61327118ED1FCB008BE5FF /* QuartzCore.framework */; };
+		AE61327818ED2206008BE5FF /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327518ED2206008BE5FF /* JVFloatLabeledTextField.m */; };
+		AE61327918ED2206008BE5FF /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,10 @@
 		AE61326C18ED1F34008BE5FF /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		AE61326D18ED1F34008BE5FF /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		AE61327118ED1FCB008BE5FF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AE61327418ED2206008BE5FF /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextField.h; sourceTree = "<group>"; };
+		AE61327518ED2206008BE5FF /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextField.m; sourceTree = "<group>"; };
+		AE61327618ED2206008BE5FF /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextView.h; sourceTree = "<group>"; };
+		AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,7 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AE61327318ED21EB008BE5FF /* FloatTextField */,
 				AE61327018ED1F39008BE5FF /* BlurSegue */,
 				AE61323018EBBAE5008BE5FF /* Counter */,
 				AE61321918E8CA10008BE5FF /* segmentedControl */,
@@ -270,6 +277,17 @@
 				AE61326218ED1E43008BE5FF /* BlurryModalSegue.m */,
 			);
 			name = BlurSegue;
+			sourceTree = "<group>";
+		};
+		AE61327318ED21EB008BE5FF /* FloatTextField */ = {
+			isa = PBXGroup;
+			children = (
+				AE61327418ED2206008BE5FF /* JVFloatLabeledTextField.h */,
+				AE61327518ED2206008BE5FF /* JVFloatLabeledTextField.m */,
+				AE61327618ED2206008BE5FF /* JVFloatLabeledTextView.h */,
+				AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */,
+			);
+			name = FloatTextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +396,8 @@
 				AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
 				AE61323B18EBBB0E008BE5FF /* SFRoundProgressLayer.m in Sources */,
+				AE61327818ED2206008BE5FF /* JVFloatLabeledTextField.m in Sources */,
+				AE61327918ED2206008BE5FF /* JVFloatLabeledTextView.m in Sources */,
 				AE61323918EBBB0E008BE5FF /* SFCounterLabel.m in Sources */,
 				AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */,
 				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
