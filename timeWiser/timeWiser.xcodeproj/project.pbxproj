@@ -42,6 +42,8 @@
 		AE61327818ED2206008BE5FF /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327518ED2206008BE5FF /* JVFloatLabeledTextField.m */; };
 		AE61327918ED2206008BE5FF /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */; };
 		AE61327B18EDC932008BE5FF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE61327A18EDC932008BE5FF /* CoreText.framework */; };
+		AE61328118EE0A4E008BE5FF /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327E18EE0A4E008BE5FF /* SAMultisectorControl.m */; };
+		AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61328018EE0A4E008BE5FF /* SAMath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,10 @@
 		AE61327618ED2206008BE5FF /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextView.h; sourceTree = "<group>"; };
 		AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextView.m; sourceTree = "<group>"; };
 		AE61327A18EDC932008BE5FF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		AE61327D18EE0A4E008BE5FF /* SAMultisectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMultisectorControl.h; sourceTree = "<group>"; };
+		AE61327E18EE0A4E008BE5FF /* SAMultisectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMultisectorControl.m; sourceTree = "<group>"; };
+		AE61327F18EE0A4E008BE5FF /* SAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMath.h; sourceTree = "<group>"; };
+		AE61328018EE0A4E008BE5FF /* SAMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +184,7 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AE61327C18EE0A32008BE5FF /* TimeSelection */,
 				AE61327318ED21EB008BE5FF /* FloatTextField */,
 				AE61327018ED1F39008BE5FF /* BlurSegue */,
 				AE61323018EBBAE5008BE5FF /* Counter */,
@@ -294,6 +301,17 @@
 			name = FloatTextField;
 			sourceTree = "<group>";
 		};
+		AE61327C18EE0A32008BE5FF /* TimeSelection */ = {
+			isa = PBXGroup;
+			children = (
+				AE61327D18EE0A4E008BE5FF /* SAMultisectorControl.h */,
+				AE61327E18EE0A4E008BE5FF /* SAMultisectorControl.m */,
+				AE61327F18EE0A4E008BE5FF /* SAMath.h */,
+				AE61328018EE0A4E008BE5FF /* SAMath.m */,
+			);
+			name = TimeSelection;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -397,6 +415,7 @@
 				AE61326F18ED1F34008BE5FF /* UIImage+ImageEffects.m in Sources */,
 				AE61326E18ED1F34008BE5FF /* UIImage+BlurredFrame.m in Sources */,
 				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
+				AE61328118EE0A4E008BE5FF /* SAMultisectorControl.m in Sources */,
 				AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
 				AE61323B18EBBB0E008BE5FF /* SFRoundProgressLayer.m in Sources */,
@@ -408,6 +427,7 @@
 				AE61326318ED1E43008BE5FF /* BlurryModalSegue.m in Sources */,
 				AE61323C18EBBB0E008BE5FF /* SFRoundProgressView.m in Sources */,
 				AE61325B18ED0196008BE5FF /* CDNavigationViewController.m in Sources */,
+				AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */,
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
 				AE61322C18EA8B62008BE5FF /* TasksViewController.m in Sources */,
 				AE61326918ED1F26008BE5FF /* NSInvocation+Copy.m in Sources */,

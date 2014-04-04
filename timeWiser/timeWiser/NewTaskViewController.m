@@ -10,7 +10,7 @@
 #import "JVFloatLabeledTextField.h"
 #import "JVFloatLabeledTextView.h"
 
-const static CGFloat kJVFieldHeight = 54.0f;
+const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
 
 const static CGFloat kJVFieldFontSize = 16.0f;
@@ -32,11 +32,71 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return self;
 }
 
+- (void)setupDesign{
+    self.view.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:26.0/255.0 blue:26.0/255.0 alpha:1.0];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+}
+
+- (void)setupTimeSelector{
+    [self.timeSelector addTarget:self action:@selector(timeSelectorValueChanged:) forControlEvents:UIControlEventValueChanged];
+    UIColor *redColor = [UIColor colorWithRed:245.0/255.0 green:76.0/255.0 blue:76.0/255.0 alpha:1.0];
+    UIColor *blueColor = [UIColor colorWithRed:0.0 green:168.0/255.0 blue:255.0/255.0 alpha:1.0];
+    UIColor *greenColor = [UIColor colorWithRed:29.0/255.0 green:207.0/255.0 blue:0.0 alpha:1.0];
+    
+    SAMultisectorSector *sector1 = [SAMultisectorSector sectorWithColor:redColor maxValue:16.0];
+    SAMultisectorSector *hours = [SAMultisectorSector sectorWithColor:blueColor maxValue:23.0];
+    SAMultisectorSector *minutes = [SAMultisectorSector sectorWithColor:greenColor maxValue:60.0];
+    
+    sector1.tag = 0;
+    hours.tag = 1;
+    minutes.tag = 2;
+    
+    //sector1.endValue = 1.0;
+    //sector1.startValue = 0.0;
+    hours.endValue = 1.0;
+    hours.startValue = 0.0;
+    minutes.startValue = 0.0;
+    minutes.endValue = 1.0;
+    
+    self.timeSelector.sectorsRadius = 60.0f;
+    self.timeSelector.minCircleMarkerRadius = 5.0f;
+    self.timeSelector.maxCircleMarkerRadius = 10.0f;
+    //[self.timeSelector addSector:sector1];
+    [self.timeSelector addSector:hours];
+    [self.timeSelector addSector:minutes];
+    [self updateDataView];
+}
+
+- (void)updateDataView
+{
+    for (SAMultisectorSector *sector in self.timeSelector.sectors)
+    {
+        double totalTime;
+        if (sector.tag == 1)
+        {
+            totalTime = sector.endValue - sector.startValue;
+            self.hoursLabel.text = [NSString stringWithFormat:@"%.0f", totalTime];
+        }
+        if (sector.tag == 2)
+        {
+            totalTime = sector.endValue - sector.startValue;
+            self.minutesLabel.text = [NSString stringWithFormat:@"%.0f", totalTime];
+        }
+    }
+}
+
+//do something when the timeselector value changed
+- (void)timeSelectorValueChanged:(id)sender
+{
+    [self updateDataView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height + 40.0f;
+    CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height + 10.0f;
     
     UIColor *floatingLabelColor = [UIColor grayColor];
     
@@ -59,7 +119,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     div1.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
     [self.view addSubview:div1];
     
-    JVFloatLabeledTextField *priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
+    /*JVFloatLabeledTextField *priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                            CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, 80.0f, kJVFieldHeight)];
     priceField.placeholder = NSLocalizedString(@"Price", @"");
     priceField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
@@ -88,17 +148,13 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     locationField.opaque = NO;
     [self.view addSubview:locationField];
     
-    UIView *div3 = [UIView new];
-    div3.frame = CGRectMake(kJVFieldHMargin, priceField.frame.origin.y + priceField.frame.size.height,
-                            self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
-    div3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
-    [self.view addSubview:div3];
+    */
     
     JVFloatLabeledTextView *descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
     descriptionField.frame = CGRectMake(kJVFieldHMargin - descriptionField.textContainer.lineFragmentPadding,
-                                        div3.frame.origin.y + div3.frame.size.height,
+                                        div1.frame.origin.y + div1.frame.size.height,
                                         self.view.frame.size.width - 2*kJVFieldHMargin + descriptionField.textContainer.lineFragmentPadding,
-                                        kJVFieldHeight*3);
+                                        kJVFieldHeight * 2);
     descriptionField.placeholder = NSLocalizedString(@"Description", @"");
     descriptionField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     descriptionField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
@@ -106,13 +162,19 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     descriptionField.backgroundColor = [UIColor clearColor];
     descriptionField.opaque = NO;
     [self.view addSubview:descriptionField];
+    UIView *div3 = [UIView new];
+    div3.frame = CGRectMake(kJVFieldHMargin, descriptionField.frame.origin.y + descriptionField.frame.size.height,
+                            self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
+    div3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
+    [self.view addSubview:div3];
     //set delegate
     titleField.delegate = self;
-    priceField.delegate = self;
-    locationField.delegate = self;
+    //priceField.delegate = self;
+    //locationField.delegate = self;
+    [self setupDesign];
+    [self setupTimeSelector];
     
-    [titleField becomeFirstResponder];
-
+    //[titleField becomeFirstResponder];
 }
 
 //Dismiss keyboard when touch out side.

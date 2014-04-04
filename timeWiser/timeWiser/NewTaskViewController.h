@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SAMultisectorControl.h"
 
 @interface NewTaskViewController : UIViewController<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet SAMultisectorControl *timeSelector;
+@property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
 
 @end
