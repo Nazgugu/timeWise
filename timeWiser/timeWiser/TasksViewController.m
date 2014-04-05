@@ -11,6 +11,7 @@
 #import "CDAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+MLPFlatColors.h"
+#import "M13Checkbox.h"
 
 @interface TasksViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -129,7 +130,10 @@
     //configure the cell
     self.testCell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
     self.testCell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
-    self.testCell.timeLabel.text = [NSString stringWithFormat:@"%@ : %@",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
+    self.testCell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
+    self.testCell.checkBox.checkState = M13CheckboxStateUnchecked;
+    self.testCell.checkBox.strokeColor = [UIColor flatBlueColor];
+    self.testCell.checkBox.checkColor = [UIColor flatBlueColor];
     //Layout the cell
     [self.testCell layoutIfNeeded];
     //Get the height for the cell
@@ -169,15 +173,37 @@
     }
     cell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
     cell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@ : %@",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
+    cell.titleLabel.textColor = [UIColor flatBlackColor];
+    cell.detailLabel.textColor = [UIColor flatBlackColor];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
     cell.timeLabel.backgroundColor = [UIColor flatWhiteColor];
     cell.detailLabel.backgroundColor = [UIColor flatWhiteColor];
     cell.titleLabel.backgroundColor = [UIColor flatWhiteColor];
     cell.backgroundColor = [UIColor flatWhiteColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.colorView.backgroundColor = [colorArray objectAtIndex:indexPath.row % 7];
+    cell.checkBox.checkState = M13CheckboxStateUnchecked;
+    cell.checkBox.strokeColor = [UIColor flatBlueColor];
+    cell.checkBox.checkColor = [UIColor flatBlueColor];
     return cell;
 }
+- (IBAction)checkBoxTapped:(id)sender forEvent:(UIEvent *)event
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.taskTable];
+    // Lookup the index path of the cell whose checkbox was modified.
+    NSIndexPath *indexPath = [self.taskTable indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath != nil)
+    {
+        NSLog(@"Did tapped at checkbox location %ld",indexPath.row);
+    }
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

@@ -7,6 +7,7 @@
 //
 
 #import "SAMultisectorControl.h"
+#import "UIColor+MLPFlatColors.h"
 
 #define saCircleLineWidth 2.0
 #define saMarkersLineWidth 2.0
@@ -238,9 +239,9 @@ typedef struct{
     
     CGContextSetLineWidth(context, saCircleLineWidth);
     
-    UIColor *startCircleColor = [sector.color colorWithAlphaComponent:0.3];
+    UIColor *startCircleColor = [sector.color colorWithAlphaComponent:0.5];//originally 0.3
     UIColor *circleColor = sector.color;
-    UIColor *endCircleColor = [[UIColor grayColor] colorWithAlphaComponent:0.1];
+    UIColor *endCircleColor = [[UIColor flatGrayColor] colorWithAlphaComponent:0.5];//originally 0.1 grayColor
     
     SASectorDrawingInformation drawInf = [self sectorToDrawInf:sector position:position];
     
