@@ -18,7 +18,8 @@ const static CGFloat kJVFieldFontSize = 16.0f;
 const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 @interface NewTaskViewController ()
-
+@property (strong, nonatomic) JVFloatLabeledTextField *titleField;
+@property (strong, nonatomic) JVFloatLabeledTextView *descriptionField;
 @end
 
 @implementation NewTaskViewController
@@ -96,25 +97,28 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height + 10.0f;
+    CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height + 30.0f;
     
     UIColor *floatingLabelColor = [UIColor grayColor];
     
-    JVFloatLabeledTextField *titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
+    if (!self.titleField)
+    {
+    self.titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                            CGRectMake(kJVFieldHMargin, topOffset, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
-    titleField.placeholder = NSLocalizedString(@"Title", @"");
-    titleField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    titleField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    titleField.floatingLabelTextColor = floatingLabelColor;
-    titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    titleField.backgroundColor = [UIColor clearColor];
+    }
+    self.titleField.placeholder = NSLocalizedString(@"Title", @"");
+    self.titleField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
+    self.titleField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
+    self.titleField.floatingLabelTextColor = floatingLabelColor;
+    self.titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.titleField.backgroundColor = [UIColor clearColor];
     //UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
     //titleField.leftView = leftView;
     //titleField.leftViewMode = UITextFieldViewModeAlways;
-    [self.view addSubview:titleField];
+    [self.view addSubview:self.titleField];
     
     UIView *div1 = [UIView new];
-    div1.frame = CGRectMake(kJVFieldHMargin, titleField.frame.origin.y + titleField.frame.size.height,
+    div1.frame = CGRectMake(kJVFieldHMargin, self.titleField.frame.origin.y + self.titleField.frame.size.height,
                             self.view.frame.size.width - 2 * kJVFieldHMargin, 1.0f);
     div1.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
     [self.view addSubview:div1];
@@ -149,32 +153,50 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [self.view addSubview:locationField];
     
     */
-    
-    JVFloatLabeledTextView *descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
-    descriptionField.frame = CGRectMake(kJVFieldHMargin - descriptionField.textContainer.lineFragmentPadding,
+    if (!self.descriptionField)
+    {
+    self.descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
+    self.descriptionField.frame = CGRectMake(kJVFieldHMargin - self.descriptionField.textContainer.lineFragmentPadding,
                                         div1.frame.origin.y + div1.frame.size.height,
-                                        self.view.frame.size.width - 2*kJVFieldHMargin + descriptionField.textContainer.lineFragmentPadding,
+                                        self.view.frame.size.width - 2*kJVFieldHMargin + self.descriptionField.textContainer.lineFragmentPadding,
                                         kJVFieldHeight * 2);
-    descriptionField.placeholder = NSLocalizedString(@"Description", @"");
-    descriptionField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    descriptionField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    descriptionField.floatingLabelTextColor = floatingLabelColor;
-    descriptionField.backgroundColor = [UIColor clearColor];
-    descriptionField.opaque = NO;
-    [self.view addSubview:descriptionField];
+    }
+    self.descriptionField.placeholder = NSLocalizedString(@"Description", @"");
+    self.descriptionField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
+    self.descriptionField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
+    self.descriptionField.floatingLabelTextColor = floatingLabelColor;
+    self.descriptionField.backgroundColor = [UIColor clearColor];
+    self.descriptionField.opaque = NO;
+    [self.view addSubview:self.descriptionField];
     UIView *div3 = [UIView new];
-    div3.frame = CGRectMake(kJVFieldHMargin, descriptionField.frame.origin.y + descriptionField.frame.size.height,
+    div3.frame = CGRectMake(kJVFieldHMargin, self.descriptionField.frame.origin.y + self.descriptionField.frame.size.height,
                             self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
     div3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
     [self.view addSubview:div3];
     //set delegate
-    titleField.delegate = self;
+    self.titleField.delegate = self;
     //priceField.delegate = self;
     //locationField.delegate = self;
     [self setupDesign];
     [self setupTimeSelector];
     
     //[titleField becomeFirstResponder];
+}
+- (IBAction)addTask:(id)sender {
+    if ([self.titleField.text  isEqualToString:@""])
+    {
+        [self.titleField becomeFirstResponder];
+        return;
+    }
+    if ([self.descriptionField.text isEqualToString:@""])
+    {
+        [self.descriptionField becomeFirstResponder];
+        return;
+    }
+    [self performSegueWithIdentifier:@"unwind" sender:sender];
+}
+- (IBAction)cancelCreation:(id)sender {
+    [self performSegueWithIdentifier:@"unwind" sender:sender];
 }
 
 //Dismiss keyboard when touch out side.

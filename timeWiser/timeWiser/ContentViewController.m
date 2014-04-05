@@ -34,7 +34,7 @@
     _label.text = _labelString;
     //circular timer
     self.timeCounter.delegate = self;
-    NSNumber *interval = [NSNumber numberWithLong:5 * 1000];
+    NSNumber *interval = [NSNumber numberWithLong:120 * 1000];
     self.timeCounter.intervals = @[interval];
     self.timeCounter.outerCircleThickness = [NSNumber numberWithLong:3.0];
     self.color = [UIColor blueColor];

@@ -2,14 +2,16 @@
 //  TasksViewController.m
 //  timeWiser
 //
-//  Created by Liu Zhe on 3/31/14.
+//  Created by Liu Zhe on 4/4/14.
 //  Copyright (c) 2014 CDFLS. All rights reserved.
 //
 
 #import "TasksViewController.h"
+#import "TaskCell.h"
 
-@interface TasksViewController ()
-
+@interface TasksViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *taskTable;
+@property (strong, nonatomic) TaskCell *testCell;
 @end
 
 @implementation TasksViewController
@@ -40,32 +42,58 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Table view cell height
+//not complete!
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //calculate a height based on a cell
+    if (!self.testCell)
+    {
+        self.testCell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell"];
+    }
+    
+    //configure the cell
+    
+    //Layout the cell
+    [self.testCell layoutIfNeeded];
+    //Get the height for the cell
+    CGFloat height = [self.testCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    //Padding of 1 point for the seperator
+    return height + 1;
+}
+
+//load contents faster!
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 95;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 5;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    TaskCell *cell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
+    if (!cell)
+    {
+        cell = [[TaskCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"taskCell"];
+    }
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

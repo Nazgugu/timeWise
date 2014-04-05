@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE5DFC8B18EE934600FA585A /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFC8A18EE934600FA585A /* TasksViewController.m */; };
+		AE5DFCA118EF30C700FA585A /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCA018EF30C700FA585A /* TaskCell.m */; };
+		AE5DFCA318EF791500FA585A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5DFCA218EF791500FA585A /* CoreData.framework */; };
 		AE6131E518E8C7A3008BE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E418E8C7A3008BE5FF /* Foundation.framework */; };
 		AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */; };
 		AE6131E918E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
@@ -23,7 +26,6 @@
 		AE61321018E8C7A3008BE5FF /* timeWiserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61320F18E8C7A3008BE5FF /* timeWiserTests.m */; };
 		AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322118E9EFAC008BE5FF /* ViewPagerController.m */; };
 		AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322418E9F147008BE5FF /* ContentViewController.m */; };
-		AE61322C18EA8B62008BE5FF /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322B18EA8B62008BE5FF /* TasksViewController.m */; };
 		AE61322F18EA8B78008BE5FF /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61322E18EA8B78008BE5FF /* TodayViewController.m */; };
 		AE61323918EBBB0E008BE5FF /* SFCounterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61323218EBBB0E008BE5FF /* SFCounterLabel.m */; };
 		AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61323418EBBB0E008BE5FF /* SFRoundProgressCounterView.m */; };
@@ -57,6 +59,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE5DFC8918EE934600FA585A /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksViewController.h; sourceTree = "<group>"; };
+		AE5DFC8A18EE934600FA585A /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksViewController.m; sourceTree = "<group>"; };
+		AE5DFC9F18EF30C700FA585A /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskCell.h; path = ../TaskCell.h; sourceTree = "<group>"; };
+		AE5DFCA018EF30C700FA585A /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskCell.m; path = ../TaskCell.m; sourceTree = "<group>"; };
+		AE5DFCA218EF791500FA585A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AE6131E118E8C7A3008BE5FF /* timeWiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeWiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6131E418E8C7A3008BE5FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -80,8 +87,6 @@
 		AE61322118E9EFAC008BE5FF /* ViewPagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewPagerController.m; sourceTree = "<group>"; };
 		AE61322318E9F147008BE5FF /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		AE61322418E9F147008BE5FF /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
-		AE61322A18EA8B62008BE5FF /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TasksViewController.h; path = ../TasksViewController.h; sourceTree = "<group>"; };
-		AE61322B18EA8B62008BE5FF /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TasksViewController.m; path = ../TasksViewController.m; sourceTree = "<group>"; };
 		AE61322D18EA8B78008BE5FF /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayViewController.h; path = ../TodayViewController.h; sourceTree = "<group>"; };
 		AE61322E18EA8B78008BE5FF /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayViewController.m; path = ../TodayViewController.m; sourceTree = "<group>"; };
 		AE61323118EBBB0E008BE5FF /* SFCounterLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCounterLabel.h; sourceTree = "<group>"; };
@@ -126,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5DFCA318EF791500FA585A /* CoreData.framework in Frameworks */,
 				AE61327B18EDC932008BE5FF /* CoreText.framework in Frameworks */,
 				AE61327218ED1FCB008BE5FF /* QuartzCore.framework in Frameworks */,
 				AE61326018ED0AFE008BE5FF /* Accelerate.framework in Frameworks */,
@@ -148,6 +154,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE5DFC6018EE75C600FA585A /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				AE5DFC9F18EF30C700FA585A /* TaskCell.h */,
+				AE5DFCA018EF30C700FA585A /* TaskCell.m */,
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
 		AE6131D818E8C7A3008BE5FF = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +185,7 @@
 		AE6131E318E8C7A3008BE5FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE5DFCA218EF791500FA585A /* CoreData.framework */,
 				AE61327A18EDC932008BE5FF /* CoreText.framework */,
 				AE61327118ED1FCB008BE5FF /* QuartzCore.framework */,
 				AE61325F18ED0AFE008BE5FF /* Accelerate.framework */,
@@ -184,14 +200,12 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AE5DFC6018EE75C600FA585A /* TableView */,
 				AE61327C18EE0A32008BE5FF /* TimeSelection */,
 				AE61327318ED21EB008BE5FF /* FloatTextField */,
 				AE61327018ED1F39008BE5FF /* BlurSegue */,
 				AE61323018EBBAE5008BE5FF /* Counter */,
 				AE61321918E8CA10008BE5FF /* segmentedControl */,
-				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
-				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
-				AE6131F618E8C7A3008BE5FF /* Main.storyboard */,
 				AE61322618E9F152008BE5FF /* VCs */,
 				AE6131FC18E8C7A3008BE5FF /* Images.xcassets */,
 				AE6131EB18E8C7A3008BE5FF /* Supporting Files */,
@@ -202,6 +216,9 @@
 		AE6131EB18E8C7A3008BE5FF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
+				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
+				AE6131F618E8C7A3008BE5FF /* Main.storyboard */,
 				AE6131EC18E8C7A3008BE5FF /* timeWiser-Info.plist */,
 				AE6131ED18E8C7A3008BE5FF /* InfoPlist.strings */,
 				AE6131F018E8C7A3008BE5FF /* main.m */,
@@ -240,10 +257,10 @@
 		AE61322618E9F152008BE5FF /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				AE5DFC8918EE934600FA585A /* TasksViewController.h */,
+				AE5DFC8A18EE934600FA585A /* TasksViewController.m */,
 				AE61325C18ED0260008BE5FF /* NewTaskViewController.h */,
 				AE61325D18ED0260008BE5FF /* NewTaskViewController.m */,
-				AE61322A18EA8B62008BE5FF /* TasksViewController.h */,
-				AE61322B18EA8B62008BE5FF /* TasksViewController.m */,
 				AE61322D18EA8B78008BE5FF /* TodayViewController.h */,
 				AE61322E18EA8B78008BE5FF /* TodayViewController.m */,
 				AE61322318E9F147008BE5FF /* ContentViewController.h */,
@@ -413,10 +430,12 @@
 				AE61326818ED1F26008BE5FF /* MZAppearance.m in Sources */,
 				AE61322F18EA8B78008BE5FF /* TodayViewController.m in Sources */,
 				AE61326F18ED1F34008BE5FF /* UIImage+ImageEffects.m in Sources */,
+				AE5DFC8B18EE934600FA585A /* TasksViewController.m in Sources */,
 				AE61326E18ED1F34008BE5FF /* UIImage+BlurredFrame.m in Sources */,
 				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
 				AE61328118EE0A4E008BE5FF /* SAMultisectorControl.m in Sources */,
 				AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */,
+				AE5DFCA118EF30C700FA585A /* TaskCell.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
 				AE61323B18EBBB0E008BE5FF /* SFRoundProgressLayer.m in Sources */,
 				AE61327818ED2206008BE5FF /* JVFloatLabeledTextField.m in Sources */,
@@ -429,7 +448,6 @@
 				AE61325B18ED0196008BE5FF /* CDNavigationViewController.m in Sources */,
 				AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */,
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
-				AE61322C18EA8B62008BE5FF /* TasksViewController.m in Sources */,
 				AE61326918ED1F26008BE5FF /* NSInvocation+Copy.m in Sources */,
 				AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */,
 				AE61324218EBE1F9008BE5FF /* TTTAttributedLabel.m in Sources */,
@@ -637,6 +655,7 @@
 				AE61321518E8C7A3008BE5FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AE61321618E8C7A3008BE5FF /* Build configuration list for PBXNativeTarget "timeWiserTests" */ = {
 			isa = XCConfigurationList;
@@ -645,6 +664,7 @@
 				AE61321818E8C7A3008BE5FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

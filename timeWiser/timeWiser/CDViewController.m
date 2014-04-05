@@ -93,7 +93,7 @@
     ContentViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
     
     cvc.labelString = [NSString stringWithFormat:@"Content View #%lu", (unsigned long)index];
-    NSNumber* singleValue = [NSNumber numberWithLong:5 * 1000];
+    NSNumber* singleValue = [NSNumber numberWithLong:3600 * 1000];
     cvc.intervals = @[singleValue];
     return cvc;
     }
