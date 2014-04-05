@@ -26,6 +26,7 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "JVFloatLabeledTextField.h"
+#import "UIColor+MLPFlatColors.h"
 
 #define kFloatingLabelShowAnimationDuration 0.3f
 #define kFloatingLabelHideAnimationDuration 0.3f
@@ -156,7 +157,7 @@
 - (void)setPlaceholder:(NSString *)placeholder
 {
     [super setPlaceholder:placeholder];
-    UIColor *color = [UIColor colorWithWhite:0.702f alpha:1.0f];
+    UIColor *color = [UIColor flatGrayColor];
      self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
     _floatingLabel.text = placeholder;
     [_floatingLabel sizeToFit];

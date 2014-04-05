@@ -7,6 +7,7 @@
 //
 
 #import "JVFloatLabeledTextView.h"
+#import "UIColor+MLPFlatColors.h"
 
 #define kFloatingLabelShowAnimationDuration 0.3f
 #define kFloatingLabelHideAnimationDuration 0.3f
@@ -247,7 +248,7 @@
 
 + (UIColor *)defaultiOSPlaceholderColor
 {
-    return [UIColor colorWithWhite:0.702f alpha:1.0f];
+    return [UIColor flatGrayColor];
 }
 
 #pragma mark - UITextView

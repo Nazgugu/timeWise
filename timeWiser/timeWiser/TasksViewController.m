@@ -55,6 +55,8 @@
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDesc];
+    NSPredicate *isCompleted = [NSPredicate predicateWithFormat:@"isCompleted == NO"];
+    [request setPredicate:isCompleted];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     NSManagedObject *matches = nil;

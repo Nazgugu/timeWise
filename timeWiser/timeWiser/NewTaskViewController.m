@@ -10,6 +10,7 @@
 #import "JVFloatLabeledTextField.h"
 #import "JVFloatLabeledTextView.h"
 #import "CDAppDelegate.h"
+#import "UIColor+MLPFlatColors.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -23,6 +24,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @property (strong, nonatomic) JVFloatLabeledTextView *descriptionField;
 @property (nonatomic) NSInteger setMin;
 @property (nonatomic) NSInteger setHr;
+@property (weak, nonatomic) IBOutlet UILabel *displayMinLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayHourLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tinyLabel;
 @end
 
 @implementation NewTaskViewController
@@ -44,9 +48,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)setupTimeSelector{
     [self.timeSelector addTarget:self action:@selector(timeSelectorValueChanged:) forControlEvents:UIControlEventValueChanged];
-    UIColor *redColor = [UIColor colorWithRed:245.0/255.0 green:76.0/255.0 blue:76.0/255.0 alpha:1.0];
-    UIColor *blueColor = [UIColor colorWithRed:0.0 green:168.0/255.0 blue:255.0/255.0 alpha:1.0];
-    UIColor *greenColor = [UIColor colorWithRed:29.0/255.0 green:207.0/255.0 blue:0.0 alpha:1.0];
+    UIColor *redColor = [UIColor flatRedColor];
+    UIColor *blueColor = [UIColor flatBlueColor];
+    UIColor *greenColor = [UIColor flatGreenColor];
     
     SAMultisectorSector *sector1 = [SAMultisectorSector sectorWithColor:redColor maxValue:16.0];
     SAMultisectorSector *hours = [SAMultisectorSector sectorWithColor:blueColor maxValue:23.0];
@@ -110,6 +114,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                                            CGRectMake(kJVFieldHMargin, topOffset, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
     }
     self.titleField.placeholder = NSLocalizedString(@"Title", @"");
+    self.titleField.floatingLabelActiveTextColor = [UIColor flatBlueColor];
+    self.titleField.textColor = [UIColor flatWhiteColor];
     self.titleField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     self.titleField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     self.titleField.floatingLabelTextColor = floatingLabelColor;
@@ -166,8 +172,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     }
     self.descriptionField.placeholder = NSLocalizedString(@"Description", @"");
     self.descriptionField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
+    self.descriptionField.floatingLabelActiveTextColor = [UIColor flatBlueColor];
     self.descriptionField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     self.descriptionField.floatingLabelTextColor = floatingLabelColor;
+    self.descriptionField.textColor = [UIColor flatWhiteColor];
     self.descriptionField.backgroundColor = [UIColor clearColor];
     self.descriptionField.opaque = NO;
     [self.view addSubview:self.descriptionField];
@@ -180,6 +188,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.titleField.delegate = self;
     //priceField.delegate = self;
     //locationField.delegate = self;
+    self.displayMinLabel.textColor = [UIColor flatGreenColor];
+    self.displayHourLabel.textColor = [UIColor flatBlueColor];
+    self.tinyLabel.textColor = [UIColor flatGrayColor];
     [self setupDesign];
     [self setupTimeSelector];
     
@@ -206,6 +217,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [newTask setValue:[NSNumber numberWithInt:(int)self.setHr]  forKey:@"hours"];
     [newTask setValue:self.titleField.text forKey:@"title"];
     [newTask setValue:self.descriptionField.text forKey:@"details"];
+    [newTask setValue:[NSNumber numberWithBool:NO] forKey:@"isCompleted"];
     NSError *error;
     [context save:&error];
     [self performSegueWithIdentifier:@"unwind" sender:sender];

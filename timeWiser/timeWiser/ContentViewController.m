@@ -8,6 +8,7 @@
 
 #import "ContentViewController.h"
 #import "SFRoundProgressCounterView.h"
+#import "UIColor+MLPFlatColors.h"
 
 /* 1000 is 1 second*/
 @interface ContentViewController ()<SFRoundProgressCounterViewDelegate>
@@ -37,7 +38,7 @@
     NSNumber *interval = [NSNumber numberWithLong:120 * 1000];
     self.timeCounter.intervals = @[interval];
     self.timeCounter.outerCircleThickness = [NSNumber numberWithLong:3.0];
-    self.color = [UIColor blueColor];
+    self.color = [UIColor flatBlueColor];
 }
 
 #pragma mark = SFRoundProgressTimerViewDelegate
