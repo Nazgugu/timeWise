@@ -8,10 +8,16 @@
 
 #import "TasksViewController.h"
 #import "TaskCell.h"
+#import "CDAppDelegate.h"
 
 @interface TasksViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *taskTable;
 @property (strong, nonatomic) TaskCell *testCell;
+@property (strong, nonatomic) NSMutableArray *titles;
+@property (strong, nonatomic) NSMutableArray *details;
+@property (strong, nonatomic) NSMutableArray *minutes;
+@property (strong, nonatomic) NSMutableArray *hours;
+@property (nonatomic) NSInteger numberOfItems;
 @end
 
 @implementation TasksViewController
@@ -25,13 +31,44 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.taskTable reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.titles = [[NSMutableArray alloc] init];
+    self.details = [[NSMutableArray alloc] init];
+    self.minutes = [[NSMutableArray alloc] init];
+    self.hours = [[NSMutableArray alloc] init];
+    CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+    NSManagedObject *matches = nil;
+    NSError *error;
+    NSArray *objects = [context executeFetchRequest:request error:&error];
+    self.numberOfItems = [objects count];
+    if ([objects count] == 0)
+    {
+        NSLog(@"No Matches");
+    }
+    else
+    {
+        for (int i = 0; i < [objects count]; i++)
+        {
+            matches = objects[i];
+            [self.titles addObject:[matches valueForKey:@"title"]];
+            [self.details addObject:[matches valueForKey:@"details"]];
+            [self.minutes addObject:[matches valueForKey:@"minutes"]];
+            [self.hours addObject:[matches valueForKey:@"hours"]];
+        }
+    }
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -79,7 +116,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return self.numberOfItems;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,6 +128,9 @@
     {
         cell = [[TaskCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"taskCell"];
     }
+    cell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
+    cell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@ : %@",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
     return cell;
 }
 

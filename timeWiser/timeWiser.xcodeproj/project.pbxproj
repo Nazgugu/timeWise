@@ -10,6 +10,7 @@
 		AE5DFC8B18EE934600FA585A /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFC8A18EE934600FA585A /* TasksViewController.m */; };
 		AE5DFCA118EF30C700FA585A /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCA018EF30C700FA585A /* TaskCell.m */; };
 		AE5DFCA318EF791500FA585A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5DFCA218EF791500FA585A /* CoreData.framework */; };
+		AE5DFCA618EF8B4900FA585A /* tasks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCA418EF8B4900FA585A /* tasks.xcdatamodeld */; };
 		AE6131E518E8C7A3008BE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E418E8C7A3008BE5FF /* Foundation.framework */; };
 		AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */; };
 		AE6131E918E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
@@ -64,6 +65,7 @@
 		AE5DFC9F18EF30C700FA585A /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskCell.h; path = ../TaskCell.h; sourceTree = "<group>"; };
 		AE5DFCA018EF30C700FA585A /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskCell.m; path = ../TaskCell.m; sourceTree = "<group>"; };
 		AE5DFCA218EF791500FA585A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AE5DFCA518EF8B4900FA585A /* tasks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tasks.xcdatamodel; sourceTree = "<group>"; };
 		AE6131E118E8C7A3008BE5FF /* timeWiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeWiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6131E418E8C7A3008BE5FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -218,6 +220,7 @@
 			children = (
 				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
 				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
+				AE5DFCA418EF8B4900FA585A /* tasks.xcdatamodeld */,
 				AE6131F618E8C7A3008BE5FF /* Main.storyboard */,
 				AE6131EC18E8C7A3008BE5FF /* timeWiser-Info.plist */,
 				AE6131ED18E8C7A3008BE5FF /* InfoPlist.strings */,
@@ -449,6 +452,7 @@
 				AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */,
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
 				AE61326918ED1F26008BE5FF /* NSInvocation+Copy.m in Sources */,
+				AE5DFCA618EF8B4900FA585A /* tasks.xcdatamodeld in Sources */,
 				AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */,
 				AE61324218EBE1F9008BE5FF /* TTTAttributedLabel.m in Sources */,
 			);
@@ -667,6 +671,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AE5DFCA418EF8B4900FA585A /* tasks.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AE5DFCA518EF8B4900FA585A /* tasks.xcdatamodel */,
+			);
+			currentVersion = AE5DFCA518EF8B4900FA585A /* tasks.xcdatamodel */;
+			path = tasks.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AE6131D918E8C7A3008BE5FF /* Project object */;
 }

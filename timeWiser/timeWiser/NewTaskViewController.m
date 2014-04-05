@@ -9,6 +9,7 @@
 #import "NewTaskViewController.h"
 #import "JVFloatLabeledTextField.h"
 #import "JVFloatLabeledTextView.h"
+#import "CDAppDelegate.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -20,6 +21,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @interface NewTaskViewController ()
 @property (strong, nonatomic) JVFloatLabeledTextField *titleField;
 @property (strong, nonatomic) JVFloatLabeledTextView *descriptionField;
+@property (nonatomic) NSInteger setMin;
+@property (nonatomic) NSInteger setHr;
 @end
 
 @implementation NewTaskViewController
@@ -193,6 +196,18 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
         [self.descriptionField becomeFirstResponder];
         return;
     }
+    self.setMin = [self.minutesLabel.text intValue];
+    self.setHr = [self.hoursLabel.text intValue];
+    CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *newTask;
+    newTask = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:context];
+    [newTask setValue:[NSNumber numberWithInt:(int)self.setMin] forKey:@"minutes"];
+    [newTask setValue:[NSNumber numberWithInt:(int)self.setHr]  forKey:@"hours"];
+    [newTask setValue:self.titleField.text forKey:@"title"];
+    [newTask setValue:self.descriptionField.text forKey:@"details"];
+    NSError *error;
+    [context save:&error];
     [self performSegueWithIdentifier:@"unwind" sender:sender];
 }
 - (IBAction)cancelCreation:(id)sender {
