@@ -9,8 +9,13 @@
 #import "TasksViewController.h"
 #import "TaskCell.h"
 #import "CDAppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIColor+MLPFlatColors.h"
 
 @interface TasksViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray *colorArray;
+}
 @property (strong, nonatomic) IBOutlet UITableView *taskTable;
 @property (strong, nonatomic) TaskCell *testCell;
 @property (strong, nonatomic) NSMutableArray *titles;
@@ -39,10 +44,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    colorArray = [[NSMutableArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatTealColor], [UIColor flatPurpleColor], [UIColor flatYellowColor], [UIColor flatGrayColor], nil];
     self.titles = [[NSMutableArray alloc] init];
     self.details = [[NSMutableArray alloc] init];
     self.minutes = [[NSMutableArray alloc] init];
     self.hours = [[NSMutableArray alloc] init];
+    self.taskTable.backgroundColor = [UIColor flatWhiteColor];
     CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
@@ -90,7 +97,9 @@
     }
     
     //configure the cell
-    
+    self.testCell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
+    self.testCell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
+    self.testCell.timeLabel.text = [NSString stringWithFormat:@"%@ : %@",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
     //Layout the cell
     [self.testCell layoutIfNeeded];
     //Get the height for the cell
@@ -131,6 +140,11 @@
     cell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
     cell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@ : %@",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
+    cell.timeLabel.backgroundColor = [UIColor flatWhiteColor];
+    cell.detailLabel.backgroundColor = [UIColor flatWhiteColor];
+    cell.titleLabel.backgroundColor = [UIColor flatWhiteColor];
+    cell.backgroundColor = [UIColor flatWhiteColor];
+    cell.colorView.backgroundColor = [colorArray objectAtIndex:indexPath.row];
     return cell;
 }
 
