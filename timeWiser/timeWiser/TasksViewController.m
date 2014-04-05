@@ -24,9 +24,11 @@
 @property (strong, nonatomic) NSMutableArray *minutes;
 @property (strong, nonatomic) NSMutableArray *hours;
 @property (nonatomic) NSInteger numberOfItems;
+@property (strong, nonatomic) NSMutableArray *objects;
 @end
 
 @implementation TasksViewController
+@synthesize objects;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -81,9 +83,15 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     NSManagedObject *matches = nil;
-    NSError *error;
-    NSArray *objects = [context executeFetchRequest:request error:&error];
+    NSError *error = nil;
+    if (!objects)
+    {
+        objects = [[NSMutableArray alloc] init];
+    }
+    [objects removeAllObjects];
+    [objects addObjectsFromArray:[context executeFetchRequest:request error:&error]];
     self.numberOfItems = [objects count];
+    NSLog(@"number of tasks in data base is: %ld",[objects count]);
     if ([objects count] == 0)
     {
         NSLog(@"No Matches");
@@ -196,6 +204,7 @@
     NSIndexPath *indexPath = [self.taskTable indexPathForRowAtPoint:currentTouchPosition];
     if (indexPath != nil)
     {
+        [self completeTaskAtIndexPath:indexPath];
         NSLog(@"Did tapped at checkbox location %ld",indexPath.row);
     }
 }
@@ -203,6 +212,39 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+//this will not delete the task from the data base but will set the isCompleted attribute to YES which indicate the task is completed and will not be shown in the table view
+- (void)completeTaskAtIndexPath:(NSIndexPath *)indexPath
+{
+    CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *tempTask = [objects objectAtIndex:indexPath.row];
+    NSManagedObject *completeTask = [context objectWithID:tempTask.objectID];
+    [completeTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
+    NSError *error = nil;
+    [context save:&error];
+    [self deleteRowAtIndexPath:indexPath];
+}
+
+//this will remove the specific task from the data base and delete from the tableview
+- (void)removeObjectFromDataBaseAtIndexPath:(NSIndexPath *)indexPath
+{
+    CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    [context deleteObject:[objects objectAtIndex:indexPath.row]];
+    NSError *error = nil;
+    [context save:&error];
+    [self deleteRowAtIndexPath:indexPath];
+}
+
+//delete a row at indexPath, does not necessarily delete from data base, will do a fetch request after deletion
+- (void)deleteRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.numberOfItems = self.numberOfItems - 1;
+    [self.taskTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self fetchContents];
+    //[self.taskTable reloadData];
 }
 
 /*
