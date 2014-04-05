@@ -63,8 +63,8 @@
     [self addSubview:_floatingLabel];
 	
     // some basic default fonts/colors
-    _floatingLabel.font = [UIFont boldSystemFontOfSize:12.0f];
-    _floatingLabelTextColor = [UIColor grayColor];
+    _floatingLabel.font = [UIFont fontWithName:@"Avenir Next" size:12.0f];
+    _floatingLabelTextColor = [UIColor flatGrayColor];
     _animateEvenIfNotFirstResponder = NO;
     _floatingLabelShowAnimationDuration = kFloatingLabelShowAnimationDuration;
     _floatingLabelHideAnimationDuration = kFloatingLabelHideAnimationDuration;
@@ -86,7 +86,7 @@
 - (void)setFloatingLabelFont:(UIFont *)floatingLabelFont
 {
     _floatingLabelFont = floatingLabelFont;
-    _floatingLabel.font = (_floatingLabelFont ? _floatingLabelFont : [UIFont boldSystemFontOfSize:12.0f]);
+    _floatingLabel.font = (_floatingLabelFont ? _floatingLabelFont : [UIFont fontWithName:@"Avenir Next" size:12.0f]);
     self.placeholder = self.placeholder; // Force the label to lay itself out with the new font.
 }
 

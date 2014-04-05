@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface TasksViewController : UITableViewController 
+@interface TasksViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet UITableView *taskTable;
 @end

@@ -105,12 +105,23 @@
     else if (index == 2)
     {
         TasksViewController *avc = [self.storyboard instantiateViewControllerWithIdentifier:@"TasksViewController"];
+        [avc.taskTable reloadData];
         return avc;
     }
     return nil;
 }
 
 #pragma mark - ViewPagerDelegate
+
+- (void)viewPager:(ViewPagerController *)viewPager didChangeTabToIndex:(NSUInteger)index
+{
+    if (index == 2)
+    {
+        TasksViewController *currentController = (TasksViewController *)[self viewPager:self contentViewControllerForTabAtIndex:index];
+        [currentController.taskTable reloadData];
+    }
+}
+
 - (CGFloat)viewPager:(ViewPagerController *)viewPager valueForOption:(ViewPagerOption)option withDefault:(CGFloat)value {
     
     switch (option) {
@@ -134,6 +145,9 @@
             return value;
     }
 }
+
+
+
 - (UIColor *)viewPager:(ViewPagerController *)viewPager colorForComponent:(ViewPagerComponent)component withDefault:(UIColor *)color {
     
     switch (component) {
@@ -147,7 +161,6 @@
             return color;
     }
 }
-
 
 
 - (void)didReceiveMemoryWarning

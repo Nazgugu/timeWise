@@ -16,7 +16,7 @@
 {
     NSMutableArray *colorArray;
 }
-@property (strong, nonatomic) IBOutlet UITableView *taskTable;
+
 @property (strong, nonatomic) TaskCell *testCell;
 @property (strong, nonatomic) NSMutableArray *titles;
 @property (strong, nonatomic) NSMutableArray *details;
@@ -38,18 +38,38 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self fetchContents];
     [self.taskTable reloadData];
 }
 
-- (void)viewDidLoad
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidLoad];
-    colorArray = [[NSMutableArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatTealColor], [UIColor flatPurpleColor], [UIColor flatYellowColor], [UIColor flatGrayColor], nil];
-    self.titles = [[NSMutableArray alloc] init];
-    self.details = [[NSMutableArray alloc] init];
-    self.minutes = [[NSMutableArray alloc] init];
-    self.hours = [[NSMutableArray alloc] init];
-    self.taskTable.backgroundColor = [UIColor flatWhiteColor];
+    [self fetchContents];
+    [self.taskTable reloadData];
+}
+
+- (void)fetchContents
+{
+    if (!self.titles)
+    {
+        self.titles = [[NSMutableArray alloc] init];
+    }
+    if (!self.details)
+    {
+        self.details = [[NSMutableArray alloc] init];
+    }
+    if (!self.minutes)
+    {
+        self.minutes = [[NSMutableArray alloc] init];
+    }
+    if (!self.hours)
+    {
+        self.hours = [[NSMutableArray alloc] init];
+    }
+    [self.titles removeAllObjects];
+    [self.details removeAllObjects];
+    [self.minutes removeAllObjects];
+    [self.hours removeAllObjects];
     CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
@@ -78,8 +98,16 @@
             [self.hours addObject:[matches valueForKey:@"hours"]];
         }
     }
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    colorArray = [[NSMutableArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatTealColor], [UIColor flatPurpleColor], [UIColor flatYellowColor], [UIColor flatGrayColor], nil];
+    self.taskTable.backgroundColor = [UIColor flatWhiteColor];
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self fetchContents];
 }
 
 - (void)didReceiveMemoryWarning
@@ -146,7 +174,7 @@
     cell.detailLabel.backgroundColor = [UIColor flatWhiteColor];
     cell.titleLabel.backgroundColor = [UIColor flatWhiteColor];
     cell.backgroundColor = [UIColor flatWhiteColor];
-    cell.colorView.backgroundColor = [colorArray objectAtIndex:indexPath.row];
+    cell.colorView.backgroundColor = [colorArray objectAtIndex:indexPath.row % 7];
     return cell;
 }
 
