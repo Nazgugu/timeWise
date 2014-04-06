@@ -119,7 +119,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ck8-TC-uoi">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.35155385610000001" green="0.85394021740000003" blue="0.80465742709999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="0.0"/>
+                            <color key="textColor" red="0.20392156862745098" green="0.28627450980392155" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Ffs-v3-EDJ" kind="relationship" relationship="rootViewController" id="3IP-Ds-dAg"/>
@@ -146,7 +150,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zta-b7-BcP">
                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="KHC-EQ-kn2" kind="custom" customClass="BlurryModalSegue" id="MLq-QL-iHK"/>
+                                <segue destination="KHC-EQ-kn2" kind="custom" identifier="" customClass="BlurryModalSegue" id="MLq-QL-iHK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -244,6 +248,23 @@
                                     <outlet property="titleLabel" destination="QCs-nY-yEr" id="ZqB-3C-jul"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="creator" textLabel="Vto-7u-jRH" style="IBUITableViewCellStyleDefault" id="2QA-tl-N1s">
+                                <rect key="frame" x="0.0" y="117" width="320" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2QA-tl-N1s" id="gYb-ha-uPq">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" id="Vto-7u-jRH">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="94"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="IR8-PS-3Ho" id="hSa-cH-U21"/>
@@ -253,11 +274,12 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="taskTable" destination="tfo-Ba-3zC" id="5j1-E1-ple"/>
+                        <segue destination="KHC-EQ-kn2" kind="custom" identifier="newTask" customClass="BlurryModalSegue" id="Ry1-eZ-1k4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IiY-zc-2Ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="799"/>
+            <point key="canvasLocation" x="945" y="-623"/>
         </scene>
         <!--Today View Controller-->
         <scene sceneID="25I-qm-olY">
@@ -290,20 +312,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIa-Wk-MPV">
-                                <rect key="frame" x="46" y="405" width="228" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuU-Ji-wiu" customClass="SFRoundProgressCounterView">
-                                <rect key="frame" x="33" y="111" width="254" height="254"/>
+                                <rect key="frame" x="33" y="140" width="254" height="254"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zla-uV-ebQ" customClass="JSQFlatButton">
-                                <rect key="frame" x="217" y="26" width="70" height="70"/>
+                                <rect key="frame" x="222" y="65" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="Start">
@@ -313,13 +328,25 @@
                                     <action selector="controlAction:" destination="WKB-nT-uja" eventType="touchUpInside" id="ela-qG-IOd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goU-rM-aJi" customClass="JSQFlatButton">
+                                <rect key="frame" x="33" y="65" width="65" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" red="0.94509803921568625" green="0.76862745098039209" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionReset:" destination="WKB-nT-uja" eventType="touchUpInside" id="gG6-QI-pWA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="kAx-m0-sTp"/>
                     <connections>
                         <outlet property="controlButton" destination="Zla-uV-ebQ" id="JUy-xY-ixS"/>
-                        <outlet property="label" destination="TIa-Wk-MPV" id="mff-fK-8xe"/>
+                        <outlet property="resetButton" destination="goU-rM-aJi" id="275-IL-ogT"/>
                         <outlet property="timeCounter" destination="RuU-Ji-wiu" id="xea-B8-n8L"/>
                     </connections>
                 </viewController>
@@ -333,4 +360,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ry1-eZ-1k4"/>
+    </inferredMetricsTieBreakers>
 </document>

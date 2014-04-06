@@ -24,11 +24,13 @@
 @property (strong, nonatomic) NSMutableArray *minutes;
 @property (strong, nonatomic) NSMutableArray *hours;
 @property (nonatomic) NSInteger numberOfItems;
+@property (nonatomic) BOOL hasNoTask;
 @property (strong, nonatomic) NSMutableArray *objects;
 @end
 
 @implementation TasksViewController
 @synthesize objects;
+@synthesize hasNoTask;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -95,9 +97,11 @@
     if ([objects count] == 0)
     {
         NSLog(@"No Matches");
+        hasNoTask = YES;
     }
     else
     {
+        hasNoTask = NO;
         for (int i = 0; i < [objects count]; i++)
         {
             matches = objects[i];
@@ -130,6 +134,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //calculate a height based on a cell
+    if (!hasNoTask)
+    {
     if (!self.testCell)
     {
         self.testCell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell"];
@@ -148,6 +154,8 @@
     CGFloat height = [self.testCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     //Padding of 1 point for the seperator
     return height + 1;
+    }
+    return 95;
 }
 
 //load contents faster!
@@ -167,33 +175,59 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.numberOfItems;
+    if (hasNoTask)
+    {
+        return 1;
+    }
+    else
+    {
+        return self.numberOfItems;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TaskCell *cell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    if (!cell)
+    if (!hasNoTask)
     {
-        cell = [[TaskCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"taskCell"];
+       TaskCell *cell = (TaskCell *)[self.taskTable dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    
+        // Configure the cell...
+        if (!cell)
+        {
+            cell = [[TaskCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"taskCell"];
+        }
+        cell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
+        cell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
+        cell.titleLabel.textColor = [UIColor flatBlackColor];
+        cell.detailLabel.textColor = [UIColor flatBlackColor];
+        cell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
+        cell.timeLabel.backgroundColor = [UIColor flatWhiteColor];
+        cell.detailLabel.backgroundColor = [UIColor flatWhiteColor];
+        cell.titleLabel.backgroundColor = [UIColor flatWhiteColor];
+        cell.backgroundColor = [UIColor flatWhiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.colorView.backgroundColor = [colorArray objectAtIndex:indexPath.row % 7];
+        cell.checkBox.checkState = M13CheckboxStateUnchecked;
+        cell.checkBox.strokeColor = [UIColor flatBlueColor];
+        cell.checkBox.checkColor = [UIColor flatBlueColor];
+        return cell;
     }
-    cell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
-    cell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
-    cell.titleLabel.textColor = [UIColor flatBlackColor];
-    cell.detailLabel.textColor = [UIColor flatBlackColor];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
-    cell.timeLabel.backgroundColor = [UIColor flatWhiteColor];
-    cell.detailLabel.backgroundColor = [UIColor flatWhiteColor];
-    cell.titleLabel.backgroundColor = [UIColor flatWhiteColor];
-    cell.backgroundColor = [UIColor flatWhiteColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.colorView.backgroundColor = [colorArray objectAtIndex:indexPath.row % 7];
-    cell.checkBox.checkState = M13CheckboxStateUnchecked;
-    cell.checkBox.strokeColor = [UIColor flatBlueColor];
-    cell.checkBox.checkColor = [UIColor flatBlueColor];
-    return cell;
+    else
+    {
+        UITableViewCell *cell = [self.taskTable dequeueReusableCellWithIdentifier:@"creator" forIndexPath:indexPath];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"creator"];
+        }
+        cell.textLabel.backgroundColor = [UIColor flatWhiteColor];
+        cell.textLabel.textColor = [UIColor flatBlackColor];
+        cell.backgroundColor = [UIColor flatWhiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.textLabel.text = @"No Task Yet, Tap To Create";
+        cell.textLabel.font = [UIFont fontWithName:@"Avenir Next" size:16.0f];
+        return  cell;
+    }
+    return nil;
 }
 - (IBAction)checkBoxTapped:(id)sender forEvent:(UIEvent *)event
 {
@@ -211,7 +245,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (hasNoTask)
+    {
+        [self performSegueWithIdentifier:@"newTask" sender:nil];
+    }
 }
 
 //this will not delete the task from the data base but will set the isCompleted attribute to YES which indicate the task is completed and will not be shown in the table view
@@ -244,7 +281,7 @@
     self.numberOfItems = self.numberOfItems - 1;
     [self.taskTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self fetchContents];
-    //[self.taskTable reloadData];
+    [self.taskTable reloadData];
 }
 
 /*

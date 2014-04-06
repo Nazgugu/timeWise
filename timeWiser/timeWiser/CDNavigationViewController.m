@@ -7,6 +7,7 @@
 //
 
 #import "CDNavigationViewController.h"
+#import "UIColor+MLPFlatColors.h"
 
 @interface CDNavigationViewController ()
 
@@ -27,6 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIColor *barColor = [[UIColor flatWhiteColor] colorWithAlphaComponent:1.0f];
+    self.navigationBar.backgroundColor = barColor;
+    [[self navigationBar] setTranslucent:YES];
     // Do any additional setup after loading the view.
 }
 

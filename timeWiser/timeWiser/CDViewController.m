@@ -28,6 +28,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.backgroundColor = [[UIColor flatWhiteColor] colorWithAlphaComponent:1.0f];
+    UIFont *font = [UIFont fontWithName:@"Avenir Next" size:18.0f];
+    NSDictionary *attribute = @{NSFontAttributeName:font,NSForegroundColorAttributeName:[UIColor flatBlackColor]};
+    self.navigationItem.titleView.tintColor = [UIColor flatBlackColor];
+    self.navigationController.navigationBar.titleTextAttributes = attribute;
+    self.title = @"TIME  WISER";
     self.dataSource = self;
     self.delegate = self;
     [self loadContent];
@@ -67,7 +73,8 @@
     
     UILabel *label = [UILabel new];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:12.0];
+    label.font = [UIFont fontWithName:@"Avenir Next" size:12.0];
+    label.textColor = [UIColor flatBlackColor];
     if (index == 0)
     {
         label.text = [NSString stringWithFormat:@"TODAY"];
@@ -81,7 +88,6 @@
         label.text = [NSString stringWithFormat:@"TASKS"];
     }
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor blackColor];
     [label sizeToFit];
     
     return label;
@@ -92,13 +98,12 @@
     if (index == 1)
     {
     ContentViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
-    cvc.labelString = [NSString stringWithFormat:@"Content View #%lu", (unsigned long)index];
     cvc.view.backgroundColor = [UIColor flatWhiteColor];
     cvc.timeCounter.backgroundColor = [UIColor flatWhiteColor];
     cvc.timeCounter.innerProgressColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
     cvc.timeCounter.outerProgressColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
     cvc.timeCounter.outerTrackColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
-    cvc.timeCounter.outerCircleThickness = [NSNumber numberWithDouble:6.0f];
+    cvc.timeCounter.outerCircleThickness = [NSNumber numberWithDouble:4.0f];
     cvc.timeCounter.innerCircleThickness = [NSNumber numberWithDouble:1.0f];
     NSNumber* singleValue = [NSNumber numberWithLong:120 * 1000];
     cvc.intervals = @[singleValue];
@@ -159,11 +164,11 @@
     
     switch (component) {
         case ViewPagerIndicator:
-            return [[UIColor redColor] colorWithAlphaComponent:0.64];
+            return [[UIColor flatTealColor] colorWithAlphaComponent:0.84];
         case ViewPagerTabsView:
-            return [[UIColor lightGrayColor] colorWithAlphaComponent:0.32];
+            return [[UIColor flatWhiteColor] colorWithAlphaComponent:1.0];
         case ViewPagerContent:
-            return [[UIColor darkGrayColor] colorWithAlphaComponent:0.32];
+            return [[UIColor flatDarkGrayColor] colorWithAlphaComponent:0.32];//0.32
         default:
             return color;
     }

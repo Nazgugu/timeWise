@@ -15,6 +15,7 @@
 @interface ContentViewController ()<SFRoundProgressCounterViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQFlatButton *controlButton;
+@property (weak, nonatomic) IBOutlet JSQFlatButton *resetButton;
 
 @end
 
@@ -44,7 +45,6 @@
     UIImage *bkgImage = [UIImage imageNamed:@"bkg"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:bkgImage];
     // Do any additional setup after loading the view.
-    _label.text = _labelString;
     //circular timer
     self.timeCounter.delegate = self;
     NSNumber *interval = [NSNumber numberWithLong:120 * 1000];
@@ -54,10 +54,15 @@
     self.view.backgroundColor = [UIColor flatWhiteColor];
     self.timeCounter.backgroundColor = [UIColor flatWhiteColor];
     self.controlButton.tintColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
-    self.controlButton.borderWidth = 5.0f;
+    self.controlButton.borderWidth = 1.5f;
     self.controlButton.cornerRadius = (self.controlButton.frame.size.height + self.controlButton.frame.size.width) / 4;
     self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
     self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
+    self.resetButton.tintColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
+    self.resetButton.cornerRadius = (self.resetButton.frame.size.height + self.resetButton.frame.size.width) / 4;
+    self.resetButton.borderWidth = 1.5f;
+    self.resetButton.normalBorderColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
+    self.resetButton.highlightedBorderColor = [[UIColor flatDarkYellowColor] colorWithAlphaComponent:0.8f];
 }
 
 #pragma mark = SFRoundProgressTimerViewDelegate
@@ -65,7 +70,7 @@
 {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
+        [self.controlButton setTitle:@"New" forState:UIControlStateNormal];
         //        [self.progressCounterView reset];
     });
 }
@@ -108,9 +113,13 @@
     
 }
 
-- (IBAction)actionRestart:(id)sender {
-    [self.controlButton setTitle:@"STOP" forState:UIControlStateNormal];
-    [self.timeCounter start];
+- (IBAction)actionReset:(id)sender {
+    [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
+    self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+    self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
+    [self.resetButton setTintColor:[[UIColor flatYellowColor] colorWithAlphaComponent:0.8f]];
+    [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
+    [self.timeCounter reset];
 }
 
 #pragma mark - color
@@ -121,7 +130,7 @@
             self.timeCounter.innerProgressColor = color;
             self.timeCounter.outerProgressColor = color;
             self.timeCounter.labelColor = color;
-            
+            self.resetButton.tintColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
             self.controlButton.tintColor = color;
         });
     }
@@ -143,6 +152,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
             [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
+            [self.resetButton setTintColor:[[UIColor flatYellowColor] colorWithAlphaComponent:0.8f]];
             [self.timeCounter stop];
             _intervals = intervals;
             self.timeCounter.intervals = intervals;

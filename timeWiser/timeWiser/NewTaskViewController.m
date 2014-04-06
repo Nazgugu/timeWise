@@ -11,6 +11,7 @@
 #import "JVFloatLabeledTextView.h"
 #import "CDAppDelegate.h"
 #import "UIColor+MLPFlatColors.h"
+#import "APLKeyboardControls.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -24,6 +25,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @property (strong, nonatomic) JVFloatLabeledTextView *descriptionField;
 @property (nonatomic) NSInteger setMin;
 @property (nonatomic) NSInteger setHr;
+@property (strong, nonatomic) APLKeyboardControls *keyboardControls;
 @property (weak, nonatomic) IBOutlet UILabel *displayMinLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayHourLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tinyLabel;
@@ -97,6 +99,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 //do something when the timeselector value changed
 - (void)timeSelectorValueChanged:(id)sender
 {
+    [self.view endEditing:YES];
     [self updateDataView];
 }
 
@@ -191,6 +194,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.displayMinLabel.textColor = [UIColor flatGreenColor];
     self.displayHourLabel.textColor = [UIColor flatBlueColor];
     self.tinyLabel.textColor = [UIColor flatGrayColor];
+    NSArray *inputChain = @[self.titleField, self.descriptionField];
+    self.keyboardControls = [[APLKeyboardControls alloc] initWithInputFields:inputChain];
+    self.keyboardControls.hasPreviousNext = YES;
+    //self.keyboardControls.doneButton.tintColor = [UIColor blueColor];
     [self setupDesign];
     [self setupTimeSelector];
     

@@ -393,7 +393,7 @@ typedef struct{
         self.startValue = 0.0;
         self.endValue = 50.0;
         self.tag = 0;
-        self.color = [UIColor greenColor];
+        self.color = [UIColor flatGreenColor];
     }
     return self;
 }

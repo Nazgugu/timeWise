@@ -88,9 +88,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(20)];
-    [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.45)];
-    [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5]];
+    [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
+    [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.85)];
+    [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.80]];
     return YES;
 }
 							
