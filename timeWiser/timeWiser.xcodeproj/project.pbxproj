@@ -14,6 +14,7 @@
 		AE5DFCA818EFD5E900FA585A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5DFCA718EFD5E900FA585A /* SystemConfiguration.framework */; };
 		AE5DFCAC18EFD63500FA585A /* UIColor+MLPFlatColors.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCAB18EFD63500FA585A /* UIColor+MLPFlatColors.m */; };
 		AE5DFCB018F0755000FA585A /* M13Checkbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCAF18F0755000FA585A /* M13Checkbox.m */; };
+		AE5DFCBA18F12D2A00FA585A /* JSQFlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCB918F12D2A00FA585A /* JSQFlatButton.m */; };
 		AE6131E518E8C7A3008BE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E418E8C7A3008BE5FF /* Foundation.framework */; };
 		AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */; };
 		AE6131E918E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
@@ -74,6 +75,8 @@
 		AE5DFCAB18EFD63500FA585A /* UIColor+MLPFlatColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MLPFlatColors.m"; sourceTree = "<group>"; };
 		AE5DFCAE18F0755000FA585A /* M13Checkbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13Checkbox.h; sourceTree = "<group>"; };
 		AE5DFCAF18F0755000FA585A /* M13Checkbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13Checkbox.m; sourceTree = "<group>"; };
+		AE5DFCB818F12D2A00FA585A /* JSQFlatButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQFlatButton.h; sourceTree = "<group>"; };
+		AE5DFCB918F12D2A00FA585A /* JSQFlatButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQFlatButton.m; sourceTree = "<group>"; };
 		AE6131E118E8C7A3008BE5FF /* timeWiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeWiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6131E418E8C7A3008BE5FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -192,6 +195,15 @@
 			name = CheckBox;
 			sourceTree = "<group>";
 		};
+		AE5DFCB718F12CC300FA585A /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				AE5DFCB818F12D2A00FA585A /* JSQFlatButton.h */,
+				AE5DFCB918F12D2A00FA585A /* JSQFlatButton.m */,
+			);
+			name = UIButton;
+			sourceTree = "<group>";
+		};
 		AE6131D818E8C7A3008BE5FF = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +242,7 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AE5DFCB718F12CC300FA585A /* UIButton */,
 				AE5DFCAD18F0753F00FA585A /* CheckBox */,
 				AE5DFCA918EFD62900FA585A /* FlatColor */,
 				AE5DFC6018EE75C600FA585A /* TableView */,
@@ -483,6 +496,7 @@
 				AE61325B18ED0196008BE5FF /* CDNavigationViewController.m in Sources */,
 				AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */,
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
+				AE5DFCBA18F12D2A00FA585A /* JSQFlatButton.m in Sources */,
 				AE61326918ED1F26008BE5FF /* NSInvocation+Copy.m in Sources */,
 				AE5DFCA618EF8B4900FA585A /* tasks.xcdatamodeld in Sources */,
 				AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */,

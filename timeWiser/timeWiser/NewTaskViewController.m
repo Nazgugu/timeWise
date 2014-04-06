@@ -240,6 +240,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return YES;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning
 {

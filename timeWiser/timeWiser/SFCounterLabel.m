@@ -48,9 +48,12 @@
     // Initialization code
     self.valueString = @"";
     self.textAlignment = NSTextAlignmentCenter;
-    self.font = [UIFont systemFontOfSize:25];
-    self.boldFont = [UIFont boldSystemFontOfSize:55];
-    self.regularFont = [UIFont systemFontOfSize:55];
+    //self.font = [UIFont systemFontOfSize:25];
+    self.font = [UIFont fontWithName:@"Avenir Next-Ultra Light" size:25];
+    //self.boldFont = [UIFont boldSystemFontOfSize:55];
+    self.boldFont = [UIFont fontWithName:@"Avenir Next" size:55];
+    //self.regularFont = [UIFont systemFontOfSize:55];
+    self.regularFont = [UIFont fontWithName:@"Avenir Next-Ultra Light" size:55];
     self.countDirection = kCountDirectionUp;
     self.value = 0;
     self.startValue = 0;

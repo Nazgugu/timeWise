@@ -7,13 +7,14 @@
 //
 
 #import "ContentViewController.h"
-#import "SFRoundProgressCounterView.h"
+
 #import "UIColor+MLPFlatColors.h"
+#import "JSQFlatButton.h"
 
 /* 1000 is 1 second*/
 @interface ContentViewController ()<SFRoundProgressCounterViewDelegate>
-@property (weak, nonatomic) IBOutlet SFRoundProgressCounterView *timeCounter;
-@property (weak, nonatomic) IBOutlet UIButton *controlButton;
+
+@property (weak, nonatomic) IBOutlet JSQFlatButton *controlButton;
 
 @end
 
@@ -28,9 +29,20 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+}
+
+- (void)loadView
+{
+    [super loadView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIImage *bkgImage = [UIImage imageNamed:@"bkg"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:bkgImage];
     // Do any additional setup after loading the view.
     _label.text = _labelString;
     //circular timer
@@ -38,9 +50,14 @@
     NSNumber *interval = [NSNumber numberWithLong:120 * 1000];
     self.timeCounter.intervals = @[interval];
     self.timeCounter.outerCircleThickness = [NSNumber numberWithLong:3.0];
-    self.color = [UIColor flatBlueColor];
+    self.color = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
     self.view.backgroundColor = [UIColor flatWhiteColor];
     self.timeCounter.backgroundColor = [UIColor flatWhiteColor];
+    self.controlButton.tintColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+    self.controlButton.borderWidth = 5.0f;
+    self.controlButton.cornerRadius = (self.controlButton.frame.size.height + self.controlButton.frame.size.width) / 4;
+    self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+    self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
 }
 
 #pragma mark = SFRoundProgressTimerViewDelegate
@@ -48,7 +65,7 @@
 {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.controlButton setTitle:@"START" forState:UIControlStateNormal];
+        [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
         //        [self.progressCounterView reset];
     });
 }
@@ -59,27 +76,36 @@
 
 
 - (IBAction)controlAction:(id)sender {
-    UIButton *button = (UIButton *)sender;
+    JSQFlatButton *button = (JSQFlatButton *)sender;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         // start
-        if ([button.currentTitle isEqualToString:@"START"]) {
+        if ([button.currentTitle isEqualToString:@"Start"]) {
             
             [self.timeCounter start];
-            [self.controlButton setTitle:@"STOP" forState:UIControlStateNormal];
+            [self.controlButton setTitle:@"Pause" forState:UIControlStateNormal];
+            [self.controlButton setTintColor:[[UIColor flatRedColor] colorWithAlphaComponent:0.8f]];
+            self.controlButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
+            self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
             // stop
-        } else if ([button.currentTitle isEqualToString:@"STOP"]) {
+        } else if ([button.currentTitle isEqualToString:@"Pause"]) {
             
             [self.timeCounter stop];
-            [self.controlButton setTitle:@"RESUME" forState:UIControlStateNormal];
+            [self.controlButton setTitle:@"Resume" forState:UIControlStateNormal];
+            self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+            self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
+            [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
             // resume
         } else {
             
             [self.timeCounter resume];
-            [self.controlButton setTitle:@"STOP" forState:UIControlStateNormal];
+            [self.controlButton setTitle:@"Pause" forState:UIControlStateNormal];
+            [self.controlButton setTintColor:[[UIColor flatRedColor] colorWithAlphaComponent:0.8f]];
+            self.controlButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
+            self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
         }
     });
-
+    
 }
 
 - (IBAction)actionRestart:(id)sender {
@@ -115,7 +141,8 @@
     if (intervals) {
         NSLog(@"I have intervals");
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.controlButton setTitle:@"START" forState:UIControlStateNormal];
+            [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
+            [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
             [self.timeCounter stop];
             _intervals = intervals;
             self.timeCounter.intervals = intervals;

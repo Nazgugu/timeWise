@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SFRoundProgressCounterView.h"
 
 @interface ContentViewController : UIViewController
+@property (weak, nonatomic) IBOutlet SFRoundProgressCounterView *timeCounter;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (strong, nonatomic) NSString *labelString;
 @property (nonatomic, strong) NSArray* intervals;

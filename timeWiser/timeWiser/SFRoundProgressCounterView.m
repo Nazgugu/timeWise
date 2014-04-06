@@ -88,8 +88,8 @@
     int fontSize = self.bounds.size.height/COUNTER_LABEL_SCALE_FACTOR;
     self.counterLabel.frame = CGRectMake(0, 0, innerWhiteCircleDiameter, diameter/2.0);
     
-    [self.counterLabel setBoldFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:fontSize + 20]];
-    [self.counterLabel setRegularFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:fontSize + 15]];
+    [self.counterLabel setBoldFont:[UIFont fontWithName:@"AvenirNext-Medium" size:fontSize + 20]];
+    [self.counterLabel setRegularFont:[UIFont fontWithName:@"AvenirNext-UltraLight" size:fontSize + 15]];
     self.counterLabel.adjustsFontSizeToFitWidth = YES;
     [self.counterLabel updateApperance];
     
@@ -303,7 +303,7 @@
 @synthesize backgroundColor = _backgroundColor;
 - (UIColor*)backgroundColor {
     if (!_backgroundColor) {
-        _backgroundColor = [UIColor whiteColor];
+        _backgroundColor = [UIColor clearColor];
     }
     
     return _backgroundColor;

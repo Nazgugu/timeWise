@@ -10,6 +10,7 @@
 #import "ContentViewController.h"
 #import "TasksViewController.h"
 #import "TodayViewController.h"
+#import "UIColor+MLPFlatColors.h"
 
 @interface CDViewController () <ViewPagerDataSource, ViewPagerDelegate>
 @property (nonatomic) NSUInteger numberOfTabs;
@@ -91,9 +92,15 @@
     if (index == 1)
     {
     ContentViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
-    
     cvc.labelString = [NSString stringWithFormat:@"Content View #%lu", (unsigned long)index];
-    NSNumber* singleValue = [NSNumber numberWithLong:3600 * 1000];
+    cvc.view.backgroundColor = [UIColor flatWhiteColor];
+    cvc.timeCounter.backgroundColor = [UIColor flatWhiteColor];
+    cvc.timeCounter.innerProgressColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
+    cvc.timeCounter.outerProgressColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
+    cvc.timeCounter.outerTrackColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
+    cvc.timeCounter.outerCircleThickness = [NSNumber numberWithDouble:6.0f];
+    cvc.timeCounter.innerCircleThickness = [NSNumber numberWithDouble:1.0f];
+    NSNumber* singleValue = [NSNumber numberWithLong:120 * 1000];
     cvc.intervals = @[singleValue];
     return cvc;
     }
