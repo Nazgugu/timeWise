@@ -39,6 +39,8 @@
     self.timeCounter.intervals = @[interval];
     self.timeCounter.outerCircleThickness = [NSNumber numberWithLong:3.0];
     self.color = [UIColor flatBlueColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
+    self.timeCounter.backgroundColor = [UIColor flatWhiteColor];
 }
 
 #pragma mark = SFRoundProgressTimerViewDelegate
