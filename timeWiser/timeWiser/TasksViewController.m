@@ -230,7 +230,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"creator"];
         }
         cell.textLabel.backgroundColor = [UIColor flatWhiteColor];
-        cell.textLabel.textColor = [UIColor flatBlackColor];
+        cell.textLabel.textColor = [UIColor flatGrayColor];
         cell.backgroundColor = [UIColor flatWhiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         cell.textLabel.text = @"No Task Yet, Tap To Create";

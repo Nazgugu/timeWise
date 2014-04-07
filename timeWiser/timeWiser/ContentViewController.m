@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet JSQFlatButton *controlButton;
 @property (weak, nonatomic) IBOutlet JSQFlatButton *resetButton;
-
+@property (weak, nonatomic) IBOutlet JSQFlatButton *titleButton;
 @end
 
 @implementation ContentViewController
@@ -47,6 +47,7 @@
         self.resetButton.enabled = NO;
         self.intervals = nil;
         self.timeCounter.intervals = @[[NSNumber numberWithLong:0.0]];
+        [self.titleButton setTitle:@"No Task" forState:UIControlStateNormal];
         //[self.timeCounter reset];
     }
     else
@@ -57,6 +58,7 @@
         int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
         long time = (minutes * 60 + hours * 3600) * 1000;
         self.intervals = @[[NSNumber numberWithLong:time]];
+        [self.titleButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forState:UIControlStateNormal];
         [self.timeCounter reset];
     }
 }
@@ -72,7 +74,6 @@
     [super viewDidLoad];
     NSNumber *defaultInt = [NSNumber numberWithLong:0.0];
     self.timeCounter.intervals = @[defaultInt];
-    [self updateButtons];
     // Do any additional setup after loading the view.
     //circular timer
     self.timeCounter.delegate = self;
@@ -90,6 +91,13 @@
     self.resetButton.borderWidth = 1.5f;
     self.resetButton.normalBorderColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
     self.resetButton.highlightedBorderColor = [[UIColor flatDarkYellowColor] colorWithAlphaComponent:0.8f];
+    self.resetButton.titleLabel.textColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
+    self.titleButton.tintColor = [[UIColor flatBlackColor] colorWithAlphaComponent:0.8f];
+    self.titleButton.borderWidth = 1.5f;
+    self.titleButton.cornerRadius = 15.0f;
+    self.titleButton.normalBorderColor = [[UIColor flatGrayColor] colorWithAlphaComponent:0.8f];
+    self.titleButton.highlightedBorderColor = [[UIColor flatDarkGrayColor] colorWithAlphaComponent:0.8f];
+    [self updateButtons];
 }
 
 #pragma mark = SFRoundProgressTimerViewDelegate
@@ -147,6 +155,9 @@
     [self.resetButton setTintColor:[[UIColor flatYellowColor] colorWithAlphaComponent:0.8f]];
     [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
     [self.timeCounter reset];
+}
+
+- (IBAction)changeTask:(id)sender {
 }
 
 #pragma mark - color

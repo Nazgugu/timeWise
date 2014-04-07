@@ -26,7 +26,6 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "JVFloatLabeledTextField.h"
-#import "UIColor+MLPFlatColors.h"
 
 #define kFloatingLabelShowAnimationDuration 0.3f
 #define kFloatingLabelHideAnimationDuration 0.3f
@@ -63,8 +62,8 @@
     [self addSubview:_floatingLabel];
 	
     // some basic default fonts/colors
-    _floatingLabel.font = [UIFont fontWithName:@"Avenir Next" size:12.0f];
-    _floatingLabelTextColor = [UIColor flatGrayColor];
+    _floatingLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    _floatingLabelTextColor = [UIColor grayColor];
     _animateEvenIfNotFirstResponder = NO;
     _floatingLabelShowAnimationDuration = kFloatingLabelShowAnimationDuration;
     _floatingLabelHideAnimationDuration = kFloatingLabelHideAnimationDuration;
@@ -86,7 +85,7 @@
 - (void)setFloatingLabelFont:(UIFont *)floatingLabelFont
 {
     _floatingLabelFont = floatingLabelFont;
-    _floatingLabel.font = (_floatingLabelFont ? _floatingLabelFont : [UIFont fontWithName:@"Avenir Next" size:12.0f]);
+    _floatingLabel.font = (_floatingLabelFont ? _floatingLabelFont : [UIFont boldSystemFontOfSize:12.0f]);
     self.placeholder = self.placeholder; // Force the label to lay itself out with the new font.
 }
 
@@ -157,8 +156,7 @@
 - (void)setPlaceholder:(NSString *)placeholder
 {
     [super setPlaceholder:placeholder];
-    UIColor *color = [UIColor flatGrayColor];
-     self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
+
     _floatingLabel.text = placeholder;
     [_floatingLabel sizeToFit];
 }
