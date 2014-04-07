@@ -211,9 +211,9 @@
 
 - (void)setIntervals:(NSArray *)intervals
 {
-    NSLog(@"%ld",[intervals count]);
+    //NSLog(@"%ld",[intervals count]);
     if ([intervals count] > 0 && intervals) {
-        NSLog(@"I have intervals");
+        //NSLog(@"I have intervals");
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
             [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];

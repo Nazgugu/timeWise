@@ -145,24 +145,32 @@
     //calculate a height based on a cell
     if (!hasNoTask)
     {
-    if (!self.testCell)
-    {
-        self.testCell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell"];
-    }
+        NSLog(@"has some task");
+        if (!self.testCell)
+        {
+            self.testCell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell"];
+        }
     
-    //configure the cell
-    self.testCell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
-    self.testCell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
-    self.testCell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
-    self.testCell.checkBox.checkState = M13CheckboxStateUnchecked;
-    self.testCell.checkBox.strokeColor = [UIColor flatBlueColor];
-    self.testCell.checkBox.checkColor = [UIColor flatBlueColor];
-    //Layout the cell
-    [self.testCell layoutIfNeeded];
-    //Get the height for the cell
-    CGFloat height = [self.testCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    //Padding of 1 point for the seperator
-    return height + 1;
+        //configure the cell
+        NSLog(@"title = %@",[self.titles objectAtIndex:indexPath.row]);
+        NSLog(@"detail = %@",[self.details objectAtIndex:indexPath.row]);
+        self.testCell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
+        self.testCell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
+        self.testCell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
+        //self.testCell.checkBox.checkState = M13CheckboxStateUnchecked;
+        //self.testCell.checkBox.strokeColor = [UIColor flatBlueColor];
+       // self.testCell.checkBox.checkColor = [UIColor flatBlueColor];
+        //Layout the cell
+        //[self.testCell setNeedsUpdateConstraints];
+        //[self.testCell updateConstraintsIfNeeded];
+        //self.testCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.taskTable.bounds), CGRectGetHeight(self.testCell.bounds));
+        [self.testCell setNeedsLayout];
+        [self.testCell layoutIfNeeded];
+        //Get the height for the cell
+        CGFloat height = [self.testCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        NSLog(@"height = %f",height);
+        //Padding of 1 point for the seperator
+        return height + 1;
     }
     return 95;
 }
@@ -250,7 +258,7 @@
     if (indexPath != nil)
     {
         [self completeTaskAtIndexPath:indexPath];
-        NSLog(@"Did tapped at checkbox location %ld",indexPath.row);
+        NSLog(@"Did tapped at checkbox location %ld",(long)indexPath.row);
     }
 }
 
