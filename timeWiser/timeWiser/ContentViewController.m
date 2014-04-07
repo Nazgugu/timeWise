@@ -41,25 +41,33 @@
 
 - (void)updateButtons
 {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == NO)
     {
-        self.controlButton.enabled = NO;
-        self.resetButton.enabled = NO;
-        self.intervals = nil;
-        self.timeCounter.intervals = @[[NSNumber numberWithLong:0.0]];
-        [self.titleButton setTitle:@"No Task" forState:UIControlStateNormal];
+        NSLog(@"not in progress");
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
+        {
+            self.controlButton.enabled = NO;
+            self.resetButton.enabled = NO;
+            self.intervals = nil;
+            self.timeCounter.intervals = @[[NSNumber numberWithLong:0.0]];
+            [self.titleButton setTitle:@"No Task" forState:UIControlStateNormal];
         //[self.timeCounter reset];
+        }
+        else
+        {
+            self.controlButton.enabled = YES;
+            self.resetButton.enabled = YES;
+            int minutes = [[[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"] intValue];
+            int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
+            long time = (minutes * 60 + hours * 3600) * 1000;
+            self.intervals = @[[NSNumber numberWithLong:time]];
+            [self.titleButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forState:UIControlStateNormal];
+            [self.timeCounter reset];
+        }
     }
     else
     {
-        self.controlButton.enabled = YES;
-        self.resetButton.enabled = YES;
-        int minutes = [[[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"] intValue];
-        int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
-        long time = (minutes * 60 + hours * 3600) * 1000;
-        self.intervals = @[[NSNumber numberWithLong:time]];
-        [self.titleButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forState:UIControlStateNormal];
-        [self.timeCounter reset];
+        NSLog(@"I am in Progress");
     }
 }
 
@@ -117,11 +125,10 @@
 
 - (IBAction)controlAction:(id)sender {
     JSQFlatButton *button = (JSQFlatButton *)sender;
-    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isInProgress"];
     dispatch_async(dispatch_get_main_queue(), ^{
         // start
         if ([button.currentTitle isEqualToString:@"Start"]) {
-            
             [self.timeCounter start];
             [self.controlButton setTitle:@"Pause" forState:UIControlStateNormal];
             [self.controlButton setTintColor:[[UIColor flatRedColor] colorWithAlphaComponent:0.8f]];
@@ -149,6 +156,7 @@
 }
 
 - (IBAction)actionReset:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
     [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
     self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
     self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
@@ -158,6 +166,10 @@
 }
 
 - (IBAction)changeTask:(id)sender {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
+    {
+        [self performSegueWithIdentifier:@"create" sender:sender];
+    }
 }
 
 #pragma mark - color

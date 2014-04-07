@@ -111,6 +111,10 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"detail"];
     }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    }
     // Override point for customization after application launch.
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.85)];
@@ -128,6 +132,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

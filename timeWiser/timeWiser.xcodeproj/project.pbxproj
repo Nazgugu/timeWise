@@ -17,7 +17,7 @@
 		AE5DFCBA18F12D2A00FA585A /* JSQFlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCB918F12D2A00FA585A /* JSQFlatButton.m */; };
 		AE5DFCC218F1DB8800FA585A /* APLKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCC118F1DB8800FA585A /* APLKeyboardControls.m */; };
 		AE5DFCC818F1DDB900FA585A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCC718F1DDB900FA585A /* NSData+Base64.m */; };
-		AE5DFCD118F228B400FA585A /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCD018F228B400FA585A /* JVFloatLabeledTextField.m */; };
+		AE5DFCD418F2575700FA585A /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCD318F2575700FA585A /* JVFloatLabeledTextField.m */; };
 		AE6131E518E8C7A3008BE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E418E8C7A3008BE5FF /* Foundation.framework */; };
 		AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */; };
 		AE6131E918E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
@@ -83,8 +83,8 @@
 		AE5DFCC118F1DB8800FA585A /* APLKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLKeyboardControls.m; sourceTree = "<group>"; };
 		AE5DFCC618F1DDB900FA585A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		AE5DFCC718F1DDB900FA585A /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		AE5DFCCF18F228B400FA585A /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextField.h; sourceTree = "<group>"; };
-		AE5DFCD018F228B400FA585A /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextField.m; sourceTree = "<group>"; };
+		AE5DFCD218F2575700FA585A /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextField.h; sourceTree = "<group>"; };
+		AE5DFCD318F2575700FA585A /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextField.m; sourceTree = "<group>"; };
 		AE6131E118E8C7A3008BE5FF /* timeWiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeWiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6131E418E8C7A3008BE5FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -375,8 +375,8 @@
 		AE61327318ED21EB008BE5FF /* FloatTextField */ = {
 			isa = PBXGroup;
 			children = (
-				AE5DFCCF18F228B400FA585A /* JVFloatLabeledTextField.h */,
-				AE5DFCD018F228B400FA585A /* JVFloatLabeledTextField.m */,
+				AE5DFCD218F2575700FA585A /* JVFloatLabeledTextField.h */,
+				AE5DFCD318F2575700FA585A /* JVFloatLabeledTextField.m */,
 				AE61327618ED2206008BE5FF /* JVFloatLabeledTextView.h */,
 				AE61327718ED2206008BE5FF /* JVFloatLabeledTextView.m */,
 			);
@@ -510,7 +510,7 @@
 				AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */,
 				AE5DFCC818F1DDB900FA585A /* NSData+Base64.m in Sources */,
 				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
-				AE5DFCD118F228B400FA585A /* JVFloatLabeledTextField.m in Sources */,
+				AE5DFCD418F2575700FA585A /* JVFloatLabeledTextField.m in Sources */,
 				AE61326318ED1E43008BE5FF /* BlurryModalSegue.m in Sources */,
 				AE61323C18EBBB0E008BE5FF /* SFRoundProgressView.m in Sources */,
 				AE5DFCC218F1DB8800FA585A /* APLKeyboardControls.m in Sources */,

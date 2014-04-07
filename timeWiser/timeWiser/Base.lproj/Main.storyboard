@@ -361,11 +361,12 @@
                         <outlet property="resetButton" destination="goU-rM-aJi" id="275-IL-ogT"/>
                         <outlet property="timeCounter" destination="RuU-Ji-wiu" id="xea-B8-n8L"/>
                         <outlet property="titleButton" destination="KpP-PO-r0N" id="uZx-3O-4EB"/>
+                        <segue destination="KHC-EQ-kn2" kind="custom" identifier="create" customClass="BlurryModalSegue" id="RkO-fU-JXy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tfy-hh-I25" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="945" y="125"/>
+            <point key="canvasLocation" x="945" y="133"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -374,6 +375,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MLq-QL-iHK"/>
+        <segue reference="Ry1-eZ-1k4"/>
     </inferredMetricsTieBreakers>
 </document>
