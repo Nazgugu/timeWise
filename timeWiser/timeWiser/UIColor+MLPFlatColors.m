@@ -42,7 +42,7 @@
 #pragma mark - Blue
 + (UIColor *)flatBlueColor
 {
-    return UIColorFromRGB(0x3498DB);
+    return UIColorFromRGB(0x19B5FE);
 }
 + (UIColor *)flatDarkBlueColor
 {
@@ -53,7 +53,7 @@
 #pragma mark - Teal
 + (UIColor *)flatTealColor
 {
-    return UIColorFromRGB(0x1ABC9C);
+    return UIColorFromRGB(0x3D7B7);
 }
 + (UIColor *)flatDarkTealColor
 {
@@ -63,7 +63,7 @@
 #pragma mark - Purple
 + (UIColor *)flatPurpleColor
 {
-    return UIColorFromRGB(0x9B59B6);
+    return UIColorFromRGB(0xBF55EC);
 }
 + (UIColor *)flatDarkPurpleColor
 {
@@ -74,7 +74,7 @@
 #pragma mark - Yellow
 + (UIColor *)flatYellowColor
 {
-    return UIColorFromRGB(0xF1C40F);
+    return UIColorFromRGB(0xF4D03F);
 }
 + (UIColor *)flatDarkYellowColor
 {

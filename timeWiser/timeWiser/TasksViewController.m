@@ -186,7 +186,8 @@
     // Return the number of rows in the section.
     if (hasNoTask)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:@"YES"] forKey:@"isEmpty"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
         return 1;
     }
     else

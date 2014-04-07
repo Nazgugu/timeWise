@@ -29,15 +29,15 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.backgroundColor = [[UIColor flatWhiteColor] colorWithAlphaComponent:1.0f];
-    UIFont *font = [UIFont fontWithName:@"Avenir Next" size:18.0f];
-    NSDictionary *attribute = @{NSFontAttributeName:font,NSForegroundColorAttributeName:[UIColor flatBlackColor]};
-    self.navigationItem.titleView.tintColor = [UIColor flatBlackColor];
+    UIFont *font = [UIFont fontWithName:@"Avenir Next" size:19.0f];
+    NSDictionary *attribute = @{NSFontAttributeName:font,NSForegroundColorAttributeName:[UIColor flatDarkBlackColor]};
+    self.navigationItem.titleView.tintColor = [UIColor flatDarkBlackColor];
     self.navigationController.navigationBar.titleTextAttributes = attribute;
-    self.title = @"TIME  WISER";
+    self.title = @"T I M E    W I S E R";
     self.dataSource = self;
     self.delegate = self;
     [self loadContent];
-    [self selectTabAtIndex:1];
+    //[self selectTabAtIndex:1];
 }
 
 #pragma mark - Setters
@@ -144,7 +144,7 @@
     
     switch (option) {
         case ViewPagerOptionStartFromSecondTab:
-            return 0.0;
+            return 1.0;
         case ViewPagerOptionCenterCurrentTab:
             return 1.0;
         case ViewPagerOptionTabLocation:

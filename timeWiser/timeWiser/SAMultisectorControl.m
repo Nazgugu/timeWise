@@ -9,8 +9,8 @@
 #import "SAMultisectorControl.h"
 #import "UIColor+MLPFlatColors.h"
 
-#define saCircleLineWidth 2.0
-#define saMarkersLineWidth 2.0
+#define saCircleLineWidth 1.5
+#define saMarkersLineWidth 1.5
 
 #define IS_OS_LOWER_7    ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
 

@@ -49,6 +49,11 @@
             self.controlButton.enabled = NO;
             self.resetButton.enabled = NO;
             self.intervals = nil;
+            [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
+            [self.controlButton setTitleColor:[[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
+            [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
+            self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+            self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
             self.timeCounter.intervals = @[[NSNumber numberWithLong:0.0]];
             [self.titleButton setTitle:@"No Task" forState:UIControlStateNormal];
         //[self.timeCounter reset];
@@ -90,6 +95,7 @@
     self.view.backgroundColor = [UIColor flatWhiteColor];
     self.timeCounter.backgroundColor = [UIColor flatWhiteColor];
     self.controlButton.tintColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+    [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
     self.controlButton.borderWidth = 1.5f;
     self.controlButton.cornerRadius = (self.controlButton.frame.size.height + self.controlButton.frame.size.width) / 4;
     self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
@@ -131,6 +137,8 @@
         if ([button.currentTitle isEqualToString:@"Start"]) {
             [self.timeCounter start];
             [self.controlButton setTitle:@"Pause" forState:UIControlStateNormal];
+            [self.controlButton setTitleColor:[[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
+            [self.controlButton setTitleColor:[[UIColor flatRedColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
             [self.controlButton setTintColor:[[UIColor flatRedColor] colorWithAlphaComponent:0.8f]];
             self.controlButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
             self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
@@ -139,6 +147,8 @@
             
             [self.timeCounter stop];
             [self.controlButton setTitle:@"Resume" forState:UIControlStateNormal];
+            [self.controlButton setTitleColor:[[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
+            [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
             self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
             self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
             [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
@@ -147,6 +157,8 @@
             
             [self.timeCounter resume];
             [self.controlButton setTitle:@"Pause" forState:UIControlStateNormal];
+            [self.controlButton setTitleColor:[[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
+            [self.controlButton setTitleColor:[[UIColor flatRedColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
             [self.controlButton setTintColor:[[UIColor flatRedColor] colorWithAlphaComponent:0.8f]];
             self.controlButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
             self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
@@ -158,6 +170,8 @@
 - (IBAction)actionReset:(id)sender {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
     [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
+    [self.controlButton setTitleColor:[[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
+    [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
     self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
     self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
     [self.resetButton setTintColor:[[UIColor flatYellowColor] colorWithAlphaComponent:0.8f]];

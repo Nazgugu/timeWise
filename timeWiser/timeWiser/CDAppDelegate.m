@@ -117,8 +117,8 @@
     }
     // Override point for customization after application launch.
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
-    [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.85)];
-    [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.80]];
+    [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(1.0)];
+    [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.45]];
     return YES;
 }
 							

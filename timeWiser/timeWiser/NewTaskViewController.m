@@ -12,6 +12,7 @@
 #import "CDAppDelegate.h"
 #import "UIColor+MLPFlatColors.h"
 #import "APLKeyboardControls.h"
+#import "TSMessage.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -23,6 +24,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @interface NewTaskViewController ()
 @property (strong, nonatomic) JVFloatLabeledTextField *titleField;
 @property (strong, nonatomic) JVFloatLabeledTextView *descriptionField;
+@property (nonatomic) BOOL isSucceeded;
 @property (nonatomic) NSInteger setMin;
 @property (nonatomic) NSInteger setHr;
 @property (strong, nonatomic) APLKeyboardControls *keyboardControls;
@@ -107,6 +109,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.isSucceeded = NO;
+    self.hoursLabel.textColor = [UIColor flatDarkGrayColor];
+    self.minutesLabel.textColor = [UIColor flatDarkGrayColor];
     CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height + 30.0f;
     
     UIColor *floatingLabelColor = [UIColor grayColor];
@@ -118,7 +123,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     }
     self.titleField.placeholder = NSLocalizedString(@"Title", @"");
     self.titleField.floatingLabelActiveTextColor = [UIColor flatBlueColor];
-    self.titleField.textColor = [UIColor flatWhiteColor];
+    self.titleField.textColor = [UIColor flatBlackColor];
     self.titleField.font = [UIFont fontWithName:@"Avenir Next" size:kJVFieldFontSize];
     self.titleField.floatingLabel.font = [UIFont fontWithName:@"Avenir Next" size:kJVFieldFloatingLabelFontSize];
     self.titleField.floatingLabelTextColor = floatingLabelColor;
@@ -173,12 +178,12 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                                         self.view.frame.size.width - 2*kJVFieldHMargin + self.descriptionField.textContainer.lineFragmentPadding,
                                         kJVFieldHeight * 2);
     }
-    self.descriptionField.placeholder = NSLocalizedString(@"Description", @"");
+    self.descriptionField.placeholder = NSLocalizedString(@"Description (optional)", @"");
     self.descriptionField.font = [UIFont fontWithName:@"Avenir Next" size:kJVFieldFontSize];
     self.descriptionField.floatingLabelActiveTextColor = [UIColor flatBlueColor];
     self.descriptionField.floatingLabel.font = [UIFont fontWithName:@"Avenir Next" size:kJVFieldFloatingLabelFontSize];
     self.descriptionField.floatingLabelTextColor = floatingLabelColor;
-    self.descriptionField.textColor = [UIColor flatWhiteColor];
+    self.descriptionField.textColor = [UIColor flatBlackColor];
     self.descriptionField.backgroundColor = [UIColor clearColor];
     self.descriptionField.opaque = NO;
     [self.view addSubview:self.descriptionField];
@@ -207,15 +212,42 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     if ([self.titleField.text  isEqualToString:@""])
     {
         [self.titleField becomeFirstResponder];
+        [TSMessage showNotificationInViewController:self
+                                              title:@"Missing Title"
+                                           subtitle:@"Title Cannot Be Left Blank"
+                                              image:nil
+                                               type:TSMessageNotificationTypeWarning
+                                           duration:1.5
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:nil
+                                         atPosition:TSMessageNotificationPositionTop
+                               canBeDismissedByUser:YES];
         return;
     }
-    if ([self.descriptionField.text isEqualToString:@""])
+    /*if ([self.descriptionField.text isEqualToString:@""])
     {
         [self.descriptionField becomeFirstResponder];
         return;
-    }
+    }*/
     self.setMin = [self.minutesLabel.text intValue];
     self.setHr = [self.hoursLabel.text intValue];
+    if (self.setMin == 0 && self.setHr ==0)
+    {
+        [TSMessage showNotificationInViewController:self
+                                              title:@"Set Duration"
+                                           subtitle:@"Time Duration Could Not Be Set To Zero"
+                                              image:nil
+                                               type:TSMessageNotificationTypeWarning
+                                           duration:1.5
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:nil
+                                         atPosition:TSMessageNotificationPositionTop
+                               canBeDismissedByUser:YES];
+        return;
+    }
+    self.isSucceeded = YES;
     CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSManagedObject *newTask;
@@ -263,7 +295,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -271,7 +303,22 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"unwind"] && self.isSucceeded == YES)
+    {
+    [TSMessage showNotificationInViewController:[segue destinationViewController]
+                                          title:@"Succeed !"
+                                       subtitle:@"Task Has Been Added Succesfully"
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:1.5
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                           canBeDismissedByUser:YES];
+    }
+
 }
-*/
+
 
 @end
