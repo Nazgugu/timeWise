@@ -40,7 +40,7 @@
 @property (strong, nonatomic) UIColor* outerTrackColor;
 @property (strong, nonatomic) UIColor* innerTrackColor;
 
-@property (strong, nonatomic) NSArray* intervals;
+@property (strong, nonatomic, readwrite) NSArray* intervals;
 
 - (void)start;
 - (void)stop;

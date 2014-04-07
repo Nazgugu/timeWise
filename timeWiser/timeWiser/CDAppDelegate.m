@@ -87,6 +87,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:0] forKey:@"minutes"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"hours"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:0] forKey:@"hours"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"title"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"title"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"detail"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"detail"];
+    }
     // Override point for customization after application launch.
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.85)];

@@ -7,7 +7,6 @@
 //
 
 #import "ContentViewController.h"
-
 #import "UIColor+MLPFlatColors.h"
 #import "JSQFlatButton.h"
 
@@ -32,23 +31,51 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self updateButtons];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //[self updateButtons];
+}
+
+- (void)updateButtons
+{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
+    {
+        self.controlButton.enabled = NO;
+        self.resetButton.enabled = NO;
+        self.intervals = nil;
+        self.timeCounter.intervals = @[[NSNumber numberWithLong:0.0]];
+        //[self.timeCounter reset];
+    }
+    else
+    {
+        self.controlButton.enabled = YES;
+        self.resetButton.enabled = YES;
+        int minutes = [[[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"] intValue];
+        int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
+        long time = (minutes * 60 + hours * 3600) * 1000;
+        self.intervals = @[[NSNumber numberWithLong:time]];
+        [self.timeCounter reset];
+    }
 }
 
 - (void)loadView
 {
     [super loadView];
+    [self updateButtons];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIImage *bkgImage = [UIImage imageNamed:@"bkg"];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:bkgImage];
+    NSNumber *defaultInt = [NSNumber numberWithLong:0.0];
+    self.timeCounter.intervals = @[defaultInt];
+    [self updateButtons];
     // Do any additional setup after loading the view.
     //circular timer
     self.timeCounter.delegate = self;
-    NSNumber *interval = [NSNumber numberWithLong:120 * 1000];
-    self.timeCounter.intervals = @[interval];
     self.timeCounter.outerCircleThickness = [NSNumber numberWithLong:3.0];
     self.color = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
     self.view.backgroundColor = [UIColor flatWhiteColor];
@@ -147,7 +174,8 @@
 
 - (void)setIntervals:(NSArray *)intervals
 {
-    if (intervals) {
+    NSLog(@"%ld",[intervals count]);
+    if ([intervals count] > 0 && intervals) {
         NSLog(@"I have intervals");
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
@@ -157,6 +185,10 @@
             _intervals = intervals;
             self.timeCounter.intervals = intervals;
         });
+    }
+    else
+    {
+        NSLog(@"No objects in me");
     }
 }
 

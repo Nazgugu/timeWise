@@ -24,6 +24,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import <Availability.h>
+#import "UIColor+MLPFlatColors.h"
 
 #define kTTTLineBreakWordWrapTextWidthScalingFactor (M_PI / M_E)
 
@@ -1046,7 +1047,7 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
 - (UIColor *)textColor {
 	UIColor *color = [super textColor];
 	if (!color) {
-		color = [UIColor blackColor];
+		color = [UIColor flatGrayColor];
 	}
 
 	return color;

@@ -93,11 +93,12 @@
     [objects removeAllObjects];
     [objects addObjectsFromArray:[context executeFetchRequest:request error:&error]];
     self.numberOfItems = [objects count];
-    NSLog(@"number of tasks in data base is: %ld",[objects count]);
+    //NSLog(@"number of tasks in data base is: %ld",[objects count]);
     if ([objects count] == 0)
     {
-        NSLog(@"No Matches");
+        //NSLog(@"No Matches");
         hasNoTask = YES;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
     }
     else
     {
@@ -109,6 +110,14 @@
             [self.details addObject:[matches valueForKey:@"details"]];
             [self.minutes addObject:[matches valueForKey:@"minutes"]];
             [self.hours addObject:[matches valueForKey:@"hours"]];
+        }
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:[self.titles objectAtIndex:[objects count] - 1] forKey:@"title"];
+            [[NSUserDefaults standardUserDefaults] setObject:[self.details objectAtIndex:[objects count] - 1] forKey:@"detail"];
+            [[NSUserDefaults standardUserDefaults] setObject:[self.minutes objectAtIndex:[objects count] - 1] forKey:@"minutes"];
+            [[NSUserDefaults standardUserDefaults] setObject:[self.hours objectAtIndex:[objects count] - 1] forKey:@"hours"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"]; //set isEmpty to no
         }
     }
 }
@@ -177,6 +186,7 @@
     // Return the number of rows in the section.
     if (hasNoTask)
     {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:@"YES"] forKey:@"isEmpty"];
         return 1;
     }
     else

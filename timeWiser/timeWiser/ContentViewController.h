@@ -12,7 +12,7 @@
 @interface ContentViewController : UIViewController
 @property (weak, nonatomic) IBOutlet SFRoundProgressCounterView *timeCounter;
 @property (strong, nonatomic) NSString *labelString;
-@property (nonatomic, strong) NSArray* intervals;
+@property (nonatomic, strong, readwrite) NSArray* intervals;
 @property (nonatomic, strong) UIColor* color;
 @property (nonatomic, strong) UIColor* bgColor;
 @end

@@ -105,8 +105,14 @@
     cvc.timeCounter.outerTrackColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
     cvc.timeCounter.outerCircleThickness = [NSNumber numberWithDouble:4.0f];
     cvc.timeCounter.innerCircleThickness = [NSNumber numberWithDouble:1.0f];
-    NSNumber* singleValue = [NSNumber numberWithLong:120 * 1000];
-    cvc.intervals = @[singleValue];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == NO)
+    {
+        NSLog(@"I am not empty");
+        int minutes = [[[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"] intValue];
+        int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
+        long time = (minutes * 60 + hours * 3600) * 1000;
+        cvc.intervals = @[[NSNumber numberWithLong:time]];
+    }
     return cvc;
     }
     else if (index == 0)

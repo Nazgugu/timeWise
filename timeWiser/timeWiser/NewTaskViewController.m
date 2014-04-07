@@ -227,6 +227,11 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [newTask setValue:[NSNumber numberWithBool:NO] forKey:@"isCompleted"];
     NSError *error;
     [context save:&error];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"]; //set isEmpty to No
+    [[NSUserDefaults standardUserDefaults] setObject:self.titleField.text forKey:@"title"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.descriptionField.text forKey:@"detail"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setMin] forKey:@"minutes"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setHr] forKey:@"hours"];
     [self performSegueWithIdentifier:@"unwind" sender:sender];
 }
 - (IBAction)cancelCreation:(id)sender {
