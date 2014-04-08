@@ -13,6 +13,7 @@
 #import "UIColor+MLPFlatColors.h"
 #import "APLKeyboardControls.h"
 #import "TSMessage.h"
+#import "JSQFlatButton.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -31,6 +32,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @property (weak, nonatomic) IBOutlet UILabel *displayMinLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayHourLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tinyLabel;
+@property (weak, nonatomic) IBOutlet JSQFlatButton *workButton;
+@property (weak, nonatomic) IBOutlet JSQFlatButton *playButton;
+@property (weak, nonatomic) IBOutlet JSQFlatButton *sportButton;
+@property (weak, nonatomic) IBOutlet JSQFlatButton *cookButton;
 @end
 
 @implementation NewTaskViewController
@@ -113,13 +118,11 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.hoursLabel.textColor = [UIColor flatDarkGrayColor];
     self.minutesLabel.textColor = [UIColor flatDarkGrayColor];
     CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height + 30.0f;
-    
     UIColor *floatingLabelColor = [UIColor grayColor];
-    
     if (!self.titleField)
     {
     self.titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                           CGRectMake(kJVFieldHMargin, topOffset, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
+                                           CGRectMake(kJVFieldHMargin, topOffset + 15 + 2, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
     }
     self.titleField.placeholder = NSLocalizedString(@"Title", @"");
     self.titleField.floatingLabelActiveTextColor = [UIColor flatBlueColor];
@@ -139,37 +142,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                             self.view.frame.size.width - 2 * kJVFieldHMargin, 1.0f);
     div1.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
     [self.view addSubview:div1];
-    
-    /*JVFloatLabeledTextField *priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                           CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, 80.0f, kJVFieldHeight)];
-    priceField.placeholder = NSLocalizedString(@"Price", @"");
-    priceField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    priceField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    priceField.floatingLabelTextColor = floatingLabelColor;
-    priceField.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:priceField];
-    
-    UIView *div2 = [UIView new];
-    div2.frame = CGRectMake(kJVFieldHMargin + priceField.frame.size.width,
-                            titleField.frame.origin.y + titleField.frame.size.height,
-                            1.0f, kJVFieldHeight);
-    div2.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
-    [self.view addSubview:div2];
-    
-    JVFloatLabeledTextField *locationField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                              CGRectMake(kJVFieldHMargin + kJVFieldHMargin + priceField.frame.size.width + 1.0f,
-                                                         div1.frame.origin.y + div1.frame.size.height,
-                                                         self.view.frame.size.width - 3*kJVFieldHMargin - priceField.frame.size.width - 1.0f,
-                                                         kJVFieldHeight)];
-    locationField.placeholder = NSLocalizedString(@"Specific Location (optional)", @"");
-    locationField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    locationField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    locationField.floatingLabelTextColor = floatingLabelColor;
-    locationField.backgroundColor = [UIColor clearColor];
-    locationField.opaque = NO;
-    [self.view addSubview:locationField];
-    
-    */
     if (!self.descriptionField)
     {
     self.descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
@@ -192,6 +164,51 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                             self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
     div3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
     [self.view addSubview:div3];
+    // 4 type buttons
+    self.workButton.borderWidth = 1.0f;
+    self.workButton.cornerRadius = 12.0f;
+    self.workButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
+    self.workButton.highlightedBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
+    self.workButton.highlightedBackgroundColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
+    [self.workButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
+    [self.workButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
+    self.workButton.selec = NO;
+    self.workButton.tag = 0;
+    //self.workButton.highlightedForegroundColor = [UIColor flatWhiteColor];
+    
+    self.playButton.borderWidth = 0.7f;
+    self.playButton.cornerRadius = 12.0f;
+    self.playButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+    self.playButton.highlightedBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+    self.playButton.highlightedBackgroundColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+    self.playButton.selec = NO;
+    self.playButton.tag = 1;
+    [self.playButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
+    [self.playButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
+    //self.playButton.highlightedForegroundColor = [UIColor flatWhiteColor];
+    
+    self.sportButton.borderWidth = 0.7f;
+    self.sportButton.cornerRadius = 12.0f;
+    self.sportButton.normalBorderColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
+    self.sportButton.highlightedBorderColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
+    self.sportButton.highlightedBackgroundColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
+    self.sportButton.selec = NO;
+    self.sportButton.tag = 2;
+    [self.sportButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
+    [self.sportButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
+    //self.sportButton.highlightedForegroundColor = [UIColor flatWhiteColor];
+    
+    self.cookButton.borderWidth = 0.7f;
+    self.cookButton.cornerRadius = 12.0f;
+    self.cookButton.normalBorderColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
+    self.cookButton.highlightedBorderColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
+    self.cookButton.highlightedBackgroundColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
+    self.cookButton.selec =NO;
+    self.cookButton.tag = 3;
+    [self.cookButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
+    [self.cookButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
+    //self.cookButton.highlightedForegroundColor = [UIColor flatWhiteColor];
+    
     //set delegate
     self.titleField.delegate = self;
     //priceField.delegate = self;
@@ -269,6 +286,130 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 - (IBAction)cancelCreation:(id)sender {
     [self performSegueWithIdentifier:@"unwind" sender:sender];
 }
+
+- (IBAction)typeSelected:(id)sender {
+    JSQFlatButton *button;
+    if ([sender isKindOfClass:[JSQFlatButton class]])
+    {
+        button = (JSQFlatButton *)sender;
+    }
+    if (button.selec == YES)
+    {
+        switch (button.tag) {
+            case 0:
+            {
+                self.workButton.selec = NO;
+                //self.workButton.selected = NO;
+                self.workButton.normalBackgroundColor = nil;
+                break;
+            }
+            case 1:
+            {
+                self.playButton.selec = NO;
+                //self.playButton.selected = NO;
+                self.playButton.normalBackgroundColor = nil;
+                break;
+            }
+            case 2:
+            {
+                self.sportButton.selec = NO;
+                //self.sportButton.selected = NO;
+                self.sportButton.normalBackgroundColor = nil;
+                break;
+            }
+            case 3:
+            {
+                self.cookButton.selec = NO;
+                //self.cookButton.selected = NO;
+                self.cookButton.normalBackgroundColor = nil;
+                break;
+            }
+            default:
+                break;
+        }
+        [self.workButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+        self.playButton.tintColor = [UIColor flatBlackColor];
+        self.sportButton.tintColor = [UIColor flatBlackColor];
+        self.cookButton.tintColor = [UIColor flatBlackColor];
+    }
+    else
+    {
+        switch (button.tag) {
+            case 0:
+            {
+                self.workButton.selec = YES;
+                //self.workButton.selected = NO;
+                self.playButton.selec = NO;
+                self.sportButton.selec = NO;
+                self.cookButton.selec = NO;
+                self.workButton.normalBackgroundColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
+                self.playButton.normalBackgroundColor = nil;
+                self.sportButton.normalBackgroundColor = nil;
+                self.cookButton.normalBackgroundColor = nil;
+                //self.workButton.titleLabel.textColor = [UIColor flatWhiteColor];
+                [self.workButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateNormal];
+                self.playButton.titleLabel.textColor = [UIColor flatBlackColor];
+                self.sportButton.titleLabel.textColor = [UIColor flatBlackColor];
+                self.cookButton.titleLabel.textColor = [UIColor flatBlackColor];
+                break;
+            }
+            case 1:
+            {
+                self.playButton.selec = YES;
+                //self.playButton.selected = NO;
+                self.workButton.selec = NO;
+                self.sportButton.selec = NO;
+                self.cookButton.selec = NO;
+                self.playButton.normalBackgroundColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+                self.workButton.normalBackgroundColor = nil;
+                self.sportButton.normalBackgroundColor = nil;
+                self.cookButton.normalBackgroundColor = nil;
+                self.workButton.titleLabel.textColor = [UIColor flatBlackColor];
+                [self.playButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateNormal];
+                self.sportButton.titleLabel.textColor = [UIColor flatBlackColor];
+                self.cookButton.titleLabel.textColor = [UIColor flatBlackColor];
+                break;
+            }
+            case 2:
+            {
+                self.sportButton.selec = YES;
+                //self.sportButton.selected = NO;
+                self.playButton.selec = NO;
+                self.workButton.selec = NO;
+                self.cookButton.selec = NO;
+                self.sportButton.normalBackgroundColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
+                self.playButton.normalBackgroundColor = nil;
+                self.workButton.normalBackgroundColor = nil;
+                self.cookButton.normalBackgroundColor = nil;
+                self.workButton.titleLabel.textColor = [UIColor flatBlackColor];
+                self.playButton.titleLabel.textColor = [UIColor flatBlackColor];
+                [self.sportButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateNormal];
+                self.cookButton.titleLabel.textColor = [UIColor flatBlackColor];
+                break;
+            }
+            case 3:
+            {
+                self.cookButton.selec = YES;
+                //self.cookButton.selected = NO;
+                self.playButton.selec = NO;
+                self.sportButton.selec = NO;
+                self.workButton.selec = NO;
+                self.cookButton.normalBackgroundColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
+                self.playButton.normalBackgroundColor = nil;
+                self.sportButton.normalBackgroundColor = nil;
+                self.workButton.normalBackgroundColor = nil;
+                self.workButton.titleLabel.textColor = [UIColor flatBlackColor];
+                self.playButton.titleLabel.textColor = [UIColor flatBlackColor];
+                self.sportButton.titleLabel.textColor = [UIColor flatBlackColor];
+                [self.cookButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateNormal];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
 
 //Dismiss keyboard when touch out side.
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

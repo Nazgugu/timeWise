@@ -80,7 +80,7 @@ typedef struct{
     self.backgroundColor = [UIColor clearColor];
     self.startAngle = toRadians(270);
     self.minCircleMarkerRadius = 10.0;
-    self.maxCircleMarkerRadius = 50.0;
+    self.maxCircleMarkerRadius = 30.0;
     self.numbersAfterPoint = 0;
 }
 

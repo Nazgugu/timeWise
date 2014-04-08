@@ -15,6 +15,7 @@
  */
 @interface JSQFlatButton : UIButton
 
+@property (nonatomic) BOOL selec;
 /**
  *  The background color of the button in its default state. The default value is `nil`. 
  *  
@@ -24,7 +25,6 @@
  *
  */
 @property (strong, nonatomic) UIColor *normalBackgroundColor;
-
 /**
  *  The background color of the button in its highlighted state. The default value is `nil`.
  */

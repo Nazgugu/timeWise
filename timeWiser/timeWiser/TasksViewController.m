@@ -145,15 +145,15 @@
     //calculate a height based on a cell
     if (!hasNoTask)
     {
-        NSLog(@"has some task");
+        //NSLog(@"has some task");
         if (!self.testCell)
         {
             self.testCell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell"];
         }
     
         //configure the cell
-        NSLog(@"title = %@",[self.titles objectAtIndex:indexPath.row]);
-        NSLog(@"detail = %@",[self.details objectAtIndex:indexPath.row]);
+        //NSLog(@"title = %@",[self.titles objectAtIndex:indexPath.row]);
+        //NSLog(@"detail = %@",[self.details objectAtIndex:indexPath.row]);
         self.testCell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
         self.testCell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
         self.testCell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
@@ -168,7 +168,7 @@
         [self.testCell layoutIfNeeded];
         //Get the height for the cell
         CGFloat height = [self.testCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        NSLog(@"height = %f",height);
+        //NSLog(@"height = %f",height);
         //Padding of 1 point for the seperator
         return height + 1;
     }
@@ -178,7 +178,7 @@
 //load contents faster!
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 95;
+    return 90;
 }
 
 #pragma mark - Table view data source

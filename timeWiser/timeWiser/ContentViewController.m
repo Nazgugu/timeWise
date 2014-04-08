@@ -43,7 +43,7 @@
 {
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == NO)
     {
-        NSLog(@"not in progress");
+        //NSLog(@"not in progress");
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
         {
             self.controlButton.enabled = NO;
@@ -225,7 +225,7 @@
     }
     else
     {
-        NSLog(@"No objects in me");
+        //NSLog(@"No objects in me");
     }
 }
 
