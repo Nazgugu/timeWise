@@ -26,6 +26,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @property (strong, nonatomic) JVFloatLabeledTextField *titleField;
 @property (strong, nonatomic) JVFloatLabeledTextView *descriptionField;
 @property (nonatomic) BOOL isSucceeded;
+@property (nonatomic) BOOL isShortCut;
 @property (nonatomic) NSInteger setMin;
 @property (nonatomic) NSInteger setHr;
 @property (strong, nonatomic) APLKeyboardControls *keyboardControls;
@@ -170,11 +171,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.workButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
     self.workButton.highlightedBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
     self.workButton.highlightedBackgroundColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
-    [self.workButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
-    [self.workButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
     self.workButton.selec = NO;
     self.workButton.tag = 0;
-    //self.workButton.highlightedForegroundColor = [UIColor flatWhiteColor];
     
     self.playButton.borderWidth = 0.7f;
     self.playButton.cornerRadius = 12.0f;
@@ -183,9 +181,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.playButton.highlightedBackgroundColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
     self.playButton.selec = NO;
     self.playButton.tag = 1;
-    [self.playButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
-    [self.playButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
-    //self.playButton.highlightedForegroundColor = [UIColor flatWhiteColor];
     
     self.sportButton.borderWidth = 0.7f;
     self.sportButton.cornerRadius = 12.0f;
@@ -194,9 +189,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.sportButton.highlightedBackgroundColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
     self.sportButton.selec = NO;
     self.sportButton.tag = 2;
-    [self.sportButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
-    [self.sportButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
-    //self.sportButton.highlightedForegroundColor = [UIColor flatWhiteColor];
     
     self.cookButton.borderWidth = 0.7f;
     self.cookButton.cornerRadius = 12.0f;
@@ -205,10 +197,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.cookButton.highlightedBackgroundColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
     self.cookButton.selec =NO;
     self.cookButton.tag = 3;
-    [self.cookButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateHighlighted];
-    [self.cookButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateSelected];
-    //self.cookButton.highlightedForegroundColor = [UIColor flatWhiteColor];
     
+    self.isShortCut = NO;
     //set delegate
     self.titleField.delegate = self;
     //priceField.delegate = self;
@@ -226,7 +216,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     //[titleField becomeFirstResponder];
 }
 - (IBAction)addTask:(id)sender {
-    if ([self.titleField.text  isEqualToString:@""])
+    if ([self.titleField.text  isEqualToString:@""] && !self.isShortCut)
     {
         [self.titleField becomeFirstResponder];
         [TSMessage showNotificationInViewController:self
@@ -295,12 +285,16 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     }
     if (button.selec == YES)
     {
+        self.isShortCut = NO;
         switch (button.tag) {
             case 0:
             {
                 self.workButton.selec = NO;
                 //self.workButton.selected = NO;
                 self.workButton.normalBackgroundColor = nil;
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Work" withString:@""];
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wor" withString:@""];
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wo" withString:@""];
                 break;
             }
             case 1:
@@ -308,6 +302,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 self.playButton.selec = NO;
                 //self.playButton.selected = NO;
                 self.playButton.normalBackgroundColor = nil;
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Play" withString:@""];
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pla" withString:@""];
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pl" withString:@""];
                 break;
             }
             case 2:
@@ -315,6 +312,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 self.sportButton.selec = NO;
                 //self.sportButton.selected = NO;
                 self.sportButton.normalBackgroundColor = nil;
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Sport" withString:@""];
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spor" withString:@""];
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spo" withString:@""];
                 break;
             }
             case 3:
@@ -322,26 +322,23 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 self.cookButton.selec = NO;
                 //self.cookButton.selected = NO;
                 self.cookButton.normalBackgroundColor = nil;
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Cook" withString:@""];
+                self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Coo" withString:@""];
                 break;
             }
             default:
                 break;
         }
         [self.workButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
-        self.playButton.tintColor = [UIColor flatBlackColor];
-        self.sportButton.tintColor = [UIColor flatBlackColor];
-        self.cookButton.tintColor = [UIColor flatBlackColor];
+        [self.playButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+        [self.sportButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+        [self.cookButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
     }
     else
     {
         switch (button.tag) {
             case 0:
             {
-                self.workButton.selec = YES;
-                //self.workButton.selected = NO;
-                self.playButton.selec = NO;
-                self.sportButton.selec = NO;
-                self.cookButton.selec = NO;
                 self.workButton.normalBackgroundColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
                 self.playButton.normalBackgroundColor = nil;
                 self.sportButton.normalBackgroundColor = nil;
@@ -351,15 +348,40 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 self.playButton.titleLabel.textColor = [UIColor flatBlackColor];
                 self.sportButton.titleLabel.textColor = [UIColor flatBlackColor];
                 self.cookButton.titleLabel.textColor = [UIColor flatBlackColor];
+                if (self.isShortCut)
+                {
+                    if (self.playButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Play" withString:@"Work"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pla" withString:@"Work"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pl" withString:@"Work"];
+                    }
+                    if (self.sportButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Sport" withString:@"Work"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spor" withString:@"Work"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spo" withString:@"Work"];
+                    }
+                    if (self.cookButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Cook" withString:@"Work"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Coo" withString:@"Work"];
+                    }
+                }
+                else
+                {
+                    NSString *temp = @"Work";
+                    self.titleField.text = [temp stringByAppendingString:self.titleField.text];
+                }
+                self.workButton.selec = YES;
+                //self.workButton.selected = NO;
+                self.playButton.selec = NO;
+                self.sportButton.selec = NO;
+                self.cookButton.selec = NO;
                 break;
             }
             case 1:
             {
-                self.playButton.selec = YES;
-                //self.playButton.selected = NO;
-                self.workButton.selec = NO;
-                self.sportButton.selec = NO;
-                self.cookButton.selec = NO;
                 self.playButton.normalBackgroundColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
                 self.workButton.normalBackgroundColor = nil;
                 self.sportButton.normalBackgroundColor = nil;
@@ -368,15 +390,41 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 [self.playButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateNormal];
                 self.sportButton.titleLabel.textColor = [UIColor flatBlackColor];
                 self.cookButton.titleLabel.textColor = [UIColor flatBlackColor];
+                if (self.isShortCut)
+                {
+                    if (self.workButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Work" withString:@"Play"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wor" withString:@"Play"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wo" withString:@"Play"];
+                    }
+                    if (self.sportButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Sport" withString:@"Play"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spor" withString:@"Play"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spo" withString:@"Play"];
+                    }
+                    if (self.cookButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Cook" withString:@"Play"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Coo" withString:@"Play"];
+                    }
+
+                }
+                else
+                {
+                    NSString *temp = @"Play";
+                    self.titleField.text = [temp stringByAppendingString:self.titleField.text];
+                }
+                self.playButton.selec = YES;
+                //self.playButton.selected = NO;
+                self.workButton.selec = NO;
+                self.sportButton.selec = NO;
+                self.cookButton.selec = NO;
                 break;
             }
             case 2:
             {
-                self.sportButton.selec = YES;
-                //self.sportButton.selected = NO;
-                self.playButton.selec = NO;
-                self.workButton.selec = NO;
-                self.cookButton.selec = NO;
                 self.sportButton.normalBackgroundColor = [[UIColor flatBlueColor] colorWithAlphaComponent:0.8f];
                 self.playButton.normalBackgroundColor = nil;
                 self.workButton.normalBackgroundColor = nil;
@@ -385,15 +433,41 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 self.playButton.titleLabel.textColor = [UIColor flatBlackColor];
                 [self.sportButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateNormal];
                 self.cookButton.titleLabel.textColor = [UIColor flatBlackColor];
+                if (self.isShortCut)
+                {
+                    if (self.workButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Work" withString:@"Sport"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wor" withString:@"Sport"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wo" withString:@"Sport"];
+                    }
+                    if (self.playButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Play" withString:@"Sport"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pla" withString:@"Sport"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pl" withString:@"Sport"];
+                    }
+                    if (self.cookButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Cook" withString:@"Sport"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Coo" withString:@"Sport"];
+                    }
+
+                }
+                else
+                {
+                    NSString *temp = @"Sport";
+                    self.titleField.text = [temp stringByAppendingString:self.titleField.text];
+                }
+                self.sportButton.selec = YES;
+                //self.sportButton.selected = NO;
+                self.playButton.selec = NO;
+                self.workButton.selec = NO;
+                self.cookButton.selec = NO;
                 break;
             }
             case 3:
             {
-                self.cookButton.selec = YES;
-                //self.cookButton.selected = NO;
-                self.playButton.selec = NO;
-                self.sportButton.selec = NO;
-                self.workButton.selec = NO;
                 self.cookButton.normalBackgroundColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
                 self.playButton.normalBackgroundColor = nil;
                 self.sportButton.normalBackgroundColor = nil;
@@ -402,11 +476,43 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 self.playButton.titleLabel.textColor = [UIColor flatBlackColor];
                 self.sportButton.titleLabel.textColor = [UIColor flatBlackColor];
                 [self.cookButton setTitleColor:[UIColor flatWhiteColor] forState:UIControlStateNormal];
+                if (self.isShortCut)
+                {
+                    if (self.workButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Work" withString:@"Cook"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wor" withString:@"Cook"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Wo" withString:@"Cook"];
+                    }
+                    if (self.playButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Play" withString:@"Cook"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pla" withString:@"Cook"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Pl" withString:@"Cook"];
+                    }
+                    if (self.sportButton.selec)
+                    {
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Sport" withString:@"Cook"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spor" withString:@"Cook"];
+                        self.titleField.text = [self.titleField.text stringByReplacingOccurrencesOfString:@"Spo" withString:@"Cook"];
+                    }
+                }
+                else
+                {
+                    NSString *temp = @"Cook";
+                    self.titleField.text = [temp stringByAppendingString:self.titleField.text];
+                }
+                self.cookButton.selec = YES;
+                //self.cookButton.selected = NO;
+                self.playButton.selec = NO;
+                self.sportButton.selec = NO;
+                self.workButton.selec = NO;
                 break;
             }
             default:
                 break;
         }
+        self.isShortCut = YES;
     }
 }
 
