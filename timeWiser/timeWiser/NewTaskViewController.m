@@ -27,6 +27,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @property (strong, nonatomic) JVFloatLabeledTextView *descriptionField;
 @property (nonatomic) BOOL isSucceeded;
 @property (nonatomic) BOOL isShortCut;
+@property (nonatomic) NSInteger shortCutNum;
 @property (nonatomic) NSInteger setMin;
 @property (nonatomic) NSInteger setHr;
 @property (strong, nonatomic) APLKeyboardControls *keyboardControls;
@@ -115,6 +116,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.shortCutNum = 4;
     self.isSucceeded = NO;
     self.hoursLabel.textColor = [UIColor flatDarkGrayColor];
     self.minutesLabel.textColor = [UIColor flatDarkGrayColor];
@@ -192,9 +194,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
     self.cookButton.borderWidth = 0.7f;
     self.cookButton.cornerRadius = 12.0f;
-    self.cookButton.normalBorderColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
-    self.cookButton.highlightedBorderColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
-    self.cookButton.highlightedBackgroundColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
+    self.cookButton.normalBorderColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
+    self.cookButton.highlightedBorderColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
+    self.cookButton.highlightedBackgroundColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
     self.cookButton.selec =NO;
     self.cookButton.tag = 3;
     
@@ -285,6 +287,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     }
     if (button.selec == YES)
     {
+        self.shortCutNum = 4;
         self.isShortCut = NO;
         switch (button.tag) {
             case 0:
@@ -468,7 +471,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
             }
             case 3:
             {
-                self.cookButton.normalBackgroundColor = [[UIColor flatOrangeColor] colorWithAlphaComponent:0.8f];
+                self.cookButton.normalBackgroundColor = [[UIColor flatYellowColor] colorWithAlphaComponent:0.8f];
                 self.playButton.normalBackgroundColor = nil;
                 self.sportButton.normalBackgroundColor = nil;
                 self.workButton.normalBackgroundColor = nil;
@@ -513,6 +516,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                 break;
         }
         self.isShortCut = YES;
+        self.shortCutNum = button.tag;
     }
 }
 
@@ -527,6 +531,44 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     if ([textField isKindOfClass:[JVFloatLabeledTextField class]])
     {
         [textField resignFirstResponder];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    if ([textField isKindOfClass:[JVFloatLabeledTextField class]])
+    {
+        if (self.isShortCut)
+        {
+            if (self.shortCutNum < 4)
+            {
+                switch (self.shortCutNum) {
+                    case 0:
+                    {
+                        [self performSelector:@selector(typeSelected:) withObject:self.workButton];
+                        break;
+                    }
+                    case 1:
+                    {
+                        [self performSelector:@selector(typeSelected:) withObject:self.playButton];
+                        break;
+                    }
+                    case 2:
+                    {
+                        [self performSelector:@selector(typeSelected:) withObject:self.sportButton];
+                        break;
+                    }
+                    case 3:
+                    {
+                        [self performSelector:@selector(typeSelected:) withObject:self.cookButton];
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        }
     }
     return YES;
 }

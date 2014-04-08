@@ -125,7 +125,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    colorArray = [[NSMutableArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatTealColor], [UIColor flatPurpleColor], [UIColor flatYellowColor], [UIColor flatGrayColor], nil];
+    colorArray = [[NSMutableArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
     self.taskTable.backgroundColor = [UIColor flatWhiteColor];
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
