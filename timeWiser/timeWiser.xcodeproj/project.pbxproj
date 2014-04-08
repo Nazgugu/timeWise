@@ -39,6 +39,8 @@
 		AE5DFD0018F271C200FA585A /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5DFCEF18F271C200FA585A /* NotificationButtonBackground@2x.png */; };
 		AE5DFD0118F271C200FA585A /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = AE5DFCF018F271C200FA585A /* TSMessagesDefaultDesign.json */; };
 		AE5DFD0418F271D900FA585A /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFD0318F271D900FA585A /* HexColor.m */; };
+		AE5DFD0A18F4687200FA585A /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFD0718F4687200FA585A /* UIImage+ResizeMagick.m */; };
+		AE5DFD0B18F4687200FA585A /* DoActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFD0918F4687200FA585A /* DoActionSheet.m */; };
 		AE6131E518E8C7A3008BE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E418E8C7A3008BE5FF /* Foundation.framework */; };
 		AE6131E718E8C7A3008BE5FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */; };
 		AE6131E918E8C7A3008BE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6131E818E8C7A3008BE5FF /* UIKit.framework */; };
@@ -131,6 +133,10 @@
 		AE5DFCF018F271C200FA585A /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
 		AE5DFD0218F271D900FA585A /* HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColor.h; sourceTree = "<group>"; };
 		AE5DFD0318F271D900FA585A /* HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColor.m; sourceTree = "<group>"; };
+		AE5DFD0618F4687200FA585A /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
+		AE5DFD0718F4687200FA585A /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
+		AE5DFD0818F4687200FA585A /* DoActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoActionSheet.h; sourceTree = "<group>"; };
+		AE5DFD0918F4687200FA585A /* DoActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoActionSheet.m; sourceTree = "<group>"; };
 		AE6131E118E8C7A3008BE5FF /* timeWiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeWiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6131E418E8C7A3008BE5FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6131E618E8C7A3008BE5FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -308,6 +314,17 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		AE5DFD0518F4682B00FA585A /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				AE5DFD0618F4687200FA585A /* UIImage+ResizeMagick.h */,
+				AE5DFD0718F4687200FA585A /* UIImage+ResizeMagick.m */,
+				AE5DFD0818F4687200FA585A /* DoActionSheet.h */,
+				AE5DFD0918F4687200FA585A /* DoActionSheet.m */,
+			);
+			name = ActionSheet;
+			sourceTree = "<group>";
+		};
 		AE6131D818E8C7A3008BE5FF = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +363,7 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AE5DFD0518F4682B00FA585A /* ActionSheet */,
 				AE5DFCD518F2719600FA585A /* Notification */,
 				AE5DFCBF18F1DB7800FA585A /* Keyboard */,
 				AE5DFCB718F12CC300FA585A /* UIButton */,
@@ -622,11 +640,13 @@
 				AE61323C18EBBB0E008BE5FF /* SFRoundProgressView.m in Sources */,
 				AE5DFCC218F1DB8800FA585A /* APLKeyboardControls.m in Sources */,
 				AE61325B18ED0196008BE5FF /* CDNavigationViewController.m in Sources */,
+				AE5DFD0A18F4687200FA585A /* UIImage+ResizeMagick.m in Sources */,
 				AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */,
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
 				AE5DFCDE18F271AC00FA585A /* TSMessageView.m in Sources */,
 				AE5DFCBA18F12D2A00FA585A /* JSQFlatButton.m in Sources */,
 				AE61326918ED1F26008BE5FF /* NSInvocation+Copy.m in Sources */,
+				AE5DFD0B18F4687200FA585A /* DoActionSheet.m in Sources */,
 				AE5DFCA618EF8B4900FA585A /* tasks.xcdatamodeld in Sources */,
 				AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */,
 				AE61324218EBE1F9008BE5FF /* TTTAttributedLabel.m in Sources */,

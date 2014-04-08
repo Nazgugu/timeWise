@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+MLPFlatColors.h"
 #import "M13Checkbox.h"
+#import "DoActionSheet.h"
 
 @interface TasksViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -267,6 +268,20 @@
     if (hasNoTask)
     {
         [self performSegueWithIdentifier:@"newTask" sender:nil];
+    }
+    else
+    {
+        DoActionSheet *actionSheet = [[DoActionSheet alloc] init];
+        actionSheet.nAnimationType = DoTransitionStyleNormal;
+        actionSheet.dRound = 5;
+        actionSheet.dButtonRound = 2;
+        actionSheet.nDestructiveIndex = 2;
+        [actionSheet showC:@"What To Do With This Task"
+                    cancel:@"Cancel"
+                   buttons:@[@"Set to timer", @"Complete this task", @"Delete this task"] result:^(int nResult)
+         {
+             NSLog(@"---------------> result : %d", nResult);
+         }];
     }
 }
 
