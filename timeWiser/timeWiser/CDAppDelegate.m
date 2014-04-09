@@ -115,6 +115,11 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
     }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"taskID"];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
     // Override point for customization after application launch.
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(1.0)];

@@ -268,11 +268,23 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [newTask setValue:[NSNumber numberWithBool:NO] forKey:@"isCompleted"];
     NSError *error;
     [context save:&error];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"]; //set isEmpty to No
-    [[NSUserDefaults standardUserDefaults] setObject:self.titleField.text forKey:@"title"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.descriptionField.text forKey:@"detail"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setMin] forKey:@"minutes"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setHr] forKey:@"hours"];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES || [[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO)
+    {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == NO)
+        {
+            //save the object ID
+            NSManagedObjectID *objID = [newTask objectID];
+            NSURL *url = [objID URIRepresentation];
+            NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
+            [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"]; //set isEmpty to No
+            [[NSUserDefaults standardUserDefaults] setObject:self.titleField.text forKey:@"title"];
+            [[NSUserDefaults standardUserDefaults] setObject:self.descriptionField.text forKey:@"detail"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setMin] forKey:@"minutes"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setHr] forKey:@"hours"];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self performSegueWithIdentifier:@"unwind" sender:sender];
 }
 - (IBAction)cancelCreation:(id)sender {

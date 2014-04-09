@@ -100,6 +100,8 @@
         //NSLog(@"No Matches");
         hasNoTask = YES;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
     }
     else
     {
@@ -114,6 +116,11 @@
         }
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO)
         {
+            //save the object ID
+            NSManagedObjectID *objID = [[objects objectAtIndex:[objects count] - 1] objectID];
+            NSURL *url = [objID URIRepresentation];
+            NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
+            [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
             [[NSUserDefaults standardUserDefaults] setObject:[self.titles objectAtIndex:[objects count] - 1] forKey:@"title"];
             [[NSUserDefaults standardUserDefaults] setObject:[self.details objectAtIndex:[objects count] - 1] forKey:@"detail"];
             [[NSUserDefaults standardUserDefaults] setObject:[self.minutes objectAtIndex:[objects count] - 1] forKey:@"minutes"];
@@ -121,6 +128,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"]; //set isEmpty to no
         }
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)viewDidLoad
@@ -152,24 +160,13 @@
             self.testCell = [self.taskTable dequeueReusableCellWithIdentifier:@"taskCell"];
         }
     
-        //configure the cell
-        //NSLog(@"title = %@",[self.titles objectAtIndex:indexPath.row]);
-        //NSLog(@"detail = %@",[self.details objectAtIndex:indexPath.row]);
         self.testCell.titleLabel.text = [self.titles objectAtIndex:indexPath.row];
         self.testCell.detailLabel.text = [self.details objectAtIndex:indexPath.row];
         self.testCell.timeLabel.text = [NSString stringWithFormat:@"%@ Hr  %@ Mins",[self.hours objectAtIndex:indexPath.row],[self.minutes objectAtIndex:indexPath.row]];
-        //self.testCell.checkBox.checkState = M13CheckboxStateUnchecked;
-        //self.testCell.checkBox.strokeColor = [UIColor flatBlueColor];
-       // self.testCell.checkBox.checkColor = [UIColor flatBlueColor];
-        //Layout the cell
-        //[self.testCell setNeedsUpdateConstraints];
-        //[self.testCell updateConstraintsIfNeeded];
-        //self.testCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.taskTable.bounds), CGRectGetHeight(self.testCell.bounds));
         [self.testCell setNeedsLayout];
         [self.testCell layoutIfNeeded];
         //Get the height for the cell
         CGFloat height = [self.testCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        //NSLog(@"height = %f",height);
         //Padding of 1 point for the seperator
         return height + 1;
     }
@@ -195,8 +192,8 @@
     // Return the number of rows in the section.
     if (hasNoTask)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
+        //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
         return 1;
     }
     else
@@ -295,10 +292,24 @@
     [completeTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
     NSError *error = nil;
     [context save:&error];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES)
+    {
+        NSData *currentTaskID = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+        NSURL *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:currentTaskID];
+        if ([currentURL isEqual:[[tempTask objectID] URIRepresentation]])
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
+            }
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self deleteRowAtIndexPath:indexPath];
 }
 
-//this will remove the specific task from the data base and delete from the tableview
+//this will remove the specific task from the data base and delete from the tableview NEED WORK.
 - (void)removeObjectFromDataBaseAtIndexPath:(NSIndexPath *)indexPath
 {
     CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
