@@ -268,10 +268,14 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [newTask setValue:[NSNumber numberWithBool:NO] forKey:@"isCompleted"];
     NSError *error;
     [context save:&error];
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES || [[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO)
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO)
     {
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == NO)
         {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"];
+            }
             //save the object ID
             NSManagedObjectID *objID = [newTask objectID];
             NSURL *url = [objID URIRepresentation];

@@ -278,6 +278,25 @@
                    buttons:@[@"Set to timer", @"Complete this task", @"Delete this task"] result:^(int nResult)
          {
              NSLog(@"---------------> result : %d", nResult);
+             switch (nResult) {
+                 case 0:
+                 {
+                     [self selectTaskAtIndexPath:indexPath];
+                     break;
+                 }
+                 case 1:
+                 {
+                     [self completeTaskAtIndexPath:indexPath];
+                     break;
+                 }
+                 case 2:
+                 {
+                     [self removeObjectFromDataBaseAtIndexPath:indexPath];
+                     break;
+                 }
+                 default:
+                     break;
+             }
          }];
     }
 }
@@ -292,26 +311,50 @@
     [completeTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
     NSError *error = nil;
     [context save:&error];
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES)
+    NSData *currentTaskID = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+    NSURL *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:currentTaskID];
+    if ([currentURL isEqual:[[tempTask objectID] URIRepresentation]])
     {
-        NSData *currentTaskID = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
-        NSURL *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:currentTaskID];
-        if ([currentURL isEqual:[[tempTask objectID] URIRepresentation]])
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
         {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
-            }
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
         }
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self deleteRowAtIndexPath:indexPath];
 }
 
+- (void)selectTaskAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isSelected"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    NSManagedObjectID *objectID = [[objects objectAtIndex:indexPath.row] objectID];
+    NSURL *url = [objectID URIRepresentation];
+    NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
+    [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
+    [[NSUserDefaults standardUserDefaults] setObject:[self.titles objectAtIndex:indexPath.row] forKey:@"title"];
+    [[NSUserDefaults standardUserDefaults] setObject:[self.details objectAtIndex:indexPath.row] forKey:@"detail"];
+    [[NSUserDefaults standardUserDefaults] setObject:[self.minutes objectAtIndex:indexPath.row] forKey:@"minutes"];
+    [[NSUserDefaults standardUserDefaults] setObject:[self.hours objectAtIndex:indexPath.row] forKey:@"hours"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 //this will remove the specific task from the data base and delete from the tableview NEED WORK.
 - (void)removeObjectFromDataBaseAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSManagedObject *tempTask = [objects objectAtIndex:indexPath.row];
+    NSData *currentTaskID = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+    NSURL *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:currentTaskID];
+    if ([currentURL isEqual:[[tempTask objectID] URIRepresentation]])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
     CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     [context deleteObject:[objects objectAtIndex:indexPath.row]];
