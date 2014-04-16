@@ -11,6 +11,7 @@
 #import "JSQFlatButton.h"
 #import "LPPopupListView.h"
 #import "CDAppDelegate.h"
+#import "TSMessage.h"
 #import <QuartzCore/QuartzCore.h>
 
 /* 1000 is 1 second*/
@@ -224,9 +225,18 @@
 #pragma mark = SFRoundProgressTimerViewDelegate
 - (void)countdownDidEnd:(SFRoundProgressCounterView*)progressTimerView
 {
+    [TSMessage showNotificationInViewController:self
+                                          title:@"Done !"
+                                       subtitle:[NSString stringWithFormat:@"%@ is completed", self.titleButton.titleLabel.text]
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:0.5
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                           canBeDismissedByUser:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        //[self.controlButton setTitle:@"New" forState:UIControlStateNormal];
-        //        [self.progressCounterView reset];
         CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         NSManagedObjectContext *context = [appDelegate managedObjectContext];
         NSData *idData = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];

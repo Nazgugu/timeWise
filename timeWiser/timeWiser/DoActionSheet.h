@@ -68,7 +68,7 @@
 
 #define DO_DIMMED_COLOR         DO_RGBA(0, 0, 0, 0.7)
 
-#define DO_TITLE_FONT           [UIFont fontWithName:@"AvenirNext-Medium" size:14]
+#define DO_TITLE_FONT           [UIFont fontWithName:@"Avenir Next" size:14]
 #define DO_BUTTON_FONT          [UIFont fontWithName:@"Avenir Next" size:14]
 
 #define DO_TITLE_INSET          UIEdgeInsetsMake(10, 20, 10, 20)
