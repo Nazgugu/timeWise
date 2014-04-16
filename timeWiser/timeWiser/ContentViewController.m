@@ -99,6 +99,11 @@
         {
             self.controlButton.enabled = YES;
             self.resetButton.enabled = YES;
+            self.controlButton.tintColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+            [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
+            [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
+            self.controlButton.normalBorderColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
+            self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
             int minutes = [[[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"] intValue];
             int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
             long time = (minutes * 60 + hours * 3600) * 1000;
@@ -186,16 +191,51 @@
     [popupListView hideAnimated:YES];
 }
 
+- (void)completeTaskWithObjectID:(NSManagedObjectID *)objectID
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
+    CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *completetTask = [context objectWithID:objectID];
+    [completetTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
+    NSError *error = nil;
+    [context save:&error];
+    [self fetchContents];
+    if ([objects count] == 0)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"title"] forKey:@"title"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"details"] forKey:@"detail"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"minutes"] forKey:@"minutes"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"hours"] forKey:@"hours"];
+        NSManagedObjectID *objectID = [[objects objectAtIndex:[objects count] - 1] objectID];
+        NSURL *url = [objectID URIRepresentation];
+        NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
+        [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self updateButtons];
+}
 
 #pragma mark = SFRoundProgressTimerViewDelegate
 - (void)countdownDidEnd:(SFRoundProgressCounterView*)progressTimerView
 {
-
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.controlButton setTitle:@"New" forState:UIControlStateNormal];
+        //[self.controlButton setTitle:@"New" forState:UIControlStateNormal];
         //        [self.progressCounterView reset];
+        CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        NSData *idData = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+        NSURL *idURL = [NSKeyedUnarchiver unarchiveObjectWithData:idData];
+        NSManagedObjectID *objectID = [[context persistentStoreCoordinator] managedObjectIDForURIRepresentation:idURL];
+        [self completeTaskWithObjectID:objectID];
     });
 }
+
 
 /*- (void)intervalDidEnd:(SFRoundProgressCounterView *)progressTimerView WithIntervalPosition:(int)position
 {
