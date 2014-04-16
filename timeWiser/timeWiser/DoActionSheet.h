@@ -43,7 +43,7 @@
 #define DO_DESTRUCTIVE_COLOR        DO_RGB(235, 15, 93)
 
 // button text color
-#define DO_TITLE_TEXT_COLOR         DO_RGB(209, 247, 247)
+#define DO_TITLE_TEXT_COLOR         DO_RGB(255, 255, 255)
 #define DO_BUTTON_TEXT_COLOR        DO_RGB(255, 255, 255)
 #define DO_CANCEL_TEXT_COLOR        DO_RGB(255, 255, 255)
 #define DO_DESTRUCTIVE_TEXT_COLOR   DO_RGB(255, 255, 255)

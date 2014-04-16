@@ -76,6 +76,8 @@
 		AE61327B18EDC932008BE5FF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE61327A18EDC932008BE5FF /* CoreText.framework */; };
 		AE61328118EE0A4E008BE5FF /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61327E18EE0A4E008BE5FF /* SAMultisectorControl.m */; };
 		AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61328018EE0A4E008BE5FF /* SAMath.m */; };
+		AEB731E018FE01C500B3A63E /* LPPopupListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB731DD18FE01C500B3A63E /* LPPopupListView.m */; };
+		AEB731E118FE01C500B3A63E /* LPPopupListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB731DF18FE01C500B3A63E /* LPPopupListViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +197,10 @@
 		AE61327E18EE0A4E008BE5FF /* SAMultisectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMultisectorControl.m; sourceTree = "<group>"; };
 		AE61327F18EE0A4E008BE5FF /* SAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMath.h; sourceTree = "<group>"; };
 		AE61328018EE0A4E008BE5FF /* SAMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMath.m; sourceTree = "<group>"; };
+		AEB731DC18FE01C500B3A63E /* LPPopupListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPopupListView.h; sourceTree = "<group>"; };
+		AEB731DD18FE01C500B3A63E /* LPPopupListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPopupListView.m; sourceTree = "<group>"; };
+		AEB731DE18FE01C500B3A63E /* LPPopupListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPopupListViewCell.h; sourceTree = "<group>"; };
+		AEB731DF18FE01C500B3A63E /* LPPopupListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPopupListViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +369,7 @@
 		AE6131EA18E8C7A3008BE5FF /* timeWiser */ = {
 			isa = PBXGroup;
 			children = (
+				AEB731DB18FE01B000B3A63E /* PopUpView */,
 				AE5DFD0518F4682B00FA585A /* ActionSheet */,
 				AE5DFCD518F2719600FA585A /* Notification */,
 				AE5DFCBF18F1DB7800FA585A /* Keyboard */,
@@ -499,6 +506,18 @@
 			name = TimeSelection;
 			sourceTree = "<group>";
 		};
+		AEB731DB18FE01B000B3A63E /* PopUpView */ = {
+			isa = PBXGroup;
+			children = (
+				AEB731DC18FE01C500B3A63E /* LPPopupListView.h */,
+				AEB731DD18FE01C500B3A63E /* LPPopupListView.m */,
+				AEB731DE18FE01C500B3A63E /* LPPopupListViewCell.h */,
+				AEB731DF18FE01C500B3A63E /* LPPopupListViewCell.m */,
+			);
+			name = PopUpView;
+			path = ..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -629,6 +648,7 @@
 				AE61323B18EBBB0E008BE5FF /* SFRoundProgressLayer.m in Sources */,
 				AE61327918ED2206008BE5FF /* JVFloatLabeledTextView.m in Sources */,
 				AE61323918EBBB0E008BE5FF /* SFCounterLabel.m in Sources */,
+				AEB731E118FE01C500B3A63E /* LPPopupListViewCell.m in Sources */,
 				AE5DFD0418F271D900FA585A /* HexColor.m in Sources */,
 				AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */,
 				AE5DFCC818F1DDB900FA585A /* NSData+Base64.m in Sources */,
@@ -644,6 +664,7 @@
 				AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */,
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
 				AE5DFCDE18F271AC00FA585A /* TSMessageView.m in Sources */,
+				AEB731E018FE01C500B3A63E /* LPPopupListView.m in Sources */,
 				AE5DFCBA18F12D2A00FA585A /* JSQFlatButton.m in Sources */,
 				AE61326918ED1F26008BE5FF /* NSInvocation+Copy.m in Sources */,
 				AE5DFD0B18F4687200FA585A /* DoActionSheet.m in Sources */,

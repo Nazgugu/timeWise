@@ -73,10 +73,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
     //sector1.endValue = 1.0;
     //sector1.startValue = 0.0;
-    hours.endValue = 1.0;
+    hours.endValue = 0.0;
     hours.startValue = 0.0;
     minutes.startValue = 0.0;
-    minutes.endValue = 1.0;
+    minutes.endValue = 25.0;
     
     self.timeSelector.sectorsRadius = 60.0f;
     self.timeSelector.minCircleMarkerRadius = 5.0f;

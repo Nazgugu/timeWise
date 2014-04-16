@@ -9,16 +9,24 @@
 #import "ContentViewController.h"
 #import "UIColor+MLPFlatColors.h"
 #import "JSQFlatButton.h"
+#import "LPPopupListView.h"
+#import "CDAppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 /* 1000 is 1 second*/
-@interface ContentViewController ()<SFRoundProgressCounterViewDelegate>
+@interface ContentViewController ()<SFRoundProgressCounterViewDelegate, LPPopupListViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQFlatButton *controlButton;
 @property (weak, nonatomic) IBOutlet JSQFlatButton *resetButton;
 @property (weak, nonatomic) IBOutlet JSQFlatButton *titleButton;
+@property (strong, nonatomic) NSMutableArray *titles;
+@property (strong, nonatomic) NSMutableArray *objects;
+@property (strong, nonatomic) NSArray *selectedTask;
+@property (strong, nonatomic) LPPopupListView *taskView;
 @end
 
 @implementation ContentViewController
+@synthesize titles,objects,taskView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +45,35 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     //[self updateButtons];
+}
+
+- (void)fetchContents
+{
+    if (!titles)
+    {
+        titles = [[NSMutableArray alloc] init];
+    }
+    if (!objects)
+    {
+        objects = [[NSMutableArray alloc] init];
+    }
+    [self.titles removeAllObjects];
+    [self.objects removeAllObjects];
+    CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    NSPredicate *isCompleted = [NSPredicate predicateWithFormat:@"isCompleted == NO"];
+    [request setPredicate:isCompleted];
+    NSManagedObject *match = nil;
+    NSError *error = nil;
+    [objects addObjectsFromArray:[context executeFetchRequest:request error:&error]];
+    for (int i = 0; i < [objects count]; i++)
+    {
+        match = objects[i];
+        [titles addObject:[match valueForKey:@"title"]];
+    }
 }
 
 - (void)updateButtons
@@ -114,6 +151,42 @@
     [self updateButtons];
 }
 
+- (NSArray *)task
+{
+    [self fetchContents];
+    return [NSArray arrayWithArray:titles];
+}
+
+#pragma mark - LPPopupListViewDelegate
+- (void)popupListView:(LPPopupListView *)popupListView didSelectedIndex:(NSInteger)index
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isSelected"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"title"] forKey:@"title"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"details"] forKey:@"detail"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"minutes"] forKey:@"minutes"];
+    [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"hours"] forKey:@"hours"];
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isInProgress"] boolValue] == YES) {
+        NSData *urlData = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+        NSManagedObjectID *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:urlData];
+        if ([currentURL isEqual:[[[objects objectAtIndex:index] objectID] URIRepresentation]])
+        {
+            NSLog(@"Yep, we are the same");
+        }
+        else
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+            NSManagedObjectID *objectID = [[objects objectAtIndex:index] objectID];
+            NSURL *url = [objectID URIRepresentation];
+            NSData *newID = [NSKeyedArchiver archivedDataWithRootObject:url];
+            [[NSUserDefaults standardUserDefaults] setObject:newID forKey:@"taskID"];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self updateButtons];
+    [popupListView hideAnimated:YES];
+}
+
+
 #pragma mark = SFRoundProgressTimerViewDelegate
 - (void)countdownDidEnd:(SFRoundProgressCounterView*)progressTimerView
 {
@@ -183,6 +256,18 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
     {
         [self performSegueWithIdentifier:@"create" sender:sender];
+    }
+    else
+    {
+        //pop up view
+        float paddingTopBottom = 20.0f;
+        float paddingLeftRight = 20.0f;
+        CGPoint point = CGPointMake(paddingLeftRight, (self.navigationController.navigationBar.frame.size.height + paddingTopBottom) + paddingTopBottom * 4);
+        CGSize size = CGSizeMake((self.view.frame.size.width - (paddingLeftRight * 2)), self.view.frame.size.height - ((self.navigationController.navigationBar.frame.size.height + paddingTopBottom) + paddingTopBottom) + paddingTopBottom);
+        taskView = [[LPPopupListView alloc] initWithTitle:@"Select Task" list:[self task] selectedList:self.selectedTask point:point size:size multipleSelection:NO];
+        taskView.delegate = self;
+        taskView.closeAnimated = YES;
+        [taskView showInView:self.navigationController.view animated:YES];
     }
 }
 

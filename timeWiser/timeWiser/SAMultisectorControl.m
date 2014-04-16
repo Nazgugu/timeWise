@@ -121,7 +121,7 @@ typedef struct{
         SAMultisectorSector *sector = sectorsArray[i];
         NSUInteger position = i + 1;
         
-        if (sector.startValue < sector.endValue && sector.minValue < sector.maxValue) {
+        if (sector.startValue <= sector.endValue && sector.minValue < sector.maxValue) {
 
             SASectorDrawingInformation drawInf =[self sectorToDrawInf:sector position:position];
         
@@ -227,7 +227,7 @@ typedef struct{
     for(int i = 0; i < sectorsArray.count; i++){
         SAMultisectorSector *sector = sectorsArray[i];
         
-        if (sector.startValue < sector.endValue && sector.minValue < sector.maxValue) {
+        if (sector.startValue <= sector.endValue && sector.minValue < sector.maxValue) {
             [self drawSector:sector atPosition:i+1];
         }
         
