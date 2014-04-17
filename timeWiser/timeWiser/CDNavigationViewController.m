@@ -28,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIColor *barColor = [[UIColor flatWhiteColor] colorWithAlphaComponent:1.0f];
+    UIColor *barColor = [[UIColor flatWhiteColor] colorWithAlphaComponent:0.8f];
     self.navigationBar.backgroundColor = barColor;
     [[self navigationBar] setTranslucent:YES];
     // Do any additional setup after loading the view.

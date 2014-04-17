@@ -110,7 +110,7 @@
 #pragma mark - White
 + (UIColor *)flatWhiteColor
 {
-    return UIColorFromRGB(0xECF0F1);
+    return UIColorFromRGB(0xECF0F1); //0xECF0F1
 }
 
 + (UIColor *)flatDarkWhiteColor

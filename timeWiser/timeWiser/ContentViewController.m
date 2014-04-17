@@ -200,6 +200,8 @@
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSManagedObject *completetTask = [context objectWithID:objectID];
     [completetTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
+    NSDate *completeDate = [NSDate date];
+    [completetTask setValue:completeDate forKey:@"completeDate"];
     NSError *error = nil;
     [context save:&error];
     [self fetchContents];

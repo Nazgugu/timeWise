@@ -309,6 +309,8 @@
     NSManagedObject *tempTask = [objects objectAtIndex:indexPath.row];
     NSManagedObject *completeTask = [context objectWithID:tempTask.objectID];
     [completeTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
+    NSDate *completeTime = [NSDate date];
+    [completeTask setValue:completeTime forKey:@"completeDate"];
     NSError *error = nil;
     [context save:&error];
     NSData *currentTaskID = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];

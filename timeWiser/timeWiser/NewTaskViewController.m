@@ -266,6 +266,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [newTask setValue:self.titleField.text forKey:@"title"];
     [newTask setValue:self.descriptionField.text forKey:@"details"];
     [newTask setValue:[NSNumber numberWithBool:NO] forKey:@"isCompleted"];
+    [newTask setValue:nil forKey:@"completeDate"];
     NSError *error;
     [context save:&error];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO)
