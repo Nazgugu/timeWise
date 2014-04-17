@@ -226,7 +226,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                                            subtitle:@"Title Cannot Be Left Blank"
                                               image:nil
                                                type:TSMessageNotificationTypeWarning
-                                           duration:1.0
+                                           duration:1.2
                                            callback:nil
                                         buttonTitle:nil
                                      buttonCallback:nil
@@ -248,7 +248,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                                            subtitle:@"Time Duration Could Not Be Set To Zero"
                                               image:nil
                                                type:TSMessageNotificationTypeWarning
-                                           duration:1.0
+                                           duration:1.2
                                            callback:nil
                                         buttonTitle:nil
                                      buttonCallback:nil

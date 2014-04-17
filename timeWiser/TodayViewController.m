@@ -58,7 +58,7 @@
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDesc];
-    NSPredicate *todayTasks = [NSPredicate predicateWithFormat:@"(completeDate >= %@) AND (completeDate <= %@",startOfToday, endOfToday];
+    NSPredicate *todayTasks = [NSPredicate predicateWithFormat:@"((completeDate >= %@) AND (completeDate <= %@) && completeDate != nil)",startOfToday, endOfToday];
     [request setPredicate:todayTasks];
     NSError *error = nil;
     [self.objects addObjectsFromArray:[context executeFetchRequest:request error:&error]];
