@@ -13,6 +13,8 @@
 #import "UIColor+MLPFlatColors.h"
 #import "M13Checkbox.h"
 #import "DoActionSheet.h"
+#import "TSMessage.h"
+#import "CDViewController.h"
 
 @interface TasksViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -330,15 +332,35 @@
 - (void)selectTaskAtIndexPath:(NSIndexPath *)indexPath
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isSelected"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
-    NSManagedObjectID *objectID = [[objects objectAtIndex:indexPath.row] objectID];
-    NSURL *url = [objectID URIRepresentation];
-    NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
-    [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
-    [[NSUserDefaults standardUserDefaults] setObject:[self.titles objectAtIndex:indexPath.row] forKey:@"title"];
-    [[NSUserDefaults standardUserDefaults] setObject:[self.details objectAtIndex:indexPath.row] forKey:@"detail"];
-    [[NSUserDefaults standardUserDefaults] setObject:[self.minutes objectAtIndex:indexPath.row] forKey:@"minutes"];
-    [[NSUserDefaults standardUserDefaults] setObject:[self.hours objectAtIndex:indexPath.row] forKey:@"hours"];
+    NSManagedObject *tempTask = [objects objectAtIndex:indexPath.row];
+    NSData *currentTaskID = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+    NSURL *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:currentTaskID];
+    if ([currentURL isEqual:[[tempTask objectID] URIRepresentation]])
+    {
+        [TSMessage showNotificationInViewController:self.parentViewController.navigationController
+                                              title:@"Duplicate Selection"
+                                           subtitle:@"This task is already been selected"
+                                              image:nil
+                                               type:TSMessageNotificationTypeWarning
+                                           duration:1.2
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:nil
+                                         atPosition:TSMessageNotificationPositionTop
+                               canBeDismissedByUser:YES];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        NSManagedObjectID *objectID = [tempTask objectID];
+        NSURL *url = [objectID URIRepresentation];
+        NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
+        [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
+        [[NSUserDefaults standardUserDefaults] setObject:[self.titles objectAtIndex:indexPath.row] forKey:@"title"];
+        [[NSUserDefaults standardUserDefaults] setObject:[self.details objectAtIndex:indexPath.row] forKey:@"detail"];
+        [[NSUserDefaults standardUserDefaults] setObject:[self.minutes objectAtIndex:indexPath.row] forKey:@"minutes"];
+        [[NSUserDefaults standardUserDefaults] setObject:[self.hours objectAtIndex:indexPath.row] forKey:@"hours"];
+    }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -362,6 +384,17 @@
     [context deleteObject:[objects objectAtIndex:indexPath.row]];
     NSError *error = nil;
     [context save:&error];
+    [TSMessage showNotificationInViewController:self.parentViewController.navigationController
+                                          title:@"Done"
+                                       subtitle:@"The task has been deleted"
+                                          image:nil
+                                           type:TSMessageNotificationTypeError
+                                       duration:1.2
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                           canBeDismissedByUser:YES];
     [self deleteRowAtIndexPath:indexPath];
 }
 

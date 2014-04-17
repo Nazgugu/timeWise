@@ -257,6 +257,7 @@
 - (IBAction)controlAction:(id)sender {
     JSQFlatButton *button = (JSQFlatButton *)sender;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isInProgress"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     dispatch_async(dispatch_get_main_queue(), ^{
         // start
         if ([button.currentTitle isEqualToString:@"Start"]) {
@@ -289,7 +290,6 @@
             self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
         }
     });
-    
 }
 
 - (IBAction)actionReset:(id)sender {
