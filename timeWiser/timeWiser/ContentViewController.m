@@ -227,7 +227,7 @@
 #pragma mark = SFRoundProgressTimerViewDelegate
 - (void)countdownDidEnd:(SFRoundProgressCounterView*)progressTimerView
 {
-    [TSMessage showNotificationInViewController:self
+    [TSMessage showNotificationInViewController:self.parentViewController.navigationController
                                           title:@"Done !"
                                        subtitle:[NSString stringWithFormat:@"%@ is completed", self.titleButton.titleLabel.text]
                                           image:nil
@@ -302,6 +302,7 @@
     [self.resetButton setTintColor:[[UIColor flatYellowColor] colorWithAlphaComponent:0.8f]];
     [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
     [self.timeCounter reset];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)changeTask:(id)sender {
