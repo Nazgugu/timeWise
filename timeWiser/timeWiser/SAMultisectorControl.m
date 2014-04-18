@@ -9,8 +9,8 @@
 #import "SAMultisectorControl.h"
 #import "UIColor+MLPFlatColors.h"
 
-#define saCircleLineWidth 1.5
-#define saMarkersLineWidth 1.5
+#define saCircleLineWidth 0.7
+#define saMarkersLineWidth 0.5
 
 #define IS_OS_LOWER_7    ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
 
@@ -79,8 +79,8 @@ typedef struct{
     self.sectorsRadius = 45.0;
     self.backgroundColor = [UIColor clearColor];
     self.startAngle = toRadians(270);
-    self.minCircleMarkerRadius = 10.0;
-    self.maxCircleMarkerRadius = 30.0;
+    self.minCircleMarkerRadius = 4.0;
+    self.maxCircleMarkerRadius = 7.0;
     self.numbersAfterPoint = 0;
 }
 
@@ -302,13 +302,13 @@ typedef struct{
     
     //drawing start marker's text
     [self drawString:startMarkerStr
-            withFont:[UIFont boldSystemFontOfSize:drawInf.startMarkerFontSize]
+            withFont:[UIFont fontWithName:@"AvenirNext-UltraLight" size:drawInf.startMarkerFontSize]
                color:[circleColor colorWithAlphaComponent:drawInf.startMarkerAlpha]
           withCenter:drawInf.startMarkerCenter];
     
     //drawing end marker's text
     [self drawString:endMarkerStr
-            withFont:[UIFont boldSystemFontOfSize:drawInf.endMarkerFontize]
+            withFont:[UIFont fontWithName:@"AvenirNext-UltraLight" size:drawInf.endMarkerFontize]
                color:[circleColor colorWithAlphaComponent:drawInf.endMarkerAlpha]
           withCenter:drawInf.endMarkerCenter];
 }
@@ -333,8 +333,8 @@ typedef struct{
     drawInf.startMarkerCenter = polarToDecart(drawInf.circleCenter, drawInf.radius, drawInf.circleOffsetAngle);
     drawInf.endMarkerCenter = polarToDecart(drawInf.circleCenter, drawInf.radius, drawInf.circleLineAngle);
     
-    CGFloat minMarkerRadius = self.sectorsRadius / 4.0;
-    CGFloat maxMarkerRadius = self.sectorsRadius / 2.0;
+    CGFloat minMarkerRadius = self.sectorsRadius / 5.0;
+    CGFloat maxMarkerRadius = self.sectorsRadius / 3.0;
     
     drawInf.startMarkerRadius = ((drawInf.circleOffsetAngle/(self.startAngle + 2*M_PI)) * (maxMarkerRadius - minMarkerRadius)) + minMarkerRadius;
     drawInf.endMarkerRadius = ((drawInf.circleLineAngle/(self.startAngle + 2*M_PI)) * (maxMarkerRadius - minMarkerRadius)) + minMarkerRadius;

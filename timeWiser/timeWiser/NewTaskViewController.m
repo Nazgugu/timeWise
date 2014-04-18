@@ -77,10 +77,25 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     hours.startValue = 0.0;
     minutes.startValue = 0.0;
     minutes.endValue = 25.0;
-    
-    self.timeSelector.sectorsRadius = 60.0f;
-    self.timeSelector.minCircleMarkerRadius = 5.0f;
-    self.timeSelector.maxCircleMarkerRadius = 10.0f;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    if (screenHeight == 480)
+    {
+        NSLog(@"I am a 3.5inch screen");
+        NSLog(@"screen height = %f",screenHeight);
+        self.timeSelector.sectorsRadius = 43.0f;
+    }
+    else
+    {
+        NSLog(@"I am a 4 inch screen");
+        NSLog(@"screen height = %f",screenHeight);
+        self.timeSelector.sectorsRadius = 60.0f;
+    }
+    NSLog(@"radius = %f", self.timeSelector.sectorsRadius);
+    NSLog(@"height = %lf, width = %lf",self.timeSelector.frame.size.height, self.timeSelector.frame.size.width);
+    self.timeSelector.minCircleMarkerRadius = 4.0f;
+    self.timeSelector.maxCircleMarkerRadius = 7.0f;
+    NSLog(@"min marker radius = %lf, max = %lf",self.timeSelector.minCircleMarkerRadius, self.timeSelector.maxCircleMarkerRadius);
     //[self.timeSelector addSector:sector1];
     [self.timeSelector addSector:hours];
     [self.timeSelector addSector:minutes];
@@ -214,7 +229,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     //self.keyboardControls.doneButton.tintColor = [UIColor blueColor];
     [self setupDesign];
     [self setupTimeSelector];
-    
     //[titleField becomeFirstResponder];
 }
 - (IBAction)addTask:(id)sender {
