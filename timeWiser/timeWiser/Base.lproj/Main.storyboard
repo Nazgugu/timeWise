@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D43" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Exb-HD-8Bk">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--New Task View Controller-->
@@ -13,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="DLE-F3-7Di"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OaZ-em-yHi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQ4-e6-iKg">
@@ -195,7 +196,7 @@
                         <viewControllerLayoutGuide type="bottom" id="XXa-0f-bFM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OQu-Vx-baW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -217,7 +218,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="TasksViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IR8-PS-3Ho" customClass="TasksViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="95" sectionHeaderHeight="22" sectionFooterHeight="22" id="tfo-Ba-3zC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -341,7 +342,7 @@
                         <viewControllerLayoutGuide type="bottom" id="TN7-yO-2Gw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JBf-vc-HOP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -360,17 +361,29 @@
                         <viewControllerLayoutGuide type="bottom" id="p4G-B8-Ilt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7l6-1z-A32">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <userGuides>
+                            <userLayoutGuide location="480" affinity="minY"/>
+                        </userGuides>
                         <subviews>
-                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuU-Ji-wiu" customClass="SFRoundProgressCounterView">
-                                <rect key="frame" x="15" y="120" width="290" height="290"/>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RuU-Ji-wiu" customClass="SFRoundProgressCounterView">
+                                <rect key="frame" x="13" y="125" width="294" height="295"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="UAU-6I-8c4"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="280" id="dIz-ra-g59"/>
+                                    <constraint firstAttribute="width" secondItem="RuU-Ji-wiu" secondAttribute="height" multiplier="1:1" constant="-1" id="tbP-UH-a93"/>
+                                </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zla-uV-ebQ" customClass="JSQFlatButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zla-uV-ebQ" customClass="JSQFlatButton">
                                 <rect key="frame" x="245" y="35" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="RdX-qA-L2L"/>
+                                    <constraint firstAttribute="width" constant="65" id="m2i-cz-99b"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" red="0.1803921568627451" green="0.80000000000000004" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
@@ -380,9 +393,13 @@
                                     <action selector="controlAction:" destination="WKB-nT-uja" eventType="touchUpInside" id="ela-qG-IOd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goU-rM-aJi" customClass="JSQFlatButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goU-rM-aJi" customClass="JSQFlatButton">
                                 <rect key="frame" x="10" y="35" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="2hl-xu-gwh"/>
+                                    <constraint firstAttribute="width" constant="65" id="C7Z-IG-Ps6"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <state key="normal" title="Reset">
                                     <color key="titleColor" red="0.94509803921568625" green="0.76862745098039209" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
@@ -392,9 +409,13 @@
                                     <action selector="actionReset:" destination="WKB-nT-uja" eventType="touchUpInside" id="gG6-QI-pWA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="KpP-PO-r0N" customClass="JSQFlatButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="KpP-PO-r0N" customClass="JSQFlatButton">
                                 <rect key="frame" x="83" y="45" width="154" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="NWU-5s-D2p"/>
+                                    <constraint firstAttribute="height" constant="45" id="oxl-f6-mIa"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.58431372549019611" green="0.6470588235294118" blue="0.65098039215686276" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
@@ -406,6 +427,19 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KpP-PO-r0N" firstAttribute="leading" secondItem="7l6-1z-A32" secondAttribute="leading" constant="83" id="0K9-hm-EbG"/>
+                            <constraint firstItem="goU-rM-aJi" firstAttribute="leading" secondItem="7l6-1z-A32" secondAttribute="leading" constant="10" id="48I-sn-EEE"/>
+                            <constraint firstItem="KpP-PO-r0N" firstAttribute="top" secondItem="l9Y-AK-YKe" secondAttribute="bottom" constant="25" id="EHa-EE-Itw"/>
+                            <constraint firstAttribute="centerX" secondItem="RuU-Ji-wiu" secondAttribute="centerX" id="Xb4-qx-YFT"/>
+                            <constraint firstItem="goU-rM-aJi" firstAttribute="centerY" secondItem="KpP-PO-r0N" secondAttribute="centerY" id="bN0-tU-6LQ"/>
+                            <constraint firstItem="p4G-B8-Ilt" firstAttribute="top" secondItem="RuU-Ji-wiu" secondAttribute="bottom" priority="500" constant="60" id="ekv-a0-7zV"/>
+                            <constraint firstAttribute="trailing" secondItem="KpP-PO-r0N" secondAttribute="trailing" constant="83" id="lsZ-Ei-chm"/>
+                            <constraint firstItem="RuU-Ji-wiu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="l9Y-AK-YKe" secondAttribute="bottom" priority="750" constant="80" id="mYf-Rg-vHl"/>
+                            <constraint firstAttribute="trailing" secondItem="Zla-uV-ebQ" secondAttribute="trailing" constant="10" id="nFO-6P-QY5"/>
+                            <constraint firstItem="RuU-Ji-wiu" firstAttribute="top" secondItem="KpP-PO-r0N" secondAttribute="bottom" priority="500" constant="35" id="nWp-eh-Twm"/>
+                            <constraint firstItem="Zla-uV-ebQ" firstAttribute="centerY" secondItem="KpP-PO-r0N" secondAttribute="centerY" id="rpP-Pk-zKy"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kAx-m0-sTp"/>
                     <connections>
@@ -424,9 +458,9 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MLq-QL-iHK"/>
+        <segue reference="RkO-fU-JXy"/>
     </inferredMetricsTieBreakers>
 </document>
