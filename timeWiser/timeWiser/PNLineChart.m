@@ -112,7 +112,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self];
     
-    for (int p = (int)(_pathPoints.count - 1); p >= 0; p--) {
+    for (int p =  (int)_pathPoints.count - 1; p >= 0; p--) {
         NSArray *linePointsArray = _pathPoints[p];
         
         for (int i = 0; i < linePointsArray.count - 1; i += 1) {
@@ -144,7 +144,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self];
     
-    for (int p = (int)(_pathPoints.count - 1); p >= 0; p--) {
+    for (int p = (int)_pathPoints.count - 1; p >= 0; p--) {
         NSArray *linePointsArray = _pathPoints[p];
         
         for (int i = 0; i < linePointsArray.count - 1; i += 1) {

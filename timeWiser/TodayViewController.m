@@ -7,13 +7,21 @@
 //
 
 #import "TodayViewController.h"
-#import "NSDate+MTDates.h"
 #import "CDAppDelegate.h"
+#import "UIColor+MLPFlatColors.h"
+#import "NSDate+MTDates.h"
+#import "PNChart.h"
+
 
 @interface TodayViewController ()
+{
+    NSArray *colorArray;
+}
 @property (strong, nonatomic) NSMutableArray *titles;
 @property (strong, nonatomic) NSMutableArray *times;
+@property (weak, nonatomic) IBOutlet PNBarChart *TaskChart;
 @property (strong, nonatomic) NSMutableArray *objects;
+@property (strong, nonatomic) NSMutableArray *colors;
 //@property (strong, nonatomic) NSMutableArray *hours;
 //@property (strong, nonatomic) NSMutableArray *minutes;
 @end
@@ -31,7 +39,46 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self fetchContents];
+    [self updateChart];
+}
+
+- (void)loadView
+{
+    [super loadView];
+    [self fetchContents];
+    self.TaskChart.backgroundColor = [UIColor clearColor];
+    self.TaskChart.barBackgroundColor = PNLightGrey;;
+}
+
+- (void)updateChart
+{
+    self.TaskChart.showLabel = YES;
+    [self.TaskChart setXLabels:self.titles];
+    [self.TaskChart setYValues:self.times];
+    NSLog(@"tasks are: %@",self.titles);
+    if (!self.colors)
+    {
+        _colors = [[NSMutableArray alloc] init];
+    }
+    [self.colors removeAllObjects];
+    int index;
+    for (int i = 0; i < [self.objects count]; i++)
+    {
+        index = i % 7;
+        [self.colors addObject:[colorArray objectAtIndex:index]];
+    }
+    [self.TaskChart setStrokeColors:self.colors];
+    [self.TaskChart strokeChart];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self fetchContents];
+    colorArray = [[NSArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
+    [self updateChart];
 }
 
 - (void)fetchContents
@@ -66,12 +113,12 @@
     //then do the calculation of time and put things in array
     if ([self.objects count] == 0)
     {
-        
+        NSLog(@"No task done yet");
     }
     else
     {
         //in here you should setup the bars or dots in the chart
-        
+        NSLog(@"I have done some tasks");
         //put things into places
         for (int i = 0; i < [self.objects count]; i++)
         {
@@ -85,18 +132,6 @@
     }
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self fetchContents];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 /*
 #pragma mark - Navigation

@@ -68,8 +68,9 @@
 {
     [self viewCleanupForCollection:_labels];
     _xLabels = xLabels;
-
+    NSLog(@"I am setting labels");
     if (_showLabel) {
+        NSLog(@"I am here");
         _xLabelWidth = (self.frame.size.width - chartMargin*2)/[xLabels count];
 
         for(int index = 0; index < xLabels.count; index++)
@@ -77,6 +78,7 @@
             NSString* labelText = xLabels[index];
             PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin), self.frame.size.height - 30.0, _xLabelWidth, 20.0)];
             [label setTextAlignment:NSTextAlignmentCenter];
+            NSLog(@"this name is: %@",labelText);
             label.text = labelText;
             [_labels addObject:label];
             [self addSubview:label];

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PNChartDelegate.h"
 
 @interface TodayViewController : UIViewController
 

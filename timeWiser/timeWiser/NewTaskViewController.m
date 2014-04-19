@@ -89,7 +89,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     {
         NSLog(@"I am a 4 inch screen");
         NSLog(@"screen height = %f",screenHeight);
-        self.timeSelector.sectorsRadius = 60.0f;
+        self.timeSelector.sectorsRadius = 64.0f;
     }
     NSLog(@"radius = %f", self.timeSelector.sectorsRadius);
     NSLog(@"height = %lf, width = %lf",self.timeSelector.frame.size.height, self.timeSelector.frame.size.width);

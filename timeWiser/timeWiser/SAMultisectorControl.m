@@ -9,8 +9,8 @@
 #import "SAMultisectorControl.h"
 #import "UIColor+MLPFlatColors.h"
 
-#define saCircleLineWidth 0.7
-#define saMarkersLineWidth 0.5
+#define saCircleLineWidth 1.0
+#define saMarkersLineWidth 1.0
 
 #define IS_OS_LOWER_7    ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
 
@@ -302,13 +302,13 @@ typedef struct{
     
     //drawing start marker's text
     [self drawString:startMarkerStr
-            withFont:[UIFont fontWithName:@"AvenirNext-UltraLight" size:drawInf.startMarkerFontSize]
+            withFont:[UIFont fontWithName:@"Avenir Next" size:drawInf.startMarkerFontSize]
                color:[circleColor colorWithAlphaComponent:drawInf.startMarkerAlpha]
           withCenter:drawInf.startMarkerCenter];
     
     //drawing end marker's text
     [self drawString:endMarkerStr
-            withFont:[UIFont fontWithName:@"AvenirNext-UltraLight" size:drawInf.endMarkerFontize]
+            withFont:[UIFont fontWithName:@"Avenir Next" size:drawInf.endMarkerFontize]
                color:[circleColor colorWithAlphaComponent:drawInf.endMarkerAlpha]
           withCenter:drawInf.endMarkerCenter];
 }
@@ -333,7 +333,7 @@ typedef struct{
     drawInf.startMarkerCenter = polarToDecart(drawInf.circleCenter, drawInf.radius, drawInf.circleOffsetAngle);
     drawInf.endMarkerCenter = polarToDecart(drawInf.circleCenter, drawInf.radius, drawInf.circleLineAngle);
     
-    CGFloat minMarkerRadius = self.sectorsRadius / 5.0;
+    CGFloat minMarkerRadius = self.sectorsRadius / 5.0 + 4.0f;
     CGFloat maxMarkerRadius = self.sectorsRadius / 3.0;
     
     drawInf.startMarkerRadius = ((drawInf.circleOffsetAngle/(self.startAngle + 2*M_PI)) * (maxMarkerRadius - minMarkerRadius)) + minMarkerRadius;
