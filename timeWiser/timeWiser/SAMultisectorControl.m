@@ -317,7 +317,7 @@ typedef struct{
 - (SASectorDrawingInformation) sectorToDrawInf:(SAMultisectorSector *)sector position:(NSInteger)position{
     SASectorDrawingInformation drawInf;
     
-    drawInf.circleCenter = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height /2);
+    drawInf.circleCenter = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height /2 + 5.0);
     drawInf.radius = self.sectorsRadius * position;
     
     drawInf.fullLine = sector.maxValue - sector.minValue;
