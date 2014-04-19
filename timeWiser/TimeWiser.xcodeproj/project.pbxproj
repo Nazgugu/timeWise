@@ -417,7 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				AE4EB24E18FF60F20013CA4E /* Date&Time */,
-				AEB731E618FE548100B3A63E /* CharView */,
+				AEB731E618FE548100B3A63E /* ChartView */,
 				AEB731DB18FE01B000B3A63E /* PopUpView */,
 				AE5DFD0518F4682B00FA585A /* ActionSheet */,
 				AE5DFCD518F2719600FA585A /* Notification */,
@@ -567,7 +567,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		AEB731E618FE548100B3A63E /* CharView */ = {
+		AEB731E618FE548100B3A63E /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
 				AE7826E719024CC500A30145 /* UICountingLabel.h */,
@@ -591,7 +591,7 @@
 				AE7826DD19024CBA00A30145 /* PNLineChartDataItem.h */,
 				AE7826DE19024CBA00A30145 /* PNLineChartDataItem.m */,
 			);
-			name = CharView;
+			name = ChartView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -840,7 +840,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -872,7 +872,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -886,6 +886,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = TimeWiser;
 				WRAPPER_EXTENSION = app;
 			};
@@ -899,6 +900,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = TimeWiser;
 				WRAPPER_EXTENSION = app;
 			};

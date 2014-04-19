@@ -14,6 +14,7 @@
 @interface PNBarChart() {
     NSMutableArray* _bars;
     NSMutableArray* _labels;
+    NSMutableArray* _timeLabels;
 }
 
 - (UIColor *)barColorAtIndex:(NSUInteger)index;
@@ -32,6 +33,7 @@
         _barBackgroundColor  = PNLightGrey;
         _labels              = [NSMutableArray array];
         _bars                = [NSMutableArray array];
+        _timeLabels          = [NSMutableArray array];
     }
 
     return self;
@@ -48,10 +50,12 @@
 -(void)setYLabels:(NSArray *)yLabels
 {
     NSInteger max = 0;
-    for (NSString * valueString in yLabels) {
-        NSInteger value = [valueString integerValue];
-        if (value > max) {
-            max = value;
+    for (NSNumber *value in yLabels) {
+        //NSLog(@"number here is %@",value);
+        NSInteger valueInt = [value integerValue];
+        //NSLog(@"integer is %d",valueInt);
+        if (valueInt > max) {
+            max = valueInt;
         }
 
     }
@@ -64,23 +68,50 @@
     _yValueMax = (int)max;
 }
 
+- (void)setTimeLabel:(NSArray *)timeLabel
+{
+    [self viewCleanupForCollection:_timeLabels];
+    _timeLabel = timeLabel;
+    if (_showLabel)
+    {
+        _xLabelWidth = (self.frame.size.width - chartMargin*2)/[timeLabel count];
+    }
+    for(int index = 0; index < timeLabel.count; index++)
+    {
+        PNChartLabel *timeLabel = [[PNChartLabel alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin), self.frame.size.height - 30.0, _xLabelWidth, 20.0)];
+        [timeLabel setTextAlignment:NSTextAlignmentCenter];
+        //NSLog(@"%@",timeLabel.text);
+        timeLabel.text = [NSString stringWithFormat:@"%d mins",[[self.timeLabel objectAtIndex:index] intValue]];
+        //NSLog(@"here %@",timeLabel.text);
+        [_timeLabels addObject:timeLabel];
+        [self addSubview:timeLabel];
+    }
+}
+
 -(void)setXLabels:(NSArray *)xLabels
 {
     [self viewCleanupForCollection:_labels];
     _xLabels = xLabels;
-    NSLog(@"I am setting labels");
+    //NSLog(@"I am setting labels");
     if (_showLabel) {
-        NSLog(@"I am here");
+        //NSLog(@"I am here");
         _xLabelWidth = (self.frame.size.width - chartMargin*2)/[xLabels count];
 
         for(int index = 0; index < xLabels.count; index++)
         {
+            //NSLog(@"# of xlables = %d",xLabels.count);
             NSString* labelText = xLabels[index];
-            PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin), self.frame.size.height - 30.0, _xLabelWidth, 20.0)];
+            PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin), self.frame.size.height - 50.0, _xLabelWidth, 20.0)];
             [label setTextAlignment:NSTextAlignmentCenter];
-            NSLog(@"this name is: %@",labelText);
-            label.text = labelText;
+            
+            //NSLog(@"this name is: %@",labelText);
+            NSString *description = [NSString stringWithFormat:@"%@",labelText];
+            //NSLog(@"%d mins",[self.yValues[index] intValue]);
+            label.text = description;
+            
+            
             [_labels addObject:label];
+            
             [self addSubview:label];
         }
     }
@@ -94,7 +125,7 @@
 -(void)strokeChart
 {
     [self viewCleanupForCollection:_bars];
-    CGFloat chartCavanHeight = self.frame.size.height - chartMargin * 2 - 40.0;
+    CGFloat chartCavanHeight = self.frame.size.height - chartMargin * 2 - 30.0;
     NSInteger index = 0;
 
     for (NSString * valueString in _yValues) {
@@ -103,7 +134,7 @@
         float grade = (float)value / (float)_yValueMax;
         PNBar * bar;
         if (_showLabel) {
-            bar = [[PNBar alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin + _xLabelWidth * 0.25), self.frame.size.height - chartCavanHeight - 30.0, _xLabelWidth * 0.5, chartCavanHeight)];
+            bar = [[PNBar alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin + _xLabelWidth * 0.25), self.frame.size.height - chartCavanHeight - 50.0, _xLabelWidth * 0.5, chartCavanHeight)];
         }else{
             bar = [[PNBar alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin + _xLabelWidth * 0.25), self.frame.size.height - chartCavanHeight , _xLabelWidth * 0.6, chartCavanHeight)];
         }

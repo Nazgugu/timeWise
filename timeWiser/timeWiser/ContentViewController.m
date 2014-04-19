@@ -115,6 +115,7 @@
     }
     else
     {
+        [self.titleButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forState:UIControlStateNormal];
         NSLog(@"I am in Progress");
     }
 }

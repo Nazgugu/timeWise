@@ -22,7 +22,7 @@
         [self setFont:[UIFont fontWithName:@"Avenir Next" size:11.0f]];
         [self setTextColor: PNDeepGrey];
         self.backgroundColor = [UIColor clearColor];
-        [self setTextAlignment:NSTextAlignmentLeft];
+        [self setTextAlignment:NSTextAlignmentCenter];
         self.userInteractionEnabled = YES;
     }
     return self;

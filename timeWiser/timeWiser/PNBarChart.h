@@ -27,6 +27,8 @@
 
 @property (strong, nonatomic) NSArray * yValues;
 
+@property (strong, nonatomic) NSArray * timeLabel;
+
 @property (nonatomic) CGFloat xLabelWidth;
 
 @property (nonatomic) int yValueMax;

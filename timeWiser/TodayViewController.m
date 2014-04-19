@@ -56,8 +56,10 @@
 {
     self.TaskChart.showLabel = YES;
     [self.TaskChart setXLabels:self.titles];
+    [self.TaskChart setTimeLabel:self.times];
+    //NSLog(@"times = %@",self.times);
     [self.TaskChart setYValues:self.times];
-    NSLog(@"tasks are: %@",self.titles);
+    //NSLog(@"tasks are: %@",self.titles);
     if (!self.colors)
     {
         _colors = [[NSMutableArray alloc] init];
@@ -113,12 +115,12 @@
     //then do the calculation of time and put things in array
     if ([self.objects count] == 0)
     {
-        NSLog(@"No task done yet");
+        //NSLog(@"No task done yet");
     }
     else
     {
         //in here you should setup the bars or dots in the chart
-        NSLog(@"I have done some tasks");
+        //NSLog(@"I have done some tasks");
         //put things into places
         for (int i = 0; i < [self.objects count]; i++)
         {

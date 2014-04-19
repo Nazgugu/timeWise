@@ -47,10 +47,10 @@
 
     NSArray *widthAndHeight = [spec componentsSeparatedByString: @"x"];
     if ([widthAndHeight count] == 1) {
-        return [self resizedImageByWidth: [spec longLongValue]];
+        return [self resizedImageByWidth: [spec intValue]];
     }
     if ([[widthAndHeight objectAtIndex: 0] isEqualToString: @""]) {
-        return [self resizedImageByHeight: [[widthAndHeight objectAtIndex: 1] longLongValue]];
+        return [self resizedImageByHeight: [[widthAndHeight objectAtIndex: 1] intValue]];
     }
     return [self resizedImageWithMaximumSize: CGSizeMake ([[widthAndHeight objectAtIndex: 0] intValue],
                                                           [[widthAndHeight objectAtIndex: 1] intValue])];
