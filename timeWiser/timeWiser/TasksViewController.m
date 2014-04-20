@@ -52,8 +52,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self fetchContents];
-    [self.taskTable reloadData];
+    //[self fetchContents];
+    //[self.taskTable reloadData];
 }
 
 - (void)fetchContents
@@ -142,7 +142,7 @@
     self.taskTable.backgroundColor = [UIColor flatWhiteColor];
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self fetchContents];
+    //[self fetchContents];
 }
 
 - (void)didReceiveMemoryWarning

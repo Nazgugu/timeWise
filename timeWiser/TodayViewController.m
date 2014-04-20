@@ -39,15 +39,18 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"view will appear is called");
     [super viewWillAppear:animated];
+    [self.TaskChart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self fetchContents];
     [self updateChart];
 }
 
 - (void)loadView
 {
+    NSLog(@"load view is called");
     [super loadView];
-    [self fetchContents];
+    //[self fetchContents];
     self.TaskChart.backgroundColor = [UIColor clearColor];
     self.TaskChart.barBackgroundColor = PNLightGrey;;
 }
@@ -55,10 +58,8 @@
 - (void)updateChart
 {
     self.TaskChart.showLabel = YES;
-    [self.TaskChart setXLabels:self.titles];
-    [self.TaskChart setTimeLabel:self.times];
+    
     //NSLog(@"times = %@",self.times);
-    [self.TaskChart setYValues:self.times];
     //NSLog(@"tasks are: %@",self.titles);
     if (!self.colors)
     {
@@ -72,15 +73,19 @@
         [self.colors addObject:[colorArray objectAtIndex:index]];
     }
     [self.TaskChart setStrokeColors:self.colors];
+    [self.TaskChart setXLabels:self.titles];
+    [self.TaskChart setTimeLabel:self.times];
+    [self.TaskChart setYValues:self.times];
     [self.TaskChart strokeChart];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self fetchContents];
+    NSLog(@"view did load is called");
+    //[self fetchContents];
     colorArray = [[NSArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
-    [self updateChart];
+    //[self updateChart];
 }
 
 - (void)fetchContents

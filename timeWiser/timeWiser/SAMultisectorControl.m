@@ -365,16 +365,10 @@ typedef struct{
     CGFloat x = center.x - (size.width / 2);
     CGFloat y = center.y - (size.height / 2);
     CGRect textRect = CGRectMake(x, y, size.width, size.height);
-    
-    if(IS_OS_LOWER_7){
-        [color set];
-        [s drawInRect:textRect withFont:font];
-    }else{
-        NSMutableDictionary *attr = [NSMutableDictionary new];
-        attr[NSFontAttributeName] = font;
-        attr[NSForegroundColorAttributeName] = color;
-        [s drawInRect:textRect withAttributes:attr];
-    }
+    NSMutableDictionary *attr = [NSMutableDictionary new];
+    attr[NSFontAttributeName] = font;
+    attr[NSForegroundColorAttributeName] = color;
+    [s drawInRect:textRect withAttributes:attr];
 }
 
 

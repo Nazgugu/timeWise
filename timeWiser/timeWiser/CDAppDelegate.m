@@ -132,7 +132,11 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    application.applicationIconBadgeNumber = 0;
+    [application cancelAllLocalNotifications];
     NSString *taskTitle = [notification.userInfo objectForKey:@"title"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self showAlertWithTitle:taskTitle];
 }
 

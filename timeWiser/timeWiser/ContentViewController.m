@@ -51,10 +51,11 @@
 
 - (void)fireUpLocalNotification
 {
-    NSLog(@"can you see me?");
-    NSLog(@"at quit time, the time left is %lld seconds",self.value / 1000);
+    //NSLog(@"can you see me?");
+    //NSLog(@"at quit time, the time left is %lld seconds",self.value / 1000);
     if (([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES) && ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES))
     {
+        NSLog(@"I have something running");
         UILocalNotification *taskCompletion = [[UILocalNotification alloc] init];
         if (taskCompletion)
         {
@@ -140,7 +141,7 @@
     else
     {
         [self.titleButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forState:UIControlStateNormal];
-        NSLog(@"I am in Progress");
+        //NSLog(@"I am in Progress");
     }
 }
 
@@ -202,7 +203,7 @@
         NSManagedObjectID *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:urlData];
         if ([currentURL isEqual:[[[objects objectAtIndex:index] objectID] URIRepresentation]])
         {
-            NSLog(@"Yep, we are the same");
+            //NSLog(@"Yep, we are the same");
         }
         else
         {
@@ -255,12 +256,13 @@
 #pragma mark = SFRoundProgressTimerViewDelegate
 - (void)countdownDidEnd:(SFRoundProgressCounterView*)progressTimerView
 {
+    NSLog(@"count down ended");
     [TSMessage showNotificationInViewController:self.parentViewController.navigationController
                                           title:@"Done !"
                                        subtitle:[NSString stringWithFormat:@"%@ is completed", self.titleButton.titleLabel.text]
                                           image:nil
                                            type:TSMessageNotificationTypeSuccess
-                                       duration:0.5
+                                       duration:1.5
                                        callback:nil
                                     buttonTitle:nil
                                  buttonCallback:nil
@@ -282,9 +284,10 @@
 }
 
 
-/*- (void)intervalDidEnd:(SFRoundProgressCounterView *)progressTimerView WithIntervalPosition:(int)position
+- (void)intervalDidEnd:(SFRoundProgressCounterView *)progressTimerView WithIntervalPosition:(int)position
 {
-}*/
+    NSLog(@"position = %d", position);
+}
 
 
 - (IBAction)controlAction:(id)sender {
