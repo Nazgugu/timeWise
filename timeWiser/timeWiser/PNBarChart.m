@@ -146,15 +146,15 @@
 
         index += 1;
     }
-    NSLog(@"number of bars = %lu",(unsigned long)[_bars count]);
-    NSLog(@"number of labels = %lu",(unsigned long)[_timeLabel count]);
-    NSLog(@"number of xlabels = %lu",(unsigned long)[_labels count]);
-    NSLog(@"number of yvalues = %lu",(unsigned long)[self.yValues count]);
+    //NSLog(@"number of bars = %lu",(unsigned long)[_bars count]);
+    //NSLog(@"number of labels = %lu",(unsigned long)[_timeLabel count]);
+    //NSLog(@"number of xlabels = %lu",(unsigned long)[_labels count]);
+    //NSLog(@"number of yvalues = %lu",(unsigned long)[self.yValues count]);
 }
 
 - (void)viewCleanupForCollection:(NSMutableArray*)array
 {
-    NSLog(@"I am cleaning up");
+    //NSLog(@"I am cleaning up");
     if (array.count) {
         [array makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [array removeAllObjects];

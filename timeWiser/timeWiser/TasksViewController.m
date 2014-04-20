@@ -46,14 +46,20 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self fetchContents];
-    [self.taskTable reloadData];
+    NSLog(@"view appeared");
+    [self refresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     //[self fetchContents];
     //[self.taskTable reloadData];
+}
+
+- (void)refresh
+{
+    [self fetchContents];
+    [self.taskTable reloadData];
 }
 
 - (void)fetchContents
@@ -138,6 +144,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"taskComplete" object:nil];
     colorArray = [[NSMutableArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
     self.taskTable.backgroundColor = [UIColor flatWhiteColor];
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.

@@ -39,7 +39,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"view will appear is called");
+    //NSLog(@"view will appear is called");
     [super viewWillAppear:animated];
     [self.TaskChart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self fetchContents];
@@ -48,7 +48,7 @@
 
 - (void)loadView
 {
-    NSLog(@"load view is called");
+    //NSLog(@"load view is called");
     [super loadView];
     //[self fetchContents];
     self.TaskChart.backgroundColor = [UIColor clearColor];
@@ -82,7 +82,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"view did load is called");
+    //NSLog(@"view did load is called");
     //[self fetchContents];
     colorArray = [[NSArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
     //[self updateChart];

@@ -10,6 +10,9 @@
 #import "BlurryModalSegue.h"
 
 @implementation CDAppDelegate
+{
+    NSMutableArray *objects;
+}
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModal = _managedObjectModal;
@@ -120,30 +123,104 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
     }
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    application.applicationIconBadgeNumber = 0;
-    [application cancelAllLocalNotifications];
-    // Override point for customization after application launch.
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+    }
+    
+    NSLog(@"did finish launching");
+    if (application.applicationIconBadgeNumber != 0)
+    {
+        //NSString *taskTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"title"];
+        //[self showAlertWithTitle:taskTitle];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+        NSLog(@"I have fired a local notification");
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
+        {
+            [self showAlertWithTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"]];
+            NSManagedObjectContext *context = [self managedObjectContext];
+            NSData *idData = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+            NSURL *idURL = [NSKeyedUnarchiver unarchiveObjectWithData:idData];
+            NSManagedObjectID *objectID = [[context persistentStoreCoordinator] managedObjectIDForURIRepresentation:idURL];
+            [self completeTaskWithID:objectID];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+        }
+    }
+    
+        // Override point for customization after application launch.
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(1.0)];
     [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.45]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     return YES;
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    NSLog(@"did receive local notification");
     application.applicationIconBadgeNumber = 0;
     [application cancelAllLocalNotifications];
     NSString *taskTitle = [notification.userInfo objectForKey:@"title"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [self showAlertWithTitle:taskTitle];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
+    {
+        NSManagedObjectContext *context = [self managedObjectContext];
+        NSData *idData = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
+        NSURL *idURL = [NSKeyedUnarchiver unarchiveObjectWithData:idData];
+        NSManagedObjectID *objectID = [[context persistentStoreCoordinator] managedObjectIDForURIRepresentation:idURL];
+        [self completeTaskWithID:objectID];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)showAlertWithTitle:(NSString *)title
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Done!" message:[NSString stringWithFormat:@"%@ is completed!",title] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
+}
+
+- (void)completeTaskWithID:(NSManagedObjectID *)objectID
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *completetTask = [context objectWithID:objectID];
+    [completetTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
+    NSDate *completeDate = [NSDate date];
+    [completetTask setValue:completeDate forKey:@"completeDate"];
+    NSError *error = nil;
+    [context save:&error];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    NSPredicate *isCompleted = [NSPredicate predicateWithFormat:@"isCompleted == NO"];
+    [request setPredicate:isCompleted];
+    if (!objects)
+    {
+        objects = [[NSMutableArray alloc] init];
+    }
+    [objects removeAllObjects];
+    [objects addObjectsFromArray:[context executeFetchRequest:request error:&error]];
+    if ([objects count] == 0)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"title"] forKey:@"title"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"details"] forKey:@"detail"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"minutes"] forKey:@"minutes"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:[objects count] - 1] valueForKey:@"hours"] forKey:@"hours"];
+        NSManagedObjectID *objectID = [[objects objectAtIndex:[objects count] - 1] objectID];
+        NSURL *url = [objectID URIRepresentation];
+        NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
+        [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskComplete" object:self];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -164,16 +241,32 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"did become active");
+    if (application.applicationIconBadgeNumber != 0)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"taskComplete" object:self];
+    }
+    [application cancelAllLocalNotifications];
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"will terminate");
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isTerminated"];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

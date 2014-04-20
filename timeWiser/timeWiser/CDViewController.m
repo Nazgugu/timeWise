@@ -107,7 +107,7 @@
     cvc.timeCounter.innerCircleThickness = [NSNumber numberWithDouble:1.0f];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == NO)
     {
-        NSLog(@"I am not empty");
+        //NSLog(@"I am not empty");
         int minutes = [[[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"] intValue];
         int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
         long time = (minutes * 60 + hours * 3600) * 1000;

@@ -55,7 +55,8 @@
     //NSLog(@"at quit time, the time left is %lld seconds",self.value / 1000);
     if (([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES) && ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES))
     {
-        NSLog(@"I have something running");
+        //NSLog(@"I have something running");
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
         UILocalNotification *taskCompletion = [[UILocalNotification alloc] init];
         if (taskCompletion)
         {
@@ -63,7 +64,7 @@
             taskCompletion.fireDate = [fireDate dateByAddingTimeInterval:self.value/1000];
             taskCompletion.timeZone = [NSTimeZone defaultTimeZone];
             taskCompletion.alertBody = [NSString stringWithFormat:@"%@ is done! Come check the statistics of today!",[[NSUserDefaults standardUserDefaults] objectForKey:@"title"]];
-            taskCompletion.alertAction = @"Task Complete";
+            taskCompletion.alertAction = @"Check Out";
             taskCompletion.soundName = UILocalNotificationDefaultSoundName;
             taskCompletion.applicationIconBadgeNumber = 1;
             NSDictionary *titleInfo = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forKey:@"title"];
@@ -95,6 +96,11 @@
     NSManagedObject *match = nil;
     NSError *error = nil;
     [objects addObjectsFromArray:[context executeFetchRequest:request error:&error]];
+    if ([objects count] == 0)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     for (int i = 0; i < [objects count]; i++)
     {
         match = objects[i];
@@ -148,6 +154,7 @@
 - (void)loadView
 {
     [super loadView];
+    [self fetchContents];
     [self updateButtons];
 }
 
@@ -256,7 +263,8 @@
 #pragma mark = SFRoundProgressTimerViewDelegate
 - (void)countdownDidEnd:(SFRoundProgressCounterView*)progressTimerView
 {
-    NSLog(@"count down ended");
+    //NSLog(@"count down ended");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskComplete" object:self];
     [TSMessage showNotificationInViewController:self.parentViewController.navigationController
                                           title:@"Done !"
                                        subtitle:[NSString stringWithFormat:@"%@ is completed", self.titleButton.titleLabel.text]
