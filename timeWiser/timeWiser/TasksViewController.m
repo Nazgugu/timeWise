@@ -104,6 +104,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isEmpty"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
     }
     else
     {
@@ -116,7 +117,7 @@
             [self.minutes addObject:[matches valueForKey:@"minutes"]];
             [self.hours addObject:[matches valueForKey:@"hours"]];
         }
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO)
+        if (([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == NO) && ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == NO))
         {
             //save the object ID
             NSManagedObjectID *objID = [[objects objectAtIndex:[objects count] - 1] objectID];
@@ -128,6 +129,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:[self.minutes objectAtIndex:[objects count] - 1] forKey:@"minutes"];
             [[NSUserDefaults standardUserDefaults] setObject:[self.hours objectAtIndex:[objects count] - 1] forKey:@"hours"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"]; //set isEmpty to no
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
         }
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -320,6 +322,7 @@
     if ([currentURL isEqual:[[tempTask objectID] URIRepresentation]])
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
         {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
@@ -352,6 +355,7 @@
     else
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
         NSManagedObjectID *objectID = [tempTask objectID];
         NSURL *url = [objectID URIRepresentation];
         NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
@@ -373,6 +377,7 @@
     if ([currentURL isEqual:[[tempTask objectID] URIRepresentation]])
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
         {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];

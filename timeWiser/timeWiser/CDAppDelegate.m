@@ -14,15 +14,12 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModal = _managedObjectModal;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
 - (void)saveContext
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Failed to load persistent store: %@\n%@", [error localizedDescription], [error userInfo]);
             abort();
         }
@@ -119,19 +116,39 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"taskID"];
     }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"running"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+    }
     [[NSUserDefaults standardUserDefaults] synchronize];
+    application.applicationIconBadgeNumber = 0;
+    [application cancelAllLocalNotifications];
     // Override point for customization after application launch.
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(1.0)];
     [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.45]];
     return YES;
 }
-							
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    NSString *taskTitle = [notification.userInfo objectForKey:@"title"];
+    [self showAlertWithTitle:taskTitle];
+}
+
+- (void)showAlertWithTitle:(NSString *)title
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Done!" message:[NSString stringWithFormat:@"%@ is completed!",title] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"goingToBackground" object:self];
 }
+
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {

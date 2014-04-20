@@ -8,6 +8,7 @@
 
 #import "PNChartLabel.h"
 #import "PNColor.h"
+#import "UIColor+MLPFlatColors.h"
 
 @implementation PNChartLabel
 
@@ -20,7 +21,7 @@
         [self setMinimumScaleFactor:11.0f];
         [self setNumberOfLines:0];
         [self setFont:[UIFont fontWithName:@"Avenir Next" size:11.0f]];
-        [self setTextColor: PNDeepGrey];
+        [self setTextColor: [UIColor flatBlackColor]];
         self.backgroundColor = [UIColor clearColor];
         [self setTextAlignment:NSTextAlignmentCenter];
         self.userInteractionEnabled = YES;

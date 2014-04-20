@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *titles;
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSArray *selectedTask;
+@property (nonatomic) unsigned long long value;
 @property (strong, nonatomic) LPPopupListView *taskView;
 @end
 
@@ -46,6 +47,29 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     //[self updateButtons];
+}
+
+- (void)fireUpLocalNotification
+{
+    NSLog(@"can you see me?");
+    NSLog(@"at quit time, the time left is %lld seconds",self.value / 1000);
+    if (([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES) && ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES))
+    {
+        UILocalNotification *taskCompletion = [[UILocalNotification alloc] init];
+        if (taskCompletion)
+        {
+            NSDate *fireDate = [NSDate date];
+            taskCompletion.fireDate = [fireDate dateByAddingTimeInterval:self.value/1000];
+            taskCompletion.timeZone = [NSTimeZone defaultTimeZone];
+            taskCompletion.alertBody = [NSString stringWithFormat:@"%@ is done! Come check the statistics of today!",[[NSUserDefaults standardUserDefaults] objectForKey:@"title"]];
+            taskCompletion.alertAction = @"Task Complete";
+            taskCompletion.soundName = UILocalNotificationDefaultSoundName;
+            taskCompletion.applicationIconBadgeNumber = 1;
+            NSDictionary *titleInfo = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forKey:@"title"];
+            taskCompletion.userInfo = titleInfo;
+            [[UIApplication sharedApplication] scheduleLocalNotification:taskCompletion];
+        }
+    }
 }
 
 - (void)fetchContents
@@ -129,6 +153,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fireUpLocalNotification) name:@"goingToBackground" object:nil];
     NSNumber *defaultInt = [NSNumber numberWithLong:0.0];
     self.timeCounter.intervals = @[defaultInt];
     // Do any additional setup after loading the view.
@@ -182,6 +207,7 @@
         else
         {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
             NSManagedObjectID *objectID = [[objects objectAtIndex:index] objectID];
             NSURL *url = [objectID URIRepresentation];
             NSData *newID = [NSKeyedArchiver archivedDataWithRootObject:url];
@@ -196,6 +222,7 @@
 - (void)completeTaskWithObjectID:(NSManagedObjectID *)objectID
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
     CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -249,6 +276,11 @@
     });
 }
 
+- (void)counter:(SFRoundProgressCounterView *)progressCounterView didReachValue:(unsigned long long)value
+{
+    self.value = value;
+}
+
 
 /*- (void)intervalDidEnd:(SFRoundProgressCounterView *)progressTimerView WithIntervalPosition:(int)position
 {
@@ -259,9 +291,10 @@
     JSQFlatButton *button = (JSQFlatButton *)sender;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isInProgress"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
         // start
         if ([button.currentTitle isEqualToString:@"Start"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"running"];
             [self.timeCounter start];
             [self.controlButton setTitle:@"Pause" forState:UIControlStateNormal];
             [self.controlButton setTitleColor:[[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
@@ -271,7 +304,7 @@
             self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
             // stop
         } else if ([button.currentTitle isEqualToString:@"Pause"]) {
-            
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
             [self.timeCounter stop];
             [self.controlButton setTitle:@"Resume" forState:UIControlStateNormal];
             [self.controlButton setTitleColor:[[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
@@ -281,7 +314,7 @@
             [self.controlButton setTintColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f]];
             // resume
         } else {
-            
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"running"];
             [self.timeCounter resume];
             [self.controlButton setTitle:@"Pause" forState:UIControlStateNormal];
             [self.controlButton setTitleColor:[[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
@@ -295,6 +328,7 @@
 
 - (IBAction)actionReset:(id)sender {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
     [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
     [self.controlButton setTitleColor:[[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
     [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];

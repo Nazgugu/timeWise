@@ -81,21 +81,21 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     CGFloat screenHeight = screenRect.size.height;
     if (screenHeight == 480)
     {
-        NSLog(@"I am a 3.5inch screen");
-        NSLog(@"screen height = %f",screenHeight);
+        //NSLog(@"I am a 3.5inch screen");
+        //NSLog(@"screen height = %f",screenHeight);
         self.timeSelector.sectorsRadius = 43.0f;
     }
     else
     {
-        NSLog(@"I am a 4 inch screen");
-        NSLog(@"screen height = %f",screenHeight);
+        //NSLog(@"I am a 4 inch screen");
+        //NSLog(@"screen height = %f",screenHeight);
         self.timeSelector.sectorsRadius = 64.0f;
     }
-    NSLog(@"radius = %f", self.timeSelector.sectorsRadius);
-    NSLog(@"height = %lf, width = %lf",self.timeSelector.frame.size.height, self.timeSelector.frame.size.width);
+    //NSLog(@"radius = %f", self.timeSelector.sectorsRadius);
+   // NSLog(@"height = %lf, width = %lf",self.timeSelector.frame.size.height, self.timeSelector.frame.size.width);
     self.timeSelector.minCircleMarkerRadius = 4.0f;
     self.timeSelector.maxCircleMarkerRadius = 7.0f;
-    NSLog(@"min marker radius = %lf, max = %lf",self.timeSelector.minCircleMarkerRadius, self.timeSelector.maxCircleMarkerRadius);
+    //NSLog(@"min marker radius = %lf, max = %lf",self.timeSelector.minCircleMarkerRadius, self.timeSelector.maxCircleMarkerRadius);
     //[self.timeSelector addSector:sector1];
     [self.timeSelector addSector:hours];
     [self.timeSelector addSector:minutes];
@@ -296,11 +296,13 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
             NSURL *url = [objID URIRepresentation];
             NSData *urlData = [NSKeyedArchiver archivedDataWithRootObject:url];
             [[NSUserDefaults standardUserDefaults] setObject:urlData forKey:@"taskID"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isEmpty"]; //set isEmpty to No
             [[NSUserDefaults standardUserDefaults] setObject:self.titleField.text forKey:@"title"];
             [[NSUserDefaults standardUserDefaults] setObject:self.descriptionField.text forKey:@"detail"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setMin] forKey:@"minutes"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(int)self.setHr] forKey:@"hours"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
         }
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
