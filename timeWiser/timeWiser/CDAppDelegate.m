@@ -128,13 +128,13 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
     }
     
-    NSLog(@"did finish launching");
+    //NSLog(@"did finish launching");
     if (application.applicationIconBadgeNumber != 0)
     {
         //NSString *taskTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"title"];
         //[self showAlertWithTitle:taskTitle];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
-        NSLog(@"I have fired a local notification");
+        //NSLog(@"I have fired a local notification");
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
         {
             [self showAlertWithTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"]];
@@ -157,7 +157,7 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    NSLog(@"did receive local notification");
+    //NSLog(@"did receive local notification");
     application.applicationIconBadgeNumber = 0;
     [application cancelAllLocalNotifications];
     NSString *taskTitle = [notification.userInfo objectForKey:@"title"];
@@ -247,7 +247,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    NSLog(@"did become active");
+    //NSLog(@"did become active");
     if (application.applicationIconBadgeNumber != 0)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"taskComplete" object:self];
@@ -259,7 +259,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    NSLog(@"will terminate");
+    //NSLog(@"will terminate");
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES)
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isTerminated"];

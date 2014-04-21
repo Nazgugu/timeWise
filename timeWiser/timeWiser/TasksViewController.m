@@ -46,7 +46,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"view appeared");
+    //NSLog(@"view appeared");
     [self refresh];
 }
 
@@ -147,9 +147,37 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"taskComplete" object:nil];
     colorArray = [[NSMutableArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
     self.taskTable.backgroundColor = [UIColor flatWhiteColor];
+    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    infoLabel.backgroundColor = [UIColor clearColor];
+    infoLabel.font = [UIFont fontWithName:@"Avenir Next" size:14.0f];
+    infoLabel.textColor = [UIColor flatGrayColor];
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.text = @"Pull To Add Task";
+    self.taskTable.tableHeaderView = infoLabel;
+    [self.taskTable setContentInset:UIEdgeInsetsMake(-infoLabel.bounds.size.height, 0.0f, 0.0f, 0.0f)];
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     //[self fetchContents];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView.contentOffset.y < -25)
+    {
+        NSLog(@"Hi , I am under here");
+        [self performSegueWithIdentifier:@"newTask" sender:nil];
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        //self.taskTable.contentInset = UIEdgeInsetsMake(40, 0, 0, 0);
+        [UIView commitAnimations];
+    }
+    else
+    {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        [UIView commitAnimations];
+    }
 }
 
 - (void)didReceiveMemoryWarning
