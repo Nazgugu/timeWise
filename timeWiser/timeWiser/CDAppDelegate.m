@@ -162,6 +162,7 @@
     else
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"activeDate"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isTerminated"];
         //NSLog(@"no notification");
         //NSLog(@"time left = %d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"] intValue]);
     }
@@ -279,7 +280,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    //NSLog(@"will terminate");
+    NSLog(@"will terminate");
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskTerminated" object:self];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES)
     {

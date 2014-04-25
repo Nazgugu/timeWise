@@ -53,6 +53,8 @@
 {
     //NSLog(@"can you see me?");
     //NSLog(@"at quit time, the time left is %lld seconds",self.value / 1000);
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithUnsignedLongLong:self.value] forKey:@"timeLeft"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if (([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES) && ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES))
     {
         //NSLog(@"I have something running");
@@ -115,7 +117,7 @@
 {
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == NO)
     {
-        NSLog(@"not in progress");
+        //NSLog(@"not in progress");
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isEmpty"] boolValue] == YES)
         {
             self.controlButton.enabled = NO;
@@ -143,7 +145,7 @@
             int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
             long time = (minutes * 60 + hours * 3600) * 1000;
             self.intervals = @[[NSNumber numberWithLong:time]];
-            NSLog(@"number = %d",[self.intervals count]);
+            //NSLog(@"number = %d",[self.intervals count]);
             [self.titleButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forState:UIControlStateNormal];
             [self.timeCounter reset];
         }
@@ -191,7 +193,7 @@
                 self.controlButton.highlightedBorderColor = [[UIColor flatDarkGreenColor] colorWithAlphaComponent:0.8f];
                 [self.controlButton setTitle:@"Resume" forState:UIControlStateNormal];
                 long time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"] longValue];
-                NSLog(@"timeLeft time = %ld",time);
+                //NSLog(@"timeLeft time = %ld",time);
                 self.intervals = @[[NSNumber numberWithLong:time]];
                 [self.timeCounter reset];
             }
