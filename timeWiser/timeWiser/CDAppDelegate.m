@@ -127,13 +127,25 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
     }
-    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithUnsignedLongLong:0] forKey:@"timeLeft"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"endDate"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"endDate"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"activeDate"];
+    }
     //NSLog(@"did finish launching");
+    //if the task is completed while the application is terminated
     if (application.applicationIconBadgeNumber != 0)
     {
         //NSString *taskTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"title"];
         //[self showAlertWithTitle:taskTitle];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+        //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
         //NSLog(@"I have fired a local notification");
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
         {
@@ -146,8 +158,14 @@
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
         }
     }
-    
-        // Override point for customization after application launch.
+    //implement handler to handle situation when task is not completed after reentering the app from an terminated state and the
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"activeDate"];
+        //NSLog(@"no notification");
+        //NSLog(@"time left = %d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"] intValue]);
+    }
+    // Override point for customization after application launch.
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(8)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(1.0)];
     [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.45]];
@@ -227,7 +245,9 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"goingToBackground" object:self];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"goingToBackground" object:self];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"endDate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -260,13 +280,14 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     //NSLog(@"will terminate");
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES)
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskTerminated" object:self];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES)
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isTerminated"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
+    //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
 }
 
 @end

@@ -164,7 +164,7 @@
 {
     if (scrollView.contentOffset.y < -25)
     {
-        NSLog(@"Hi , I am under here");
+        //NSLog(@"Hi , I am under here");
         [self performSegueWithIdentifier:@"newTask" sender:nil];
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
@@ -358,6 +358,7 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
         {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
@@ -413,6 +414,7 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isSelected"] boolValue] == YES)
         {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
