@@ -13,6 +13,7 @@
 #import "CDAppDelegate.h"
 #import "TSMessage.h"
 #import <QuartzCore/QuartzCore.h>
+#import <AVFoundation/AVFoundation.h>
 
 /* 1000 is 1 second*/
 @interface ContentViewController ()<SFRoundProgressCounterViewDelegate, LPPopupListViewDelegate>
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSArray *selectedTask;
 @property (nonatomic) unsigned long long value;
+@property (strong, nonatomic) AVAudioPlayer *completionAudio;
 @property (strong, nonatomic) LPPopupListView *taskView;
 @end
 
@@ -247,7 +249,19 @@
     self.titleButton.normalBorderColor = [[UIColor flatGrayColor] colorWithAlphaComponent:0.8f];
     self.titleButton.highlightedBorderColor = [[UIColor flatDarkGrayColor] colorWithAlphaComponent:0.8f];
     self.value = 0;
+    [self.completionAudio prepareToPlay];
     //[self updateButtons];
+}
+
+#pragma mark - audio
+- (AVAudioPlayer *) completionAudio
+{
+    if (!_completionAudio)
+    {
+        NSURL *audioURL = [NSURL fileURLWithPath:([[NSBundle mainBundle] pathForResource:@"doublebeep" ofType:@"mp3"])];
+        _completionAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+    }
+    return _completionAudio;
 }
 
 - (NSArray *)task
@@ -324,6 +338,7 @@
 - (void)countdownDidEnd:(SFRoundProgressCounterView*)progressTimerView
 {
     //NSLog(@"count down ended");
+    [self.completionAudio play];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskComplete" object:self];
     [TSMessage showNotificationInViewController:self.parentViewController.navigationController
                                           title:@"Done !"

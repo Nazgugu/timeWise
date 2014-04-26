@@ -123,10 +123,6 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
     }
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"])
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
-    }
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"])
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithUnsignedLongLong:0] forKey:@"timeLeft"];
@@ -138,6 +134,14 @@
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"])
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"activeDate"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isTerminated"];
     }
     //NSLog(@"did finish launching");
     //if the task is completed while the application is terminated
@@ -162,7 +166,6 @@
     else
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"activeDate"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isTerminated"];
         //NSLog(@"no notification");
         //NSLog(@"time left = %d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"] intValue]);
     }
@@ -271,6 +274,7 @@
     //NSLog(@"did become active");
     if (application.applicationIconBadgeNumber != 0)
     {
+        [self showAlertWithTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"taskComplete" object:self];
     }
     [application cancelAllLocalNotifications];

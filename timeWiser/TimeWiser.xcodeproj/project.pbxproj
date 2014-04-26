@@ -90,6 +90,9 @@
 		AEB731E118FE01C500B3A63E /* LPPopupListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB731DF18FE01C500B3A63E /* LPPopupListViewCell.m */; };
 		AED3BD6419007B75004501BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE6131F618E8C7A3008BE5FF /* Main.storyboard */; };
 		AED3BD6619007F89004501BF /* TimeWiserTest-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AED3BD6519007F89004501BF /* TimeWiserTest-Info.plist */; };
+		AEDD545A190AEE1600EB1DBD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD5459190AEE1600EB1DBD /* AVFoundation.framework */; };
+		AEDD545D190B3A0C00EB1DBD /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEDD545B190B3A0C00EB1DBD /* beep.mp3 */; };
+		AEDD545E190B3A0C00EB1DBD /* doublebeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEDD545C190B3A0C00EB1DBD /* doublebeep.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +240,9 @@
 		AEB731DF18FE01C500B3A63E /* LPPopupListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPopupListViewCell.m; sourceTree = "<group>"; };
 		AED3BD62190079E5004501BF /* TimeWiser-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TimeWiser-Info.plist"; sourceTree = "<group>"; };
 		AED3BD6519007F89004501BF /* TimeWiserTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "TimeWiserTest-Info.plist"; path = "../timeWiserTests/TimeWiserTest-Info.plist"; sourceTree = "<group>"; };
+		AEDD5459190AEE1600EB1DBD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AEDD545B190B3A0C00EB1DBD /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
+		AEDD545C190B3A0C00EB1DBD /* doublebeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = doublebeep.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEDD545A190AEE1600EB1DBD /* AVFoundation.framework in Frameworks */,
 				AE5DFCA818EFD5E900FA585A /* SystemConfiguration.framework in Frameworks */,
 				AE5DFCA318EF791500FA585A /* CoreData.framework in Frameworks */,
 				AE61327B18EDC932008BE5FF /* CoreText.framework in Frameworks */,
@@ -400,6 +407,7 @@
 		AE6131E318E8C7A3008BE5FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEDD5459190AEE1600EB1DBD /* AVFoundation.framework */,
 				AE5DFCA718EFD5E900FA585A /* SystemConfiguration.framework */,
 				AE5DFCA218EF791500FA585A /* CoreData.framework */,
 				AE61327A18EDC932008BE5FF /* CoreText.framework */,
@@ -441,6 +449,8 @@
 		AE6131EB18E8C7A3008BE5FF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AEDD545B190B3A0C00EB1DBD /* beep.mp3 */,
+				AEDD545C190B3A0C00EB1DBD /* doublebeep.mp3 */,
 				AED3BD62190079E5004501BF /* TimeWiser-Info.plist */,
 				AE6131F318E8C7A3008BE5FF /* CDAppDelegate.h */,
 				AE6131F418E8C7A3008BE5FF /* CDAppDelegate.m */,
@@ -673,6 +683,7 @@
 			files = (
 				AED3BD6419007B75004501BF /* Main.storyboard in Resources */,
 				AE5DFCF518F271C200FA585A /* NotificationBackgroundMessage.png in Resources */,
+				AEDD545D190B3A0C00EB1DBD /* beep.mp3 in Resources */,
 				AE5DFCFA18F271C200FA585A /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
 				AE5DFD0118F271C200FA585A /* TSMessagesDefaultDesign.json in Resources */,
 				AE6131FD18E8C7A3008BE5FF /* Images.xcassets in Resources */,
@@ -680,6 +691,7 @@
 				AE5DFD0018F271C200FA585A /* NotificationButtonBackground@2x.png in Resources */,
 				AE5DFCFC18F271C200FA585A /* NotificationBackgroundWarning@2x.png in Resources */,
 				AE5DFCF418F271C200FA585A /* NotificationBackgroundErrorIcon@2x.png in Resources */,
+				AEDD545E190B3A0C00EB1DBD /* doublebeep.mp3 in Resources */,
 				AED3BD6619007F89004501BF /* TimeWiserTest-Info.plist in Resources */,
 				AE5DFCFF18F271C200FA585A /* NotificationButtonBackground.png in Resources */,
 				AE5DFCF218F271C200FA585A /* NotificationBackgroundError@2x.png in Resources */,
@@ -946,6 +958,80 @@
 			};
 			name = Release;
 		};
+		AEDD5456190AE71300EB1DBD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		AEDD5457190AE71300EB1DBD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
+				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = TimeWiser;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
+		AEDD5458190AE71300EB1DBD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TimeWiser.app/TimeWiser";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TimeWiserTests/TimeWiserTests-Info.plist";
+				PRODUCT_NAME = TimeWiserTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -953,6 +1039,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE61321118E8C7A3008BE5FF /* Debug */,
+				AEDD5456190AE71300EB1DBD /* Distribution */,
 				AE61321218E8C7A3008BE5FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -962,6 +1049,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE61321418E8C7A3008BE5FF /* Debug */,
+				AEDD5457190AE71300EB1DBD /* Distribution */,
 				AE61321518E8C7A3008BE5FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -971,6 +1059,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE61321718E8C7A3008BE5FF /* Debug */,
+				AEDD5458190AE71300EB1DBD /* Distribution */,
 				AE61321818E8C7A3008BE5FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

@@ -17,11 +17,17 @@
 {
     NSArray *colorArray;
 }
+@property (weak, nonatomic) IBOutlet UIButton *previousPageButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextPageButton;
 @property (strong, nonatomic) NSMutableArray *titles;
 @property (strong, nonatomic) NSMutableArray *times;
 @property (weak, nonatomic) IBOutlet PNBarChart *TaskChart;
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSMutableArray *colors;
+@property (strong, nonatomic) NSMutableArray *showingTitles;
+@property (strong, nonatomic) NSMutableArray *showingTime;
+@property (nonatomic) NSUInteger currentPageNumber;
+@property (nonatomic) NSUInteger totalPageNumber;
 //@property (strong, nonatomic) NSMutableArray *hours;
 //@property (strong, nonatomic) NSMutableArray *minutes;
 @end
@@ -37,13 +43,35 @@
     return self;
 }
 
+- (IBAction)previousPage:(id)sender {
+    NSLog(@"go back");
+    self.currentPageNumber -= 1;
+    if (self.currentPageNumber < 1)
+    {
+        self.currentPageNumber = 1;
+        return;
+    }
+    //implement this to get the correct tasks to show on the page
+    [self updateChartWithPage:self.currentPageNumber];
+}
+
+- (IBAction)nextPage:(id)sender {
+    NSLog(@"go next");
+    self.currentPageNumber += 1;
+    if (self.currentPageNumber > self.totalPageNumber)
+    {
+        self.currentPageNumber = self.totalPageNumber;
+        return;
+    }
+    [self updateChartWithPage:self.currentPageNumber];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     //NSLog(@"view will appear is called");
     [super viewWillAppear:animated];
-    [self.TaskChart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self fetchContents];
-    [self updateChart];
+    [self updateChartWithPage:1];
 }
 
 - (void)loadView
@@ -55,29 +83,68 @@
     self.TaskChart.barBackgroundColor = PNLightGrey;;
 }
 
-- (void)updateChart
+- (void)updateChartWithPage:(NSUInteger)pageNumber
 {
     self.TaskChart.showLabel = YES;
     
     //NSLog(@"times = %@",self.times);
     //NSLog(@"tasks are: %@",self.titles);
-    if (!self.colors)
+    if (!_colors)
     {
         _colors = [[NSMutableArray alloc] init];
     }
+    if (!_showingTime)
+    {
+        _showingTime = [[NSMutableArray alloc] init];
+    }
+    if (!_showingTitles)
+    {
+        _showingTitles = [[NSMutableArray alloc] init];
+    }
     [self.colors removeAllObjects];
+    [self.showingTitles removeAllObjects];
+    [self.showingTime removeAllObjects];
     int index;
-    for (int i = 0; i < [self.objects count]; i++)
+    NSRange range;
+    if ([self.objects count] < 7)
+    {
+            [self.showingTitles addObjectsFromArray:self.titles];
+            [self.showingTime addObjectsFromArray:self.times];
+    }
+    else
+    {
+        NSUInteger startingLocation = (pageNumber - 1) * 7;
+        NSUInteger endingLocation = startingLocation + 6;
+        range.location = startingLocation;
+        if ((startingLocation + endingLocation) > [self.objects count])
+        {
+            range.length = [self.objects count] % 7;
+        }
+        else
+        {
+            range.length = 7;
+        }
+        [self.showingTitles addObjectsFromArray:[self.titles subarrayWithRange:range]];
+        [self.showingTime addObjectsFromArray:[self.times subarrayWithRange:range]];
+    }
+    for (int i = 0; i < [self.showingTitles count]; i++)
     {
         index = i % 7;
         [self.colors addObject:[colorArray objectAtIndex:index]];
     }
-    [self.TaskChart setStrokeColors:self.colors];
-    [self.TaskChart setXLabels:self.titles];
-    [self.TaskChart setTimeLabel:self.times];
-    [self.TaskChart setYValues:self.times];
-    [self.TaskChart strokeChart];
-}
+    [UIView transitionWithView:self.TaskChart
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.TaskChart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+                    } completion:^(BOOL finished){
+                        [self.TaskChart setStrokeColors:self.colors];
+                        [self.TaskChart setXLabels:self.showingTitles];
+                        [self.TaskChart setTimeLabel:self.showingTime];
+                        [self.TaskChart setYValues:self.showingTime];
+                        [self.TaskChart strokeChart];
+                    }];
+    }
 
 - (void)viewDidLoad
 {
@@ -121,12 +188,18 @@
     if ([self.objects count] == 0)
     {
         //NSLog(@"No task done yet");
+        self.previousPageButton.enabled = NO;
+        self.nextPageButton.enabled = NO;
+        self.totalPageNumber = 1;
+        self.currentPageNumber = 1;
     }
     else
     {
         //in here you should setup the bars or dots in the chart
         //NSLog(@"I have done some tasks");
         //put things into places
+        self.previousPageButton.enabled = YES;
+        self.nextPageButton.enabled = YES;
         for (int i = 0; i < [self.objects count]; i++)
         {
             match = self.objects[i];
@@ -135,6 +208,17 @@
             int hours = [[match valueForKey:@"hours"] intValue];
             NSNumber *totalMinutes = [NSNumber numberWithInt:minutes + hours * 60];
             [self.times addObject:totalMinutes];
+        }
+        NSUInteger remainder = [self.objects count] % 7;
+        if (remainder == 0)
+        {
+            self.totalPageNumber = [self.objects count] / 7;
+            self.currentPageNumber = 1;
+        }
+        else
+        {
+            self.totalPageNumber = ([self.objects count] - remainder) / 7 + 1;
+            self.currentPageNumber = 1;
         }
     }
 }

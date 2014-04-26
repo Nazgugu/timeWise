@@ -15,6 +15,7 @@
 #import "DoActionSheet.h"
 #import "TSMessage.h"
 #import "CDViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface TasksViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) NSMutableArray *hours;
 @property (nonatomic) NSInteger numberOfItems;
 @property (nonatomic) BOOL hasNoTask;
+@property (strong, nonatomic) AVAudioPlayer *completionAudio;
 @property (strong, nonatomic) NSMutableArray *objects;
 @end
 
@@ -155,10 +157,23 @@
     infoLabel.text = @"Pull To Add Task";
     self.taskTable.tableHeaderView = infoLabel;
     [self.taskTable setContentInset:UIEdgeInsetsMake(-infoLabel.bounds.size.height, 0.0f, 0.0f, 0.0f)];
+    [self.completionAudio prepareToPlay];
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     //[self fetchContents];
 }
+
+#pragma mark - audio
+- (AVAudioPlayer *) completionAudio
+{
+    if (!_completionAudio)
+    {
+        NSURL *audioURL = [NSURL fileURLWithPath:([[NSBundle mainBundle] pathForResource:@"doublebeep" ofType:@"mp3"])];
+        _completionAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+    }
+    return _completionAudio;
+}
+
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
@@ -347,6 +362,17 @@
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSManagedObject *tempTask = [objects objectAtIndex:indexPath.row];
     NSManagedObject *completeTask = [context objectWithID:tempTask.objectID];
+    [TSMessage showNotificationInViewController:self.parentViewController.navigationController
+                                          title:@"Done"
+                                       subtitle:[NSString stringWithFormat:@"%@ is completed!",[tempTask valueForKey:@"title"]]
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:1.5
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                           canBeDismissedByUser:YES];
     [completeTask setValue:[NSNumber numberWithBool:YES] forKey:@"isCompleted"];
     NSDate *completeTime = [NSDate date];
     [completeTask setValue:completeTime forKey:@"completeDate"];
@@ -365,6 +391,7 @@
         }
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.completionAudio play];
     [self deleteRowAtIndexPath:indexPath];
 }
 
