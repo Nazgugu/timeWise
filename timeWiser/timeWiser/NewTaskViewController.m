@@ -127,6 +127,47 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [self updateDataView];
 }
 
+- (IBAction)textFieldInputDidChange:(id)sender
+{
+    if ([sender isKindOfClass:[JVFloatLabeledTextField class]])
+    {
+        if ([self.titleField.text isEqualToString:@""])
+        {
+            if (self.isShortCut)
+            {
+                if (self.shortCutNum < 4)
+                {
+                    switch (self.shortCutNum) {
+                        case 0:
+                        {
+                            [self performSelector:@selector(typeSelected:) withObject:self.workButton];
+                            break;
+                        }
+                        case 1:
+                        {
+                            [self performSelector:@selector(typeSelected:) withObject:self.playButton];
+                            break;
+                        }
+                        case 2:
+                        {
+                            [self performSelector:@selector(typeSelected:) withObject:self.sportButton];
+                            break;
+                        }
+                        case 3:
+                        {
+                            [self performSelector:@selector(typeSelected:) withObject:self.cookButton];
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -154,7 +195,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     //titleField.leftView = leftView;
     //titleField.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:self.titleField];
-    
+    [self.titleField addTarget:self action:@selector(textFieldInputDidChange:) forControlEvents:UIControlEventEditingChanged];
     UIView *div1 = [UIView new];
     div1.frame = CGRectMake(kJVFieldHMargin, self.titleField.frame.origin.y + self.titleField.frame.size.height,
                             self.view.frame.size.width - 2 * kJVFieldHMargin, 1.0f);
@@ -567,6 +608,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     }
     return YES;
 }
+
+
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
