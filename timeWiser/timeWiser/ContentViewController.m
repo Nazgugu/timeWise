@@ -27,6 +27,7 @@
 @property (nonatomic) unsigned long long value;
 @property (strong, nonatomic) AVAudioPlayer *completionAudio;
 @property (strong, nonatomic) LPPopupListView *taskView;
+@property (nonatomic) BOOL trigger;
 @end
 
 @implementation ContentViewController
@@ -159,7 +160,8 @@
         //NSLog(@"I am in Progress");
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
         {
-            //NSLog(@"is terminated");
+            self.trigger = YES;
+            NSLog(@"is terminated");
             self.controlButton.enabled = YES;
             self.resetButton.enabled = YES;
             //this is the running state
@@ -200,6 +202,12 @@
                 [self.timeCounter reset];
             }
         }
+        else
+        {
+            self.trigger = NO;
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -279,6 +287,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"minutes"] forKey:@"minutes"];
     [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"hours"] forKey:@"hours"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+    self.trigger = NO;
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isInProgress"] boolValue] == YES) {
         NSData *urlData = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
         NSManagedObjectID *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:urlData];
@@ -405,10 +414,9 @@
             // resume
         } else {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"running"];
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
+            if (self.trigger == YES)
             {
                 [self.timeCounter start];
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
             }
             else
             {
