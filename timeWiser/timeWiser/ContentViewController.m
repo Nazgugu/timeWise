@@ -164,13 +164,13 @@
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
         {
             self.trigger = YES;
-            //NSLog(@"is terminated");
+            NSLog(@"is terminated");
             self.controlButton.enabled = YES;
             self.resetButton.enabled = YES;
             //this is the running state
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES)
             {
-                //NSLog(@"has running in process");
+                NSLog(@"has running in process");
                 //NSLog(@"endDate = %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"endDate"]);
                 ///NSLog(@"activeDate = %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"]);
                 NSTimeInterval elapsedTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"] timeIntervalSinceDate:[[NSUserDefaults standardUserDefaults] objectForKey:@"endDate"]];
@@ -181,9 +181,10 @@
                 self.controlButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
                 self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
                 long time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"] longValue] - (long)(elapsedTime * 1000);
-                if (time < 86400000)
+                if ((time < 86400000) && (time > 0))
                 {
-                    self.intervals  = @[[NSNumber numberWithLong:time]];
+                    NSLog(@"%ld",time);
+                        self.intervals  = @[[NSNumber numberWithLong:time]];
                 //NSLog(@"elapsed time = %ld",time);
                 //NSLog(@"number = %d",[self.intervals count]);
                         [self.timeCounter reset];
@@ -195,7 +196,7 @@
             //this is the resume state
             else
             {
-                //NSLog(@"it is in resume state");
+                NSLog(@"it is in resume state");
                 self.controlButton.tintColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
                 [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
                 [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];

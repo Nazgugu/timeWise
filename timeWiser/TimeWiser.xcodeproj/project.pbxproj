@@ -652,6 +652,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = CDFLS;
 				TargetAttributes = {
+					AE6131E018E8C7A3008BE5FF = {
+						DevelopmentTeam = AQNTGEWRNX;
+					};
 					AE61320118E8C7A3008BE5FF = {
 						TestTargetID = AE6131E018E8C7A3008BE5FF;
 					};
@@ -836,7 +839,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -854,6 +858,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5AC0E076-2303-4302-B8F3-B640725086FC";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -874,7 +879,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -885,6 +891,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "5AC0E076-2303-4302-B8F3-B640725086FC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -895,11 +902,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = TimeWiser;
+				PROVISIONING_PROFILE = "5AC0E076-2303-4302-B8F3-B640725086FC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -909,11 +919,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = TimeWiser;
+				PROVISIONING_PROFILE = "5AC0E076-2303-4302-B8F3-B640725086FC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -958,7 +971,7 @@
 			};
 			name = Release;
 		};
-		AEDD5456190AE71300EB1DBD /* Distribution */ = {
+		AEDD545F190E035600EB1DBD /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -974,16 +987,11 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				COPY_PHASE_STRIP = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -991,26 +999,30 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5AC0E076-2303-4302-B8F3-B640725086FC";
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
 		};
-		AEDD5457190AE71300EB1DBD /* Distribution */ = {
+		AEDD5460190E035600EB1DBD /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = TimeWiser;
+				PROVISIONING_PROFILE = "5AC0E076-2303-4302-B8F3-B640725086FC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;
 		};
-		AEDD5458190AE71300EB1DBD /* Distribution */ = {
+		AEDD5461190E035600EB1DBD /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TimeWiser.app/TimeWiser";
@@ -1021,10 +1033,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "TimeWiserTests/TimeWiserTests-Info.plist";
 				PRODUCT_NAME = TimeWiserTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1039,8 +1047,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE61321118E8C7A3008BE5FF /* Debug */,
-				AEDD5456190AE71300EB1DBD /* Distribution */,
 				AE61321218E8C7A3008BE5FF /* Release */,
+				AEDD545F190E035600EB1DBD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1049,8 +1057,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE61321418E8C7A3008BE5FF /* Debug */,
-				AEDD5457190AE71300EB1DBD /* Distribution */,
 				AE61321518E8C7A3008BE5FF /* Release */,
+				AEDD5460190E035600EB1DBD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1059,8 +1067,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE61321718E8C7A3008BE5FF /* Debug */,
-				AEDD5458190AE71300EB1DBD /* Distribution */,
 				AE61321818E8C7A3008BE5FF /* Release */,
+				AEDD5461190E035600EB1DBD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
