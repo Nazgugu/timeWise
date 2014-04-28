@@ -56,8 +56,11 @@
 {
     //NSLog(@"can you see me?");
     //NSLog(@"at quit time, the time left is %lld seconds",self.value / 1000);
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithUnsignedLongLong:self.value] forKey:@"timeLeft"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (self.value != 0)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithUnsignedLongLong:self.value] forKey:@"timeLeft"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     if (([[[NSUserDefaults standardUserDefaults] objectForKey:@"isInProgress"] boolValue] == YES) && ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES))
     {
         //NSLog(@"I have something running");
