@@ -161,7 +161,7 @@
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
         {
             self.trigger = YES;
-            NSLog(@"is terminated");
+            //NSLog(@"is terminated");
             self.controlButton.enabled = YES;
             self.resetButton.enabled = YES;
             //this is the running state
@@ -178,11 +178,14 @@
                 self.controlButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
                 self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
                 long time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"] longValue] - (long)(elapsedTime * 1000);
-                self.intervals  = @[[NSNumber numberWithLong:time]];
+                if (time < 86400000)
+                {
+                    self.intervals  = @[[NSNumber numberWithLong:time]];
                 //NSLog(@"elapsed time = %ld",time);
                 //NSLog(@"number = %d",[self.intervals count]);
-                [self.timeCounter reset];
-                [self.timeCounter start];
+                        [self.timeCounter reset];
+                        [self.timeCounter start];
+                }
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }

@@ -198,8 +198,16 @@
         //in here you should setup the bars or dots in the chart
         //NSLog(@"I have done some tasks");
         //put things into places
-        self.previousPageButton.enabled = YES;
-        self.nextPageButton.enabled = YES;
+        if ([self.objects count] > 7)
+        {
+            self.previousPageButton.enabled = YES;
+            self.nextPageButton.enabled = YES;
+        }
+        else
+        {
+            self.previousPageButton.enabled = NO;
+            self.nextPageButton.enabled = NO;
+        }
         for (int i = 0; i < [self.objects count]; i++)
         {
             match = self.objects[i];
