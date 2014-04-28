@@ -142,6 +142,7 @@
         {
             self.controlButton.enabled = YES;
             self.resetButton.enabled = YES;
+            [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
             self.controlButton.tintColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
             [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
             [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
@@ -164,13 +165,13 @@
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
         {
             self.trigger = YES;
-            NSLog(@"is terminated");
+            //NSLog(@"is terminated");
             self.controlButton.enabled = YES;
             self.resetButton.enabled = YES;
             //this is the running state
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES)
             {
-                NSLog(@"has running in process");
+                //NSLog(@"has running in process");
                 //NSLog(@"endDate = %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"endDate"]);
                 ///NSLog(@"activeDate = %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"]);
                 NSTimeInterval elapsedTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"] timeIntervalSinceDate:[[NSUserDefaults standardUserDefaults] objectForKey:@"endDate"]];
@@ -181,9 +182,13 @@
                 self.controlButton.normalBorderColor = [[UIColor flatRedColor] colorWithAlphaComponent:0.8f];
                 self.controlButton.highlightedBorderColor = [[UIColor flatDarkRedColor] colorWithAlphaComponent:0.8f];
                 long time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"timeLeft"] longValue] - (long)(elapsedTime * 1000);
-                if ((time < 86400000) && (time > 0))
+                int minutes = [[[NSUserDefaults standardUserDefaults] objectForKey:@"minutes"] intValue];
+                int hours = [[[NSUserDefaults standardUserDefaults] objectForKey:@"hours"] intValue];
+                long defaultTime = (minutes * 60 + hours * 3600) * 1000;
+
+                if ((time < defaultTime) && (time > 0))
                 {
-                    NSLog(@"%ld",time);
+                    //NSLog(@"%ld",time);
                         self.intervals  = @[[NSNumber numberWithLong:time]];
                 //NSLog(@"elapsed time = %ld",time);
                 //NSLog(@"number = %d",[self.intervals count]);
@@ -196,7 +201,7 @@
             //this is the resume state
             else
             {
-                NSLog(@"it is in resume state");
+                //NSLog(@"it is in resume state");
                 self.controlButton.tintColor = [[UIColor flatGreenColor] colorWithAlphaComponent:0.8f];
                 [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateHighlighted];
                 [self.controlButton setTitleColor:[[UIColor flatGreenColor] colorWithAlphaComponent:0.8f] forState:UIControlStateNormal];
@@ -213,8 +218,8 @@
         {
             self.trigger = NO;
         }
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+        //[[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -293,8 +298,6 @@
     [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"details"] forKey:@"detail"];
     [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"minutes"] forKey:@"minutes"];
     [[NSUserDefaults standardUserDefaults] setObject:[[objects objectAtIndex:index] valueForKey:@"hours"] forKey:@"hours"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
-    self.trigger = NO;
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isInProgress"] boolValue] == YES) {
         NSData *urlData = [[NSUserDefaults standardUserDefaults] objectForKey:@"taskID"];
         NSManagedObjectID *currentURL = [NSKeyedUnarchiver unarchiveObjectWithData:urlData];
@@ -304,14 +307,17 @@
         }
         else
         {
+            //NSLog(@"Not the same");
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isInProgress"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"running"];
-            NSManagedObjectID *objectID = [[objects objectAtIndex:index] objectID];
-            NSURL *url = [objectID URIRepresentation];
-            NSData *newID = [NSKeyedArchiver archivedDataWithRootObject:url];
-            [[NSUserDefaults standardUserDefaults] setObject:newID forKey:@"taskID"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"isTerminated"];
+            self.trigger = NO;
         }
     }
+    NSManagedObjectID *objectID = [[objects objectAtIndex:index] objectID];
+    NSURL *url = [objectID URIRepresentation];
+    NSData *newID = [NSKeyedArchiver archivedDataWithRootObject:url];
+    [[NSUserDefaults standardUserDefaults] setObject:newID forKey:@"taskID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self updateButtons];
     [popupListView hideAnimated:YES];
@@ -424,6 +430,7 @@
             if (self.trigger == YES)
             {
                 [self.timeCounter start];
+                self.trigger = NO;
             }
             else
             {
