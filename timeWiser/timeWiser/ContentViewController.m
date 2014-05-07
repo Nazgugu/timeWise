@@ -44,6 +44,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"view will appear");
     [self updateButtons];
 }
 
@@ -240,6 +241,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"view did load");
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fireUpLocalNotification) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTermination) name:UIApplicationWillTerminateNotification object:nil];
     NSNumber *defaultInt = [NSNumber numberWithLong:0.0];

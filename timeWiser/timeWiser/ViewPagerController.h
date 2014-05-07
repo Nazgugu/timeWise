@@ -53,12 +53,12 @@ typedef NS_ENUM(NSUInteger, ViewPagerComponent) {
  * The object that acts as the data source of the receiving viewPager
  * @discussion The data source must adopt the ViewPagerDataSource protocol. The data source is not retained.
  */
-@property (weak) id <ViewPagerDataSource> dataSource;
+@property (strong) id <ViewPagerDataSource> dataSource;
 /**
  * The object that acts as the delegate of the receiving viewPager
  * @discussion The delegate must adopt the ViewPagerDelegate protocol. The delegate is not retained.
  */
-@property (weak) id <ViewPagerDelegate> delegate;
+@property (strong) id <ViewPagerDelegate> delegate;
 
 #pragma mark Methods
 /**

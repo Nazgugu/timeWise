@@ -11,6 +11,7 @@
 #import "TasksViewController.h"
 #import "TodayViewController.h"
 #import "UIColor+MLPFlatColors.h"
+#import "BlurryModalSegue.h"
 
 @interface CDViewController () <ViewPagerDataSource, ViewPagerDelegate>
 @property (nonatomic) NSUInteger numberOfTabs;
@@ -53,10 +54,10 @@
 
 #pragma mark - Helpers
 - (void)selectTabWithNumberFive {
-    [self selectTabAtIndex:1];
+    [self selectTabAtIndex:0];
 }
 - (void)loadContent {
-    self.numberOfTabs = 3;
+    self.numberOfTabs = 2;
 }
 
 #pragma mark - Interface Orientation Changes
@@ -77,25 +78,26 @@
     label.textColor = [UIColor flatBlackColor];
     if (index == 0)
     {
-        label.text = [NSString stringWithFormat:@"TODAY"];
+        label.text = [NSString stringWithFormat:@"TIMER"];
     }
     else if (index == 1)
     {
-        label.text = [NSString stringWithFormat:@"TIMER"];
-    }
-    else if (index == 2)
-    {
         label.text = [NSString stringWithFormat:@"TASKS"];
     }
+    /*else if (index == 2)
+    {
+        label.text = [NSString stringWithFormat:@"TASKS"];
+    }*/
     label.textAlignment = NSTextAlignmentCenter;
     [label sizeToFit];
+    //[label setNeedsDisplay];
     
     return label;
 }
 
 - (UIViewController *)viewPager:(ViewPagerController *)viewPager contentViewControllerForTabAtIndex:(NSUInteger)index {
     
-    if (index == 1)
+    if (index == 0)
     {
     ContentViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
     cvc.view.backgroundColor = [UIColor flatWhiteColor];
@@ -115,12 +117,12 @@
     }
     return cvc;
     }
-    else if (index == 0)
+    /*else if (index == 0)
     {
         TodayViewController *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"TodayViewController"];
         return tvc;
-    }
-    else if (index == 2)
+    }*/
+    else if (index == 1)
     {
         TasksViewController *avc = [self.storyboard instantiateViewControllerWithIdentifier:@"TasksViewController"];
         [avc.taskTable reloadData];
@@ -133,7 +135,7 @@
 
 - (void)viewPager:(ViewPagerController *)viewPager didChangeTabToIndex:(NSUInteger)index
 {
-    if (index == 2)
+    if (index == 1)
     {
         TasksViewController *currentController = (TasksViewController *)[self viewPager:self contentViewControllerForTabAtIndex:index];
         [currentController.taskTable reloadData];
@@ -144,7 +146,7 @@
     
     switch (option) {
         case ViewPagerOptionStartFromSecondTab:
-            return 1.0;
+            return 0.0;
         case ViewPagerOptionCenterCurrentTab:
             return 1.0;
         case ViewPagerOptionTabLocation:
@@ -154,7 +156,7 @@
         case ViewPagerOptionTabOffset:
             return 0.0;
         case ViewPagerOptionTabWidth:
-            return UIInterfaceOrientationIsLandscape(self.interfaceOrientation) ? 128.0 : 106.0;
+            return UIInterfaceOrientationIsLandscape(self.interfaceOrientation) ? 160.0 : 160.0;
         case ViewPagerOptionFixFormerTabsPositions:
             return 0.0;
         case ViewPagerOptionFixLatterTabsPositions:
@@ -180,6 +182,17 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue isKindOfClass:[BlurryModalSegue class]])
+        if ([[segue destinationViewController] isKindOfClass:[TodayViewController class]])
+        {
+            BlurryModalSegue *bms = (BlurryModalSegue *)segue;
+            bms.backingImageBlurRadius = @(10);
+            bms.backingImageSaturationDeltaFactor = @(0.25);
+            bms.backingImageTintColor = [[UIColor flatWhiteColor] colorWithAlphaComponent:0.2];
+        }
+}
 
 - (void)didReceiveMemoryWarning
 {

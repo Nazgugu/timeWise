@@ -368,8 +368,8 @@
     }
     
     // __weak pageViewController to be used in blocks to prevent retaining strong reference to self
-    __weak UIPageViewController *weakPageViewController = self.pageViewController;
-    __weak ViewPagerController *weakSelf = self;
+    __strong UIPageViewController *weakPageViewController = self.pageViewController;
+    __strong ViewPagerController *weakSelf = self;
     
     if (activeContentIndex == self.activeContentIndex) {
         
