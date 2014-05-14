@@ -143,7 +143,7 @@
         bar.grade = grade;
         [_bars addObject:bar];
         [self addSubview:bar];
-
+        bar.tag = index;
         index += 1;
     }
     //NSLog(@"number of bars = %lu",(unsigned long)[_bars count]);
