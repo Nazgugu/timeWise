@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PNChartDelegate.h"
 
 #define chartMargin     10
 #define xLabelMargin    15
@@ -40,5 +41,7 @@
 @property (nonatomic, strong) UIColor * barBackgroundColor;
 
 @property (nonatomic) BOOL showLabel;
+
+@property (nonatomic, retain) id<PNChartDelegate> delegate;
 
 @end

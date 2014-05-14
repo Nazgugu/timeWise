@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE4C04D81922DD8700414E06 /* PNLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04D31922DD8700414E06 /* PNLineChart.m */; };
+		AE4C04D91922DD8700414E06 /* PNLineChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04D51922DD8700414E06 /* PNLineChartData.m */; };
+		AE4C04DA1922DD8700414E06 /* PNLineChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04D71922DD8700414E06 /* PNLineChartDataItem.m */; };
+		AE4C04DE1922DDC800414E06 /* PNCircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04DD1922DDC800414E06 /* PNCircleChart.m */; };
+		AE4C04E41922DDF600414E06 /* PNChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04E31922DDF600414E06 /* PNChartLabel.m */; };
+		AE4C04E71922DE1C00414E06 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04E61922DE1C00414E06 /* UICountingLabel.m */; };
+		AE4C04EC1922DE4100414E06 /* PNPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04E91922DE4100414E06 /* PNPieChart.m */; };
+		AE4C04ED1922DE4100414E06 /* PNPieChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C04EB1922DE4100414E06 /* PNPieChartDataItem.m */; };
 		AE4EB25318FF61040013CA4E /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4EB25018FF61040013CA4E /* NSDate+MTDates.m */; };
 		AE4EB25418FF61040013CA4E /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4EB25218FF61040013CA4E /* NSDateComponents+MTDates.m */; };
 		AE5DFC8B18EE934600FA585A /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFC8A18EE934600FA585A /* TasksViewController.m */; };
@@ -79,13 +87,7 @@
 		AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61328018EE0A4E008BE5FF /* SAMath.m */; };
 		AE7826DF19024CBA00A30145 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826CE19024CBA00A30145 /* PNBar.m */; };
 		AE7826E019024CBA00A30145 /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826D019024CBA00A30145 /* PNBarChart.m */; };
-		AE7826E119024CBA00A30145 /* PNChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826D419024CBA00A30145 /* PNChartLabel.m */; };
-		AE7826E219024CBA00A30145 /* PNCircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826D619024CBA00A30145 /* PNCircleChart.m */; };
 		AE7826E319024CBA00A30145 /* PNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826D819024CBA00A30145 /* PNColor.m */; };
-		AE7826E419024CBA00A30145 /* PNLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826DA19024CBA00A30145 /* PNLineChart.m */; };
-		AE7826E519024CBA00A30145 /* PNLineChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826DC19024CBA00A30145 /* PNLineChartData.m */; };
-		AE7826E619024CBA00A30145 /* PNLineChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826DE19024CBA00A30145 /* PNLineChartDataItem.m */; };
-		AE7826E919024CC500A30145 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7826E819024CC500A30145 /* UICountingLabel.m */; };
 		AEB731E018FE01C500B3A63E /* LPPopupListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB731DD18FE01C500B3A63E /* LPPopupListView.m */; };
 		AEB731E118FE01C500B3A63E /* LPPopupListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB731DF18FE01C500B3A63E /* LPPopupListViewCell.m */; };
 		AED3BD6419007B75004501BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE6131F618E8C7A3008BE5FF /* Main.storyboard */; };
@@ -106,6 +108,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE4C04D21922DD8700414E06 /* PNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChart.h; sourceTree = "<group>"; };
+		AE4C04D31922DD8700414E06 /* PNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChart.m; sourceTree = "<group>"; };
+		AE4C04D41922DD8700414E06 /* PNLineChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartData.h; sourceTree = "<group>"; };
+		AE4C04D51922DD8700414E06 /* PNLineChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartData.m; sourceTree = "<group>"; };
+		AE4C04D61922DD8700414E06 /* PNLineChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartDataItem.h; sourceTree = "<group>"; };
+		AE4C04D71922DD8700414E06 /* PNLineChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartDataItem.m; sourceTree = "<group>"; };
+		AE4C04DC1922DDC800414E06 /* PNCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNCircleChart.h; sourceTree = "<group>"; };
+		AE4C04DD1922DDC800414E06 /* PNCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNCircleChart.m; sourceTree = "<group>"; };
+		AE4C04E01922DDF600414E06 /* PNChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChart.h; sourceTree = "<group>"; };
+		AE4C04E11922DDF600414E06 /* PNChartDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartDelegate.h; sourceTree = "<group>"; };
+		AE4C04E21922DDF600414E06 /* PNChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartLabel.h; sourceTree = "<group>"; };
+		AE4C04E31922DDF600414E06 /* PNChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNChartLabel.m; sourceTree = "<group>"; };
+		AE4C04E51922DE1C00414E06 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
+		AE4C04E61922DE1C00414E06 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
+		AE4C04E81922DE4100414E06 /* PNPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChart.h; sourceTree = "<group>"; };
+		AE4C04E91922DE4100414E06 /* PNPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChart.m; sourceTree = "<group>"; };
+		AE4C04EA1922DE4100414E06 /* PNPieChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChartDataItem.h; sourceTree = "<group>"; };
+		AE4C04EB1922DE4100414E06 /* PNPieChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChartDataItem.m; sourceTree = "<group>"; };
 		AE4EB24F18FF61040013CA4E /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MTDates.h"; sourceTree = "<group>"; };
 		AE4EB25018FF61040013CA4E /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MTDates.m"; sourceTree = "<group>"; };
 		AE4EB25118FF61040013CA4E /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
@@ -218,22 +238,8 @@
 		AE7826CE19024CBA00A30145 /* PNBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBar.m; sourceTree = "<group>"; };
 		AE7826CF19024CBA00A30145 /* PNBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBarChart.h; sourceTree = "<group>"; };
 		AE7826D019024CBA00A30145 /* PNBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBarChart.m; sourceTree = "<group>"; };
-		AE7826D119024CBA00A30145 /* PNChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChart.h; sourceTree = "<group>"; };
-		AE7826D219024CBA00A30145 /* PNChartDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartDelegate.h; sourceTree = "<group>"; };
-		AE7826D319024CBA00A30145 /* PNChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartLabel.h; sourceTree = "<group>"; };
-		AE7826D419024CBA00A30145 /* PNChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNChartLabel.m; sourceTree = "<group>"; };
-		AE7826D519024CBA00A30145 /* PNCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNCircleChart.h; sourceTree = "<group>"; };
-		AE7826D619024CBA00A30145 /* PNCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNCircleChart.m; sourceTree = "<group>"; };
 		AE7826D719024CBA00A30145 /* PNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNColor.h; sourceTree = "<group>"; };
 		AE7826D819024CBA00A30145 /* PNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNColor.m; sourceTree = "<group>"; };
-		AE7826D919024CBA00A30145 /* PNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChart.h; sourceTree = "<group>"; };
-		AE7826DA19024CBA00A30145 /* PNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChart.m; sourceTree = "<group>"; };
-		AE7826DB19024CBA00A30145 /* PNLineChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartData.h; sourceTree = "<group>"; };
-		AE7826DC19024CBA00A30145 /* PNLineChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartData.m; sourceTree = "<group>"; };
-		AE7826DD19024CBA00A30145 /* PNLineChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartDataItem.h; sourceTree = "<group>"; };
-		AE7826DE19024CBA00A30145 /* PNLineChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartDataItem.m; sourceTree = "<group>"; };
-		AE7826E719024CC500A30145 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
-		AE7826E819024CC500A30145 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		AEB731DC18FE01C500B3A63E /* LPPopupListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPopupListView.h; sourceTree = "<group>"; };
 		AEB731DD18FE01C500B3A63E /* LPPopupListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPopupListView.m; sourceTree = "<group>"; };
 		AEB731DE18FE01C500B3A63E /* LPPopupListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPopupListViewCell.h; sourceTree = "<group>"; };
@@ -275,6 +281,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE4C04DB1922DD8E00414E06 /* LineChart */ = {
+			isa = PBXGroup;
+			children = (
+				AE4C04D21922DD8700414E06 /* PNLineChart.h */,
+				AE4C04D31922DD8700414E06 /* PNLineChart.m */,
+				AE4C04D41922DD8700414E06 /* PNLineChartData.h */,
+				AE4C04D51922DD8700414E06 /* PNLineChartData.m */,
+				AE4C04D61922DD8700414E06 /* PNLineChartDataItem.h */,
+				AE4C04D71922DD8700414E06 /* PNLineChartDataItem.m */,
+			);
+			name = LineChart;
+			sourceTree = "<group>";
+		};
+		AE4C04DF1922DDCD00414E06 /* CircleChart */ = {
+			isa = PBXGroup;
+			children = (
+				AE4C04DC1922DDC800414E06 /* PNCircleChart.h */,
+				AE4C04DD1922DDC800414E06 /* PNCircleChart.m */,
+			);
+			name = CircleChart;
+			sourceTree = "<group>";
+		};
+		AE4C04EE1922DE4700414E06 /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				AE4C04E81922DE4100414E06 /* PNPieChart.h */,
+				AE4C04E91922DE4100414E06 /* PNPieChart.m */,
+				AE4C04EA1922DE4100414E06 /* PNPieChartDataItem.h */,
+				AE4C04EB1922DE4100414E06 /* PNPieChartDataItem.m */,
+			);
+			name = PieChart;
+			sourceTree = "<group>";
+		};
+		AE4C04EF1923D7F900414E06 /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				AE7826CD19024CBA00A30145 /* PNBar.h */,
+				AE7826CE19024CBA00A30145 /* PNBar.m */,
+				AE7826CF19024CBA00A30145 /* PNBarChart.h */,
+				AE7826D019024CBA00A30145 /* PNBarChart.m */,
+			);
+			name = BarChart;
+			sourceTree = "<group>";
+		};
 		AE4EB24E18FF60F20013CA4E /* Date&Time */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,26 +630,18 @@
 		AEB731E618FE548100B3A63E /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
-				AE7826E719024CC500A30145 /* UICountingLabel.h */,
-				AE7826E819024CC500A30145 /* UICountingLabel.m */,
-				AE7826CD19024CBA00A30145 /* PNBar.h */,
-				AE7826CE19024CBA00A30145 /* PNBar.m */,
-				AE7826CF19024CBA00A30145 /* PNBarChart.h */,
-				AE7826D019024CBA00A30145 /* PNBarChart.m */,
-				AE7826D119024CBA00A30145 /* PNChart.h */,
-				AE7826D219024CBA00A30145 /* PNChartDelegate.h */,
-				AE7826D319024CBA00A30145 /* PNChartLabel.h */,
-				AE7826D419024CBA00A30145 /* PNChartLabel.m */,
-				AE7826D519024CBA00A30145 /* PNCircleChart.h */,
-				AE7826D619024CBA00A30145 /* PNCircleChart.m */,
+				AE4C04E51922DE1C00414E06 /* UICountingLabel.h */,
+				AE4C04E61922DE1C00414E06 /* UICountingLabel.m */,
+				AE4C04E01922DDF600414E06 /* PNChart.h */,
+				AE4C04E11922DDF600414E06 /* PNChartDelegate.h */,
+				AE4C04E21922DDF600414E06 /* PNChartLabel.h */,
+				AE4C04E31922DDF600414E06 /* PNChartLabel.m */,
+				AE4C04DF1922DDCD00414E06 /* CircleChart */,
+				AE4C04DB1922DD8E00414E06 /* LineChart */,
+				AE4C04EE1922DE4700414E06 /* PieChart */,
+				AE4C04EF1923D7F900414E06 /* BarChart */,
 				AE7826D719024CBA00A30145 /* PNColor.h */,
 				AE7826D819024CBA00A30145 /* PNColor.m */,
-				AE7826D919024CBA00A30145 /* PNLineChart.h */,
-				AE7826DA19024CBA00A30145 /* PNLineChart.m */,
-				AE7826DB19024CBA00A30145 /* PNLineChartData.h */,
-				AE7826DC19024CBA00A30145 /* PNLineChartData.m */,
-				AE7826DD19024CBA00A30145 /* PNLineChartDataItem.h */,
-				AE7826DE19024CBA00A30145 /* PNLineChartDataItem.m */,
 			);
 			name = ChartView;
 			sourceTree = "<group>";
@@ -725,25 +767,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE7826E219024CBA00A30145 /* PNCircleChart.m in Sources */,
 				AE61326818ED1F26008BE5FF /* MZAppearance.m in Sources */,
 				AE61322F18EA8B78008BE5FF /* TodayViewController.m in Sources */,
 				AE61326F18ED1F34008BE5FF /* UIImage+ImageEffects.m in Sources */,
 				AE5DFC8B18EE934600FA585A /* TasksViewController.m in Sources */,
 				AE61326E18ED1F34008BE5FF /* UIImage+BlurredFrame.m in Sources */,
 				AE6131F118E8C7A3008BE5FF /* main.m in Sources */,
+				AE4C04ED1922DE4100414E06 /* PNPieChartDataItem.m in Sources */,
+				AE4C04DE1922DDC800414E06 /* PNCircleChart.m in Sources */,
 				AE61328118EE0A4E008BE5FF /* SAMultisectorControl.m in Sources */,
 				AE61322518E9F147008BE5FF /* ContentViewController.m in Sources */,
 				AE5DFCAC18EFD63500FA585A /* UIColor+MLPFlatColors.m in Sources */,
 				AE5DFCA118EF30C700FA585A /* TaskCell.m in Sources */,
 				AE6131F518E8C7A3008BE5FF /* CDAppDelegate.m in Sources */,
 				AE7826DF19024CBA00A30145 /* PNBar.m in Sources */,
-				AE7826E119024CBA00A30145 /* PNChartLabel.m in Sources */,
 				AE5DFCB018F0755000FA585A /* M13Checkbox.m in Sources */,
 				AE61323B18EBBB0E008BE5FF /* SFRoundProgressLayer.m in Sources */,
-				AE7826E519024CBA00A30145 /* PNLineChartData.m in Sources */,
-				AE7826E619024CBA00A30145 /* PNLineChartDataItem.m in Sources */,
-				AE7826E419024CBA00A30145 /* PNLineChart.m in Sources */,
 				AE61327918ED2206008BE5FF /* JVFloatLabeledTextView.m in Sources */,
 				AE61323918EBBB0E008BE5FF /* SFCounterLabel.m in Sources */,
 				AEB731E118FE01C500B3A63E /* LPPopupListViewCell.m in Sources */,
@@ -751,19 +790,24 @@
 				AE5DFD0418F271D900FA585A /* HexColor.m in Sources */,
 				AE61322218E9EFAC008BE5FF /* ViewPagerController.m in Sources */,
 				AE5DFCC818F1DDB900FA585A /* NSData+Base64.m in Sources */,
+				AE4C04D81922DD8700414E06 /* PNLineChart.m in Sources */,
 				AE6131FB18E8C7A3008BE5FF /* CDViewController.m in Sources */,
 				AE5DFCDD18F271AC00FA585A /* TSMessage.m in Sources */,
 				AE7826E019024CBA00A30145 /* PNBarChart.m in Sources */,
 				AE5DFCDC18F271AC00FA585A /* TSBlurView.m in Sources */,
 				AE5DFCD418F2575700FA585A /* JVFloatLabeledTextField.m in Sources */,
-				AE7826E919024CC500A30145 /* UICountingLabel.m in Sources */,
+				AE4C04D91922DD8700414E06 /* PNLineChartData.m in Sources */,
+				AE4C04EC1922DE4100414E06 /* PNPieChart.m in Sources */,
 				AE61326318ED1E43008BE5FF /* BlurryModalSegue.m in Sources */,
 				AE61323C18EBBB0E008BE5FF /* SFRoundProgressView.m in Sources */,
+				AE4C04E71922DE1C00414E06 /* UICountingLabel.m in Sources */,
 				AE4EB25418FF61040013CA4E /* NSDateComponents+MTDates.m in Sources */,
 				AE5DFCC218F1DB8800FA585A /* APLKeyboardControls.m in Sources */,
 				AE61325B18ED0196008BE5FF /* CDNavigationViewController.m in Sources */,
+				AE4C04E41922DDF600414E06 /* PNChartLabel.m in Sources */,
 				AE5DFD0A18F4687200FA585A /* UIImage+ResizeMagick.m in Sources */,
 				AE61328218EE0A4E008BE5FF /* SAMath.m in Sources */,
+				AE4C04DA1922DD8700414E06 /* PNLineChartDataItem.m in Sources */,
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
 				AE5DFCDE18F271AC00FA585A /* TSMessageView.m in Sources */,
 				AE4EB25318FF61040013CA4E /* NSDate+MTDates.m in Sources */,
@@ -839,8 +883,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -879,8 +923,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -902,8 +946,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
@@ -919,8 +963,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";
@@ -1010,8 +1054,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhe Liu (AQNTGEWRNX)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimeWiser/TimeWiser-Prefix.pch";
 				INFOPLIST_FILE = "TimeWiser/TimeWiser-Info.plist";

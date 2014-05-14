@@ -13,7 +13,7 @@
 #import "PNChart.h"
 
 
-@interface TodayViewController ()
+@interface TodayViewController ()<PNChartDelegate>
 {
     NSArray *colorArray;
 }
@@ -152,7 +152,14 @@
     //NSLog(@"view did load is called");
     //[self fetchContents];
     colorArray = [[NSArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
+    self.TaskChart.delegate = self;
     //[self updateChart];
+}
+
+//barChart Delegate method
+- (void)userClickedOnBarCharIndex:(NSInteger)barIndex
+{
+    NSLog(@"Click on bar %@", @(barIndex));
 }
 
 - (void)fetchContents

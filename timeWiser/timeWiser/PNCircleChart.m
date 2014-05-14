@@ -7,40 +7,30 @@
 //
 
 #import "PNCircleChart.h"
-#import "UICountingLabel.h"
 
-@interface PNCircleChart () {
-    UICountingLabel *_gradeLabel;
-}
-
+@interface PNCircleChart ()
 @end
 
 @implementation PNCircleChart
 
-- (UIColor *)labelColor
+
+- (id)initWithFrame:(CGRect)frame andTotal:(NSNumber *)total andCurrent:(NSNumber *)current andClockwise:(BOOL)clockwise andShadow:(BOOL)hasBackgroundShadow
 {
-    if (!_labelColor) {
-        _labelColor = PNDeepGrey;
-    }
-    return _labelColor;
-}
-
-
-- (id)initWithFrame:(CGRect)frame andTotal:(NSNumber *)total andCurrent:(NSNumber *)current andClockwise:(BOOL)clockwise {
     self = [super initWithFrame:frame];
-    
+
     if (self) {
         _total = total;
         _current = current;
         _strokeColor = PNFreshGreen;
-		_clockwise = clockwise;
-		
-		CGFloat startAngle = clockwise ? -90.0f : 270.0f;
-		CGFloat endAngle = clockwise ? -90.01f : 270.01f;
-        
-        _lineWidth = [NSNumber numberWithFloat:8.0];
-        UIBezierPath* circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.center.x,self.center.y) radius:self.frame.size.height*0.5 startAngle:DEGREES_TO_RADIANS(startAngle) endAngle:DEGREES_TO_RADIANS(endAngle) clockwise:clockwise];
-        
+        _duration = 1.0;
+        _chartType = PNChartFormatTypePercent;
+
+        CGFloat startAngle = clockwise ? -90.0f : 270.0f;
+        CGFloat endAngle = clockwise ? -90.01f : 270.01f;
+
+        _lineWidth = @8.0f;
+        UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.center.x, self.center.y) radius:self.frame.size.height * 0.5 startAngle:DEGREES_TO_RADIANS(startAngle) endAngle:DEGREES_TO_RADIANS(endAngle) clockwise:clockwise];
+
         _circle               = [CAShapeLayer layer];
         _circle.path          = circlePath.CGPath;
         _circle.lineCap       = kCALineCapRound;
@@ -53,53 +43,83 @@
         _circleBG.lineCap     = kCALineCapRound;
         _circleBG.fillColor   = [UIColor clearColor].CGColor;
         _circleBG.lineWidth   = [_lineWidth floatValue];
-        _circleBG.strokeColor = PNLightYellow.CGColor;
+        _circleBG.strokeColor = (hasBackgroundShadow ? PNLightYellow.CGColor : [UIColor clearColor].CGColor);
         _circleBG.strokeEnd   = 1.0;
         _circleBG.zPosition   = -1;
-        
+
         [self.layer addSublayer:_circle];
         [self.layer addSublayer:_circleBG];
 
-		_gradeLabel = [[UICountingLabel alloc] initWithFrame:CGRectMake(0, 0, 50.0, 50.0)];
-        
+        _countingLabel = [[UICountingLabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 50.0)];
+        [_countingLabel setTextAlignment:NSTextAlignmentCenter];
+        [_countingLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
+        [_countingLabel setTextColor:[UIColor grayColor]];
+        [_countingLabel setCenter:CGPointMake(self.center.x, self.center.y)];
+        _countingLabel.method = UILabelCountingMethodEaseInOut;
+        [self addSubview:_countingLabel];;
     }
-    
+
     return self;
-    
 }
 
--(void)strokeChart
+
+- (void)strokeChart
 {
-    //Add count label
+    // Add counting label
     
-    [_gradeLabel setTextAlignment:NSTextAlignmentCenter];
-    [_gradeLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
-    [_gradeLabel setTextColor:self.labelColor];
-    [_gradeLabel setCenter:CGPointMake(self.center.x,self.center.y)];
-    _gradeLabel.method = UILabelCountingMethodEaseInOut;
-    _gradeLabel.format = @"%d%%";
-   
-    
-    [self addSubview:_gradeLabel];
-    
-    //Add circle params
-    
+    NSString *format;
+    switch (self.chartType) {
+      case PNChartFormatTypePercent:
+        format = @"%d%%";
+        break;
+      case PNChartFormatTypeDollar:
+        format = @"$%d";
+        break;
+      case PNChartFormatTypeNone:
+      default:
+        format = @"%d";
+        break;
+    }
+    self.countingLabel.format = format;
+    [self addSubview:self.countingLabel];
+
+
+    // Add circle params
+
     _circle.lineWidth   = [_lineWidth floatValue];
     _circleBG.lineWidth = [_lineWidth floatValue];
     _circleBG.strokeEnd = 1.0;
     _circle.strokeColor = _strokeColor.CGColor;
-    
-    //Add Animation
+
+    // Add Animation
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    pathAnimation.duration = 1.0;
+    pathAnimation.duration = self.duration;
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-    pathAnimation.toValue = [NSNumber numberWithFloat:[_current floatValue]/[_total floatValue]];
+    pathAnimation.fromValue = @0.0f;
+    pathAnimation.toValue = @([_current floatValue] / [_total floatValue]);
     [_circle addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
-    _circle.strokeEnd   = [_current floatValue]/[_total floatValue];
+    _circle.strokeEnd   = [_current floatValue] / [_total floatValue];
+
+    [_countingLabel countFrom:0 to:[_current floatValue] withDuration:1.0];
+}
+
+
+
+- (void)growChartByAmount:(NSNumber *)growAmount
+{
+    NSNumber *updatedValue = [NSNumber numberWithFloat:[_current floatValue] + [growAmount floatValue]];
     
-    [_gradeLabel countFrom:0 to:[_current floatValue]/[_total floatValue]*100 withDuration:1.0];
-   
+    // Add animation
+    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    pathAnimation.duration = self.duration;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    pathAnimation.fromValue = @([_current floatValue] / [_total floatValue]);
+    pathAnimation.toValue = @([updatedValue floatValue] / [_total floatValue]);
+    _circle.strokeEnd   = [updatedValue floatValue] / [_total floatValue];
+    [_circle addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+    
+    [self.countingLabel countFrom:fmin([_current floatValue], [_total floatValue]) to:fmin([_current floatValue] + [growAmount floatValue], [_total floatValue]) withDuration:self.duration];
+    _current = updatedValue;
 }
 
 @end

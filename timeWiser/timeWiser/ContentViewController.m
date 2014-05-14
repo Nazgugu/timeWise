@@ -162,17 +162,17 @@
     else
     {
         [self.titleButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"title"] forState:UIControlStateNormal];
-        //NSLog(@"I am in Progress");
+        NSLog(@"I am in Progress");
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isTerminated"] boolValue] == YES)
         {
             self.trigger = YES;
-            //NSLog(@"is terminated");
+            NSLog(@"is terminated");
             self.controlButton.enabled = YES;
             self.resetButton.enabled = YES;
             //this is the running state
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"running"] boolValue] == YES)
             {
-                //NSLog(@"has running in process");
+                NSLog(@"has running in process");
                 //NSLog(@"endDate = %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"endDate"]);
                 ///NSLog(@"activeDate = %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"]);
                 NSTimeInterval elapsedTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"activeDate"] timeIntervalSinceDate:[[NSUserDefaults standardUserDefaults] objectForKey:@"endDate"]];

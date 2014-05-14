@@ -76,6 +76,8 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Avenir Next" size:12.0];
     label.textColor = [UIColor flatBlackColor];
+    //label.layer.borderWidth = 1.0f;
+    //label.layer.borderColor = [[UIColor flatGrayColor] colorWithAlphaComponent:0.5f].CGColor;
     if (index == 0)
     {
         label.text = [NSString stringWithFormat:@"TIMER"];
