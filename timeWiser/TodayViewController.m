@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextPageButton;
 @property (strong, nonatomic) NSMutableArray *titles;
 @property (strong, nonatomic) NSMutableArray *times;
-@property (weak, nonatomic) IBOutlet PNBarChart *TaskChart;
+@property (strong, nonatomic) PNBarChart *TaskChart;
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSMutableArray *colors;
 @property (strong, nonatomic) NSMutableArray *showingTitles;
@@ -80,15 +80,12 @@
     [super loadView];
     //[self fetchContents];
     self.TaskChart.backgroundColor = [UIColor clearColor];
-    self.TaskChart.barBackgroundColor = PNLightGrey;;
+    self.TaskChart.barBackgroundColor = PNLightGrey;
 }
 
 - (void)updateChartWithPage:(NSUInteger)pageNumber
 {
     self.TaskChart.showLabel = YES;
-    
-    //NSLog(@"times = %@",self.times);
-    //NSLog(@"tasks are: %@",self.titles);
     if (!_colors)
     {
         _colors = [[NSMutableArray alloc] init];
@@ -132,7 +129,19 @@
         index = i % 7;
         [self.colors addObject:[colorArray objectAtIndex:index]];
     }
-    [UIView transitionWithView:self.TaskChart
+    if (!self.TaskChart)
+    {
+        self.TaskChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 80, 320, 280)];
+    }
+    self.TaskChart.backgroundColor = [UIColor clearColor];
+    self.TaskChart.yLabelFormatter = ^(CGFloat yValue){
+        CGFloat yValueParsed = yValue;
+        NSString * labelText = [NSString stringWithFormat:@"%1.f",yValueParsed];
+        return labelText;
+    };
+
+    self.TaskChart.labelMarginTop = 5.0;
+    /*[UIView transitionWithView:self.TaskChart
                       duration:0.5
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
@@ -140,11 +149,19 @@
                     } completion:^(BOOL finished){
                         [self.TaskChart setStrokeColors:self.colors];
                         [self.TaskChart setXLabels:self.showingTitles];
-                        [self.TaskChart setTimeLabel:self.showingTime];
+                        //[self.TaskChart setTimeLabel:self.showingTime];
                         [self.TaskChart setYValues:self.showingTime];
                         [self.TaskChart strokeChart];
-                    }];
-    }
+                    }];*/
+    //NSLog(@"%@",self.showingTitles);
+    self.TaskChart.delegate = self;
+    self.TaskChart.labelFont = [UIFont fontWithName:@"Avenir Next" size:11.0f];
+    [self.TaskChart setXLabels:self.showingTitles];
+    [self.TaskChart setYValues:self.showingTime];
+    [self.TaskChart setStrokeColors:self.colors];
+    [self.TaskChart strokeChart];
+    [self.view addSubview:self.TaskChart];
+}
 
 - (void)viewDidLoad
 {
@@ -152,7 +169,6 @@
     //NSLog(@"view did load is called");
     //[self fetchContents];
     colorArray = [[NSArray alloc] initWithObjects:[UIColor flatRedColor], [UIColor flatGreenColor], [UIColor flatBlueColor], [UIColor flatYellowColor], [UIColor flatPurpleColor], [UIColor flatTealColor], [UIColor flatGrayColor], nil];
-    self.TaskChart.delegate = self;
     //[self updateChart];
 }
 
@@ -161,6 +177,64 @@
 - (void)userClickedOnBarCharIndex:(NSInteger)barIndex
 {
     NSLog(@"Click on bar %@", @(barIndex));
+    //[self.TaskChart animateBarAtIndex:barIndex];
+    NSLog(@"number of bars = %d",self.TaskChart.bars.count);
+    for (PNBar *tempBar in self.TaskChart.bars)
+    {
+        if (tempBar.isScaled == YES)
+        {
+            CABasicAnimation *animation= [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+            
+            animation.fromValue= @1.1;
+            
+            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            
+            animation.toValue= @1.0;
+            
+            animation.duration= 0.2;
+            
+            animation.repeatCount = 0;
+            
+            animation.autoreverses = NO;
+            
+            animation.removedOnCompletion = NO;
+            
+            animation.fillMode=kCAFillModeForwards;
+            
+            [tempBar.layer addAnimation:animation forKey:@"Float"];
+            tempBar.isScaled = NO;
+        }
+    }
+    PNBar * bar = [self.TaskChart.bars objectAtIndex:barIndex];
+    if (bar)
+    {
+        NSLog(@"not null");
+    }
+    else
+    {
+        NSLog(@"Null");
+    }
+    CABasicAnimation *animation= [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    animation.fromValue= @1.0;
+    
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    animation.toValue= @1.1;
+    
+    animation.duration= 0.2;
+    
+    animation.repeatCount = 0;
+    
+    animation.autoreverses = NO;
+    
+    animation.removedOnCompletion = NO;
+    
+    animation.fillMode=kCAFillModeForwards;
+    
+    [bar.layer addAnimation:animation forKey:@"Float"];
+    bar.isScaled = YES;
+
 }
 
 -(void)userClickedOnLineKeyPoint:(CGPoint)point lineIndex:(NSInteger)lineIndex andPointIndex:(NSInteger)pointIndex{

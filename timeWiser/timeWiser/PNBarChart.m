@@ -9,15 +9,14 @@
 #import "PNBarChart.h"
 #import "PNColor.h"
 #import "PNChartLabel.h"
-#import "PNBar.h"
 
-@interface PNBarChart() {
-    NSMutableArray* _bars;
-    NSMutableArray* _labels;
-    NSMutableArray* _timeLabels;
+
+@interface PNBarChart () {
+    NSMutableArray *_labels;
 }
 
 - (UIColor *)barColorAtIndex:(NSUInteger)index;
+
 @end
 
 @implementation PNBarChart
@@ -25,141 +24,281 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds   = YES;
         _showLabel           = YES;
         _barBackgroundColor  = PNLightGrey;
+        _labelTextColor      = [UIColor whiteColor];
+        _labelFont           = [UIFont systemFontOfSize:11.0f];
         _labels              = [NSMutableArray array];
         _bars                = [NSMutableArray array];
-        _timeLabels          = [NSMutableArray array];
+        _xLabelSkip          = 1;
+        _yLabelSum           = 4;
+        _labelMarginTop      = 0;
+        _chartMargin         = 15.0;
+        _barRadius           = 2.0;
+        _showChartBorder     = NO;
+        _yChartLabelWidth    = 18;
     }
 
     return self;
 }
 
--(void)setYValues:(NSArray *)yValues
+
+- (void)setYValues:(NSArray *)yValues
 {
     _yValues = yValues;
-    [self setYLabels:yValues];
+    
+    if (_yMaxValue) {
+        _yValueMax = _yMaxValue;
+    }else{
+        [self getYValueMax:yValues];
+    }
+    
 
-    _xLabelWidth = (self.frame.size.width - chartMargin*2)/[_yValues count];
+    _xLabelWidth = (self.frame.size.width - _chartMargin * 2) / [_yValues count];
 }
 
--(void)setYLabels:(NSArray *)yLabels
+- (void)getYValueMax:(NSArray *)yLabels
 {
     NSInteger max = 0;
-    for (NSNumber *value in yLabels) {
-        //NSLog(@"number here is %@",value);
-        NSInteger valueInt = [value integerValue];
-        //NSLog(@"integer is %d",valueInt);
-        if (valueInt > max) {
-            max = valueInt;
+    
+    for (NSString *valueString in yLabels) {
+        NSInteger value = [valueString integerValue];
+        
+        if (value > max) {
+            max = value;
         }
-
     }
-
+    
     //Min value for Y label
     if (max < 5) {
         max = 5;
     }
-
+    
     _yValueMax = (int)max;
 }
 
-- (void)setTimeLabel:(NSArray *)timeLabel
+
+- (void)setYLabels:(NSArray *)yLabels
 {
-    [self viewCleanupForCollection:_timeLabels];
-    _timeLabel = timeLabel;
-    if (_showLabel)
-    {
-        _xLabelWidth = (self.frame.size.width - chartMargin*2)/[timeLabel count];
-    }
-    for(int index = 0; index < timeLabel.count; index++)
-    {
-        PNChartLabel *timeLabel = [[PNChartLabel alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin), self.frame.size.height - 30.0, _xLabelWidth, 20.0)];
-        [timeLabel setTextAlignment:NSTextAlignmentCenter];
-        //NSLog(@"%@",timeLabel.text);
-        timeLabel.text = [NSString stringWithFormat:@"%d mins",[[self.timeLabel objectAtIndex:index] intValue]];
-        //NSLog(@"here %@",timeLabel.text);
-        [_timeLabels addObject:timeLabel];
-        [self addSubview:timeLabel];
+    
+}
+
+
+- (void)setXLabels:(NSArray *)xLabels
+{
+    _xLabels = xLabels;
+    NSLog(@"%@",self.xLabels);
+
+    if (_showLabel) {
+        _xLabelWidth = (self.frame.size.width - _chartMargin * 2) / [xLabels count];
     }
 }
 
--(void)setXLabels:(NSArray *)xLabels
+
+- (void)setStrokeColor:(UIColor *)strokeColor
+{
+    _strokeColor = strokeColor;
+}
+
+
+- (void)strokeChart
 {
     [self viewCleanupForCollection:_labels];
-    _xLabels = xLabels;
-    //NSLog(@"I am setting labels");
+    //Add Labels
     if (_showLabel) {
-        //NSLog(@"I am here");
-        _xLabelWidth = (self.frame.size.width - chartMargin*2)/[xLabels count];
+        //NSLog(@"showing labels");
+        //Add x labels
+        int labelAddCount = 0;
+        //NSLog(@"%d",_xLabels.count);
+        for (int index = 0; index < _xLabels.count; index++) {
+            labelAddCount += 1;
+            //NSLog(@"labelAddCount = %d, xlabelSkip = %d",labelAddCount,self.xLabelSkip);
+            //if (labelAddCount == _xLabelSkip) {
+                NSString *labelText = _xLabels[index];
+                //NSLog(@"text = %@",labelText);
+                PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectZero];
+                label.font = _labelFont;
+                label.textColor = _labelTextColor;
+                [label setTextAlignment:NSTextAlignmentCenter];
+                label.text = labelText;
+                //NSLog(@"%@",labelText);
+                [label sizeToFit];
+                CGFloat labelXPosition  = (index *  _xLabelWidth + _chartMargin + _xLabelWidth /2.0 );
+                
+                label.center = CGPointMake(labelXPosition,
+                                           self.frame.size.height - xLabelHeight - _chartMargin + label.frame.size.height /2.0 + _labelMarginTop + 8.0);
+                labelAddCount = 0;
+                
+                [_labels addObject:label];
+                [self addSubview:label];
+            //}
+        }
+        
+        //Add y labels
+        
+        float yLabelSectionHeight = (self.frame.size.height - _chartMargin * 2 - xLabelHeight) / _yLabelSum;
+        
+        for (int index = 0; index < _yLabelSum; index++) {
 
-        for(int index = 0; index < xLabels.count; index++)
-        {
-            //NSLog(@"# of xlables = %d",xLabels.count);
-            NSString* labelText = xLabels[index];
-            PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin), self.frame.size.height - 50.0, _xLabelWidth, 20.0)];
-            [label setTextAlignment:NSTextAlignmentCenter];
+            NSString *labelText = _yLabelFormatter((float)_yValueMax * ( (_yLabelSum - index) / (float)_yLabelSum ));
             
-            //NSLog(@"this name is: %@",labelText);
-            NSString *description = [NSString stringWithFormat:@"%@",labelText];
-            //NSLog(@"%d mins",[self.yValues[index] intValue]);
-            label.text = description;
-            
-            
+            PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0,
+                                                                                  yLabelSectionHeight * index + _chartMargin - yLabelHeight/2.0,
+                                                                                  _yChartLabelWidth,
+                                                                                  yLabelHeight)];
+            label.font = _labelFont;
+            label.textColor = _labelTextColor;
+            [label setTextAlignment:NSTextAlignmentRight];
+            label.text = labelText;
+
             [_labels addObject:label];
-            
             [self addSubview:label];
+
         }
     }
-}
+    
 
--(void)setStrokeColor:(UIColor *)strokeColor
-{
-	_strokeColor = strokeColor;
-}
-
--(void)strokeChart
-{
     [self viewCleanupForCollection:_bars];
-    CGFloat chartCavanHeight = self.frame.size.height - chartMargin * 2 - 30.0;
+    
+    
+    //Add bars
+    CGFloat chartCavanHeight = self.frame.size.height - _chartMargin * 2 - xLabelHeight;
     NSInteger index = 0;
 
-    for (NSString * valueString in _yValues) {
+    for (NSNumber *valueString in _yValues) {
         float value = [valueString floatValue];
 
         float grade = (float)value / (float)_yValueMax;
-        PNBar * bar;
-        if (_showLabel) {
-            bar = [[PNBar alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin + _xLabelWidth * 0.25), self.frame.size.height - chartCavanHeight - 50.0, _xLabelWidth * 0.5, chartCavanHeight)];
+        PNBar *bar;
+        CGFloat barWidth;
+        CGFloat barXPosition;
+        
+        if (_barWidth) {
+            barWidth = _barWidth;
+            barXPosition = index *  _xLabelWidth + _chartMargin + _xLabelWidth /2.0 - _barWidth /2.0;
         }else{
-            bar = [[PNBar alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin + _xLabelWidth * 0.25), self.frame.size.height - chartCavanHeight , _xLabelWidth * 0.6, chartCavanHeight)];
+            barXPosition = index *  _xLabelWidth + _chartMargin + _xLabelWidth * 0.25;
+            if (_showLabel) {
+                barWidth = _xLabelWidth * 0.5;
+                
+            }
+            else {
+                barWidth = _xLabelWidth * 0.6;
+                
+            }
         }
+        
+        bar = [[PNBar alloc] initWithFrame:CGRectMake(barXPosition, //Bar X position
+                                                      self.frame.size.height - chartCavanHeight - xLabelHeight - _chartMargin, //Bar Y position
+                                                      barWidth, // Bar witdh
+                                                      chartCavanHeight)]; //Bar height
+        
+        //Change Bar Radius
+        bar.barRadius = _barRadius;
+        
+        //Change Bar Background color
         bar.backgroundColor = _barBackgroundColor;
-        bar.barColor = [self barColorAtIndex:index];
+        
+        //Bar StrokColor First
+        if (self.strokeColor) {
+            bar.barColor = self.strokeColor;
+        }else{
+            bar.barColor = [self barColorAtIndex:index];
+        }
+        
+        //Height Of Bar
         bar.grade = grade;
+        
+        //For Click Index
+        bar.tag = index;
+        
         [_bars addObject:bar];
         [self addSubview:bar];
-        bar.tag = index;
+        NSLog(@"Added bar");
         index += 1;
     }
-    //NSLog(@"number of bars = %lu",(unsigned long)[_bars count]);
-    //NSLog(@"number of labels = %lu",(unsigned long)[_timeLabel count]);
-    //NSLog(@"number of xlabels = %lu",(unsigned long)[_labels count]);
-    //NSLog(@"number of yvalues = %lu",(unsigned long)[self.yValues count]);
+    
+    //Add chart border lines
+    
+    if (_showChartBorder) {
+        _chartBottomLine = [CAShapeLayer layer];
+        _chartBottomLine.lineCap      = kCALineCapButt;
+        _chartBottomLine.fillColor    = [[UIColor whiteColor] CGColor];
+        _chartBottomLine.lineWidth    = 1.0;
+        _chartBottomLine.strokeEnd    = 0.0;
+        
+        UIBezierPath *progressline = [UIBezierPath bezierPath];
+        
+        [progressline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height - xLabelHeight - _chartMargin)];
+        [progressline addLineToPoint:CGPointMake(self.frame.size.width - _chartMargin,  self.frame.size.height - xLabelHeight - _chartMargin)];
+        
+        [progressline setLineWidth:1.0];
+        [progressline setLineCapStyle:kCGLineCapSquare];
+        _chartBottomLine.path = progressline.CGPath;
+        
+        
+        _chartBottomLine.strokeColor = PNLightGrey.CGColor;
+        
+        
+        CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        pathAnimation.duration = 0.5;
+        pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        pathAnimation.fromValue = @0.0f;
+        pathAnimation.toValue = @1.0f;
+        [_chartBottomLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+        
+        _chartBottomLine.strokeEnd = 1.0;
+        
+        [self.layer addSublayer:_chartBottomLine];
+        
+        //Add left Chart Line
+        
+        _chartLeftLine = [CAShapeLayer layer];
+        _chartLeftLine.lineCap      = kCALineCapButt;
+        _chartLeftLine.fillColor    = [[UIColor whiteColor] CGColor];
+        _chartLeftLine.lineWidth    = 1.0;
+        _chartLeftLine.strokeEnd    = 0.0;
+        
+        UIBezierPath *progressLeftline = [UIBezierPath bezierPath];
+        
+        [progressLeftline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height - xLabelHeight - _chartMargin)];
+        [progressLeftline addLineToPoint:CGPointMake(_chartMargin,  _chartMargin)];
+        
+        [progressLeftline setLineWidth:1.0];
+        [progressLeftline setLineCapStyle:kCGLineCapSquare];
+        _chartLeftLine.path = progressLeftline.CGPath;
+        
+        
+        _chartLeftLine.strokeColor = PNLightGrey.CGColor;
+        
+        
+        CABasicAnimation *pathLeftAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        pathLeftAnimation.duration = 0.5;
+        pathLeftAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        pathLeftAnimation.fromValue = @0.0f;
+        pathLeftAnimation.toValue = @1.0f;
+        [_chartLeftLine addAnimation:pathLeftAnimation forKey:@"strokeEndAnimation"];
+        
+        _chartLeftLine.strokeEnd = 1.0;
+        
+        [self.layer addSublayer:_chartLeftLine];
+    }
 }
 
-- (void)viewCleanupForCollection:(NSMutableArray*)array
+
+- (void)viewCleanupForCollection:(NSMutableArray *)array
 {
-    //NSLog(@"I am cleaning up");
     if (array.count) {
         [array makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [array removeAllObjects];
     }
 }
+
 
 #pragma mark - Class extension methods
 
@@ -167,10 +306,12 @@
 {
     if ([self.strokeColors count] == [self.yValues count]) {
         return self.strokeColors[index];
-    } else {
+    }
+    else {
         return self.strokeColor;
     }
 }
+
 
 #pragma mark - Touch detection
 
@@ -192,5 +333,6 @@
         [self.delegate userClickedOnBarCharIndex:subview.tag];
     }
 }
+
 
 @end
