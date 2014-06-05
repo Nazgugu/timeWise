@@ -19,15 +19,23 @@
 }
 //@property (weak, nonatomic) IBOutlet UIButton *previousPageButton;
 //@property (weak, nonatomic) IBOutlet UIButton *nextPageButton;
+@property (weak, nonatomic) IBOutlet UIView *timeView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) NSMutableArray *titles;
 @property (strong, nonatomic) NSMutableArray *times;
 @property (strong, nonatomic) PNBarChart *TaskChart;
+@property (strong, nonatomic) PNCircleChart *timeChart;
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSMutableArray *colors;
 @property (strong, nonatomic) NSMutableArray *showingTitles;
 @property (strong, nonatomic) NSMutableArray *showingTime;
+@property (nonatomic) BOOL chosen;
+@property (nonatomic) NSInteger chosenTask;
+@property (nonatomic) NSInteger previousValue;
 @property (nonatomic) NSInteger currentPageNumber;
+@property (nonatomic) NSInteger totalTime;
+@property (weak, nonatomic) IBOutlet UILabel *taskTitle;
+@property (weak, nonatomic) IBOutlet UICountingLabel *taskTime;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (nonatomic) NSInteger totalPageNumber;
@@ -50,7 +58,6 @@
 {
     //NSLog(@"view will appear is called");
     [super viewWillAppear:animated];
-    [self fetchContents];
     [self updateChartWithPage:1];
 }
 
@@ -169,7 +176,47 @@
     NSString *dateString = [formatter stringFromDate:now];
     NSLog(@"%@",dateString);
     self.dateLabel.text = dateString;
+    self.chosen = NO;
+    self.chosenTask = 0;
+    self.previousValue = 0;
+    self.taskTime.method = UILabelCountingMethodEaseInOut;
+    self.taskTime.format = @"%d";
+    [self fetchContents];
+    [self updateInfoWithObjectIndex:0];
+    self.timeChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(0, 0, self.timeView.frame.size.width, self.timeView.frame.size.height) andTotal:@100 andCurrent:@0 andClockwise:YES andShadow:YES];
+    self.timeChart.backgroundColor = [UIColor clearColor];
+    self.timeChart.total = @100;
+    self.timeChart.current = @0;
+    [self.timeChart setStrokeColor:[UIColor whiteColor]];
+    [self.timeChart strokeChart];
+    [self.timeView addSubview:self.timeChart];
     //[self updateChart];
+}
+
+- (void)updateInfoWithObjectIndex:(NSInteger)index
+{
+    if (self.chosen)
+    {
+        self.taskTitle.text = [self.titles objectAtIndex:index];
+        [self.taskTime countFrom:self.previousValue to:[[self.times objectAtIndex:index] floatValue] withDuration:0.8];
+        self.previousValue = [[self.times objectAtIndex:index] intValue];
+        NSLog(@"total time = %ld",(long)self.totalTime);
+        NSLog(@"current time = %ld",(long)[[self.times objectAtIndex:index] intValue]);
+        int percent = (int)([[self.times objectAtIndex:index] intValue] * 100 / self.totalTime);
+        NSLog(@"percent = %d",percent);
+        self.timeChart.current = [NSNumber numberWithInt:percent];
+        [self.timeChart setStrokeColor:[self.colors objectAtIndex:(index % 7)]];
+        [self.timeChart strokeChart];
+    }
+    else
+    {
+        NSLog(@"no info yet");
+        self.taskTitle.text = @"Title";
+        [self.taskTime countFrom:self.previousValue to:0 withDuration:0.8];
+        self.previousValue = 0;
+        self.timeChart.current = @0;
+        [self.timeChart strokeChart];
+    }
 }
 
 //barChart Delegate method
@@ -202,6 +249,8 @@
         
         [bar.layer addAnimation:animation forKey:@"Float"];
         bar.isScaled = NO;
+        self.chosen = NO;
+        [self updateInfoWithObjectIndex:0];
     }
     else
     {
@@ -252,6 +301,9 @@
     
         [bar.layer addAnimation:animation forKey:@"Float"];
         bar.isScaled = YES;
+        self.chosen = YES;
+        NSInteger index = (self.currentPageNumber - 1) * 7 + barIndex;
+        [self updateInfoWithObjectIndex:index];
     }
 
 }
@@ -301,6 +353,8 @@
         }
         [self updateChartWithPage:pageNumber];
         self.currentPageNumber = self.pageControl.currentPage + 1;
+        self.chosen = NO;
+        [self updateInfoWithObjectIndex:0];
     }
 }
 
@@ -422,6 +476,7 @@
             //self.nextPageButton.enabled = NO;
         }
         NSLog(@"total number of tasks = %lu",(unsigned long)self.objects.count);
+        self.totalTime = 0;
         for (int i = 0; i < [self.objects count]; i++)
         {
             match = self.objects[i];
@@ -430,6 +485,7 @@
             int hours = [[match valueForKey:@"hours"] intValue];
             NSNumber *totalMinutes = [NSNumber numberWithInt:minutes + hours * 60];
             [self.times addObject:totalMinutes];
+            self.totalTime += [totalMinutes intValue];
         }
         NSInteger remainder = [self.objects count] % 7;
         if (remainder == 0)

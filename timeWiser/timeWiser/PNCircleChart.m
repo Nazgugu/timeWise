@@ -28,7 +28,7 @@
         CGFloat startAngle = clockwise ? -90.0f : 270.0f;
         CGFloat endAngle = clockwise ? -90.01f : 270.01f;
 
-        _lineWidth = @8.0f;
+        _lineWidth = @2.0f;
         UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.center.x, self.center.y) radius:self.frame.size.height * 0.5 startAngle:DEGREES_TO_RADIANS(startAngle) endAngle:DEGREES_TO_RADIANS(endAngle) clockwise:clockwise];
 
         _circle               = [CAShapeLayer layer];
@@ -52,8 +52,8 @@
 
         _countingLabel = [[UICountingLabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 50.0)];
         [_countingLabel setTextAlignment:NSTextAlignmentCenter];
-        [_countingLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
-        [_countingLabel setTextColor:[UIColor grayColor]];
+        [_countingLabel setFont:[UIFont fontWithName:@"Avenir Next" size:16.0f]];
+        [_countingLabel setTextColor:[UIColor whiteColor]];
         [_countingLabel setCenter:CGPointMake(self.center.x, self.center.y)];
         _countingLabel.method = UILabelCountingMethodEaseInOut;
         [self addSubview:_countingLabel];;
