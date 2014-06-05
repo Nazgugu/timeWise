@@ -25,16 +25,16 @@ typedef NSString *(^PNyLabelFromatter)(CGFloat yLabelValue);
 
 - (void)strokeChart;
 
-@property (nonatomic) NSArray *xLabels;
-@property (nonatomic) NSArray *yLabels;
-@property (nonatomic) NSArray *yValues;
+@property (nonatomic) NSMutableArray *xLabels;
+@property (nonatomic) NSMutableArray *yLabels;
+@property (nonatomic) NSMutableArray *yValues;
 
 @property (nonatomic) NSMutableArray * bars;
 
 @property (nonatomic) CGFloat xLabelWidth;
 @property (nonatomic) int yValueMax;
 @property (nonatomic) UIColor *strokeColor;
-@property (nonatomic) NSArray *strokeColors;
+@property (nonatomic) NSMutableArray *strokeColors;
 
 
 /*
@@ -118,6 +118,6 @@ typedef NSString *(^PNyLabelFromatter)(CGFloat yLabelValue);
  */
 @property (nonatomic) CGFloat yMaxValue;
 
-@property (nonatomic, retain) id<PNChartDelegate> delegate;
+@property (nonatomic) id<PNChartDelegate> delegate;
 
 @end

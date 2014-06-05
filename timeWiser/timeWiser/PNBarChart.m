@@ -24,7 +24,6 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
@@ -48,7 +47,7 @@
 }
 
 
-- (void)setYValues:(NSArray *)yValues
+- (void)setYValues:(NSMutableArray *)yValues
 {
     _yValues = yValues;
     
@@ -89,11 +88,17 @@
 }
 
 
-- (void)setXLabels:(NSArray *)xLabels
+- (void)setXLabels:(NSMutableArray *)xLabels
 {
-    _xLabels = xLabels;
-    NSLog(@"%@",self.xLabels);
-
+    NSLog(@"number of XLabels = %u",(unsigned int)xLabels.count);
+    if (!_xLabels)
+    {
+        _xLabels = [[NSMutableArray alloc] init];
+    }
+    [self.xLabels removeAllObjects];
+    [self.xLabels addObjectsFromArray:xLabels];
+    //NSLog(@"%@",self.xLabels);
+    
     if (_showLabel) {
         _xLabelWidth = (self.frame.size.width - _chartMargin * 2) / [xLabels count];
     }
@@ -108,6 +113,7 @@
 
 - (void)strokeChart
 {
+    //NSLog(@"stroking");
     [self viewCleanupForCollection:_labels];
     //Add Labels
     if (_showLabel) {
@@ -160,11 +166,11 @@
             [self addSubview:label];
 
         }
+        //NSLog(@"labes count = %lu",(unsigned long)_labels.count);
     }
     
-
+    //NSLog(@"bars count = %lu",(unsigned long)_bars.count);
     [self viewCleanupForCollection:_bars];
-    
     
     //Add bars
     CGFloat chartCavanHeight = self.frame.size.height - _chartMargin * 2 - xLabelHeight;
@@ -222,6 +228,7 @@
         NSLog(@"Added bar");
         index += 1;
     }
+    NSLog(@"\n");
     
     //Add chart border lines
     
@@ -294,8 +301,13 @@
 - (void)viewCleanupForCollection:(NSMutableArray *)array
 {
     if (array.count) {
+        //NSLog(@"Cleaning up");
         [array makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [array removeAllObjects];
+    }
+    else
+    {
+        //NSLog(@"not cleaning");
     }
 }
 

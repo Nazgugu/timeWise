@@ -190,9 +190,9 @@
         if ([[segue destinationViewController] isKindOfClass:[TodayViewController class]])
         {
             BlurryModalSegue *bms = (BlurryModalSegue *)segue;
-            bms.backingImageBlurRadius = @(20);
-            bms.backingImageSaturationDeltaFactor = @(0.25);
-            bms.backingImageTintColor = [[UIColor flatBlackColor] colorWithAlphaComponent:0.6];
+            bms.backingImageBlurRadius = @(8);
+            bms.backingImageSaturationDeltaFactor = @(0.55);
+            bms.backingImageTintColor = [[UIColor flatBlackColor] colorWithAlphaComponent:0.4];
         }
 }
 
