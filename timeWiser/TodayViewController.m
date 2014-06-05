@@ -64,7 +64,7 @@
 
 - (void)updateChartWithPage:(NSInteger)pageNumber
 {
-    NSLog(@"Page Number = %ld",(unsigned long)pageNumber);
+    //NSLog(@"Page Number = %ld",(unsigned long)pageNumber);
     self.TaskChart.showLabel = YES;
     if (!_colors)
     {
@@ -92,18 +92,18 @@
     {
         NSInteger startingLocation = (pageNumber - 1) * 7;
         NSInteger endingLocation = startingLocation + 6;
-        NSLog(@"starting location = %ld",(long)startingLocation);
-        NSLog(@"ending location = %ld",(long)endingLocation);
+        //NSLog(@"starting location = %ld",(long)startingLocation);
+        //NSLog(@"ending location = %ld",(long)endingLocation);
         range.location = startingLocation;
         if (endingLocation > [self.objects count])
         {
             range.length = [self.objects count] % 7;
-            NSLog(@"length = %lu",(unsigned long)range.length);
+            //NSLog(@"length = %lu",(unsigned long)range.length);
         }
         else
         {
             range.length = 7;
-            NSLog(@"length = %lu",(unsigned long)range.length);
+            //NSLog(@"length = %lu",(unsigned long)range.length);
         }
         [self.showingTitles addObjectsFromArray:[self.titles subarrayWithRange:range]];
         [self.showingTime addObjectsFromArray:[self.times subarrayWithRange:range]];
@@ -114,6 +114,7 @@
         [self.colors addObject:[colorArray objectAtIndex:index]];
     }
     //[self.TaskChart removeFromSuperview];
+    //[self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     self.TaskChart = [[PNBarChart alloc] initWithFrame:CGRectMake((pageNumber - 1) * 320, 0, 320, 280)];
     self.TaskChart.backgroundColor = [UIColor clearColor];
     self.TaskChart.yLabelFormatter = ^(CGFloat yValue){
@@ -140,7 +141,6 @@
     //[self.TaskChart.xLabels removeAllObjects];
     //[self.TaskChart.yValues removeAllObjects];
     //[self.TaskChart.strokeColors removeAllObjects];
-    [self.TaskChart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     //NSLog(@"number of showing titles = %u",(unsigned int)self.showingTitles.count);
     //NSLog(@"number of showing time = %u",(unsigned int)self.showingTime.count);
     self.TaskChart.xLabels = self.showingTitles;
@@ -293,6 +293,7 @@
             }
         }
         [self updateChartWithPage:pageNumber];
+        self.currentPageNumber = self.pageControl.currentPage + 1;
     }
 }
 
@@ -310,7 +311,9 @@
     float fractionalPage = self.scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);
     self.pageControl.currentPage = page;
-    //NSLog(@"new Page Number = %ld",(unsigned long)page);
+    NSLog(@"new Page Number = %ld",(unsigned long)self.pageControl.currentPage);
+    NSLog(@"current page Number = %ld",(unsigned long)self.currentPageNumber);
+    NSLog(@"\n");
     [self updateChart:self.pageControl.currentPage + 1];
 }
 

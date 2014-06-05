@@ -90,7 +90,7 @@
 
 - (void)setXLabels:(NSMutableArray *)xLabels
 {
-    NSLog(@"number of XLabels = %u",(unsigned int)xLabels.count);
+    //NSLog(@"number of XLabels = %u",(unsigned int)xLabels.count);
     if (!_xLabels)
     {
         _xLabels = [[NSMutableArray alloc] init];
@@ -225,10 +225,10 @@
         
         [_bars addObject:bar];
         [self addSubview:bar];
-        NSLog(@"Added bar");
+        //NSLog(@"Added bar");
         index += 1;
     }
-    NSLog(@"\n");
+    //NSLog(@"\n");
     
     //Add chart border lines
     
