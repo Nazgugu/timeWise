@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AE4EB25318FF61040013CA4E /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4EB25018FF61040013CA4E /* NSDate+MTDates.m */; };
-		AE4EB25418FF61040013CA4E /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4EB25218FF61040013CA4E /* NSDateComponents+MTDates.m */; };
 		AE5DFC8B18EE934600FA585A /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFC8A18EE934600FA585A /* TasksViewController.m */; };
 		AE5DFCA118EF30C700FA585A /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DFCA018EF30C700FA585A /* TaskCell.m */; };
 		AE5DFCA318EF791500FA585A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5DFCA218EF791500FA585A /* CoreData.framework */; };
@@ -95,6 +93,8 @@
 		AEDD545A190AEE1600EB1DBD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD5459190AEE1600EB1DBD /* AVFoundation.framework */; };
 		AEDD545D190B3A0C00EB1DBD /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEDD545B190B3A0C00EB1DBD /* beep.mp3 */; };
 		AEDD545E190B3A0C00EB1DBD /* doublebeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEDD545C190B3A0C00EB1DBD /* doublebeep.mp3 */; };
+		AEFFC3A519401B2400706F80 /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFFC3A219401B2400706F80 /* NSDate+MTDates.m */; };
+		AEFFC3A619401B2400706F80 /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFFC3A419401B2400706F80 /* NSDateComponents+MTDates.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,10 +108,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AE4EB24F18FF61040013CA4E /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MTDates.h"; sourceTree = "<group>"; };
-		AE4EB25018FF61040013CA4E /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MTDates.m"; sourceTree = "<group>"; };
-		AE4EB25118FF61040013CA4E /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
-		AE4EB25218FF61040013CA4E /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
 		AE5DFC8918EE934600FA585A /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksViewController.h; sourceTree = "<group>"; };
 		AE5DFC8A18EE934600FA585A /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksViewController.m; sourceTree = "<group>"; };
 		AE5DFC9F18EF30C700FA585A /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskCell.h; path = ../TaskCell.h; sourceTree = "<group>"; };
@@ -249,6 +245,10 @@
 		AEDD5459190AEE1600EB1DBD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEDD545B190B3A0C00EB1DBD /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		AEDD545C190B3A0C00EB1DBD /* doublebeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = doublebeep.mp3; sourceTree = "<group>"; };
+		AEFFC3A119401B2400706F80 /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MTDates.h"; sourceTree = "<group>"; };
+		AEFFC3A219401B2400706F80 /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MTDates.m"; sourceTree = "<group>"; };
+		AEFFC3A319401B2400706F80 /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
+		AEFFC3A419401B2400706F80 /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,10 +328,10 @@
 		AE4EB24E18FF60F20013CA4E /* Date&Time */ = {
 			isa = PBXGroup;
 			children = (
-				AE4EB24F18FF61040013CA4E /* NSDate+MTDates.h */,
-				AE4EB25018FF61040013CA4E /* NSDate+MTDates.m */,
-				AE4EB25118FF61040013CA4E /* NSDateComponents+MTDates.h */,
-				AE4EB25218FF61040013CA4E /* NSDateComponents+MTDates.m */,
+				AEFFC3A119401B2400706F80 /* NSDate+MTDates.h */,
+				AEFFC3A219401B2400706F80 /* NSDate+MTDates.m */,
+				AEFFC3A319401B2400706F80 /* NSDateComponents+MTDates.h */,
+				AEFFC3A419401B2400706F80 /* NSDateComponents+MTDates.m */,
 			);
 			name = "Date&Time";
 			sourceTree = "<group>";
@@ -798,7 +798,6 @@
 				AEB3BBF21936E6E100DAC61C /* PNPieChart.m in Sources */,
 				AE61326318ED1E43008BE5FF /* BlurryModalSegue.m in Sources */,
 				AE61323C18EBBB0E008BE5FF /* SFRoundProgressView.m in Sources */,
-				AE4EB25418FF61040013CA4E /* NSDateComponents+MTDates.m in Sources */,
 				AE5DFCC218F1DB8800FA585A /* APLKeyboardControls.m in Sources */,
 				AEB3BBE71936E6AB00DAC61C /* PNChartLabel.m in Sources */,
 				AE61325B18ED0196008BE5FF /* CDNavigationViewController.m in Sources */,
@@ -807,17 +806,18 @@
 				AE61325E18ED0260008BE5FF /* NewTaskViewController.m in Sources */,
 				AEB3BBEA1936E6B600DAC61C /* UICountingLabel.m in Sources */,
 				AE5DFCDE18F271AC00FA585A /* TSMessageView.m in Sources */,
-				AE4EB25318FF61040013CA4E /* NSDate+MTDates.m in Sources */,
 				AEB3BC021936E71200DAC61C /* PNLineChartDataItem.m in Sources */,
 				AEB731E018FE01C500B3A63E /* LPPopupListView.m in Sources */,
 				AE5DFCBA18F12D2A00FA585A /* JSQFlatButton.m in Sources */,
 				AE61326918ED1F26008BE5FF /* NSInvocation+Copy.m in Sources */,
+				AEFFC3A619401B2400706F80 /* NSDateComponents+MTDates.m in Sources */,
 				AEB3BBF91936E6F500DAC61C /* PNBarChart.m in Sources */,
 				AE5DFD0B18F4687200FA585A /* DoActionSheet.m in Sources */,
 				AE5DFCA618EF8B4900FA585A /* tasks.xcdatamodeld in Sources */,
 				AE61323A18EBBB0E008BE5FF /* SFRoundProgressCounterView.m in Sources */,
 				AEB3BC011936E71200DAC61C /* PNLineChartData.m in Sources */,
 				AE61324218EBE1F9008BE5FF /* TTTAttributedLabel.m in Sources */,
+				AEFFC3A519401B2400706F80 /* NSDate+MTDates.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

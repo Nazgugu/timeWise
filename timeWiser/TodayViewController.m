@@ -19,6 +19,7 @@
 }
 //@property (weak, nonatomic) IBOutlet UIButton *previousPageButton;
 //@property (weak, nonatomic) IBOutlet UIButton *nextPageButton;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) NSMutableArray *titles;
 @property (strong, nonatomic) NSMutableArray *times;
 @property (strong, nonatomic) PNBarChart *TaskChart;
@@ -162,6 +163,12 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.scrollEnabled = YES;
     self.scrollView.pagingEnabled = YES;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy . MM . dd";
+    NSDate *now = [NSDate date];
+    NSString *dateString = [formatter stringFromDate:now];
+    NSLog(@"%@",dateString);
+    self.dateLabel.text = dateString;
     //[self updateChart];
 }
 
